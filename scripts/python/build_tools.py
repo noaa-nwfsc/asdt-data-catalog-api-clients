@@ -367,7 +367,6 @@ class BuildOrchestrator:
             ["Rscript", "-e", f"roxygen2::roxygenize('{client_dir_posix}')"]
         )
 
-        # --- STRUCTURAL FIX: Patch DESCRIPTION using R's native 'desc' package ---
         print(">>> Patching DESCRIPTION file robustly via 'desc'...")
         desc_path = client_dir / "DESCRIPTION"
         if desc_path.exists():
