@@ -165,16 +165,24 @@ jobs:
           VERSION="${{ needs.build-and-test.outputs.version }}"
           TAG="v$VERSION"
 
-          # --- AUTOMATED ALIASING ---
+          echo ">>> DEBUG: Directory structure of downloaded artifacts <<<"
+          ls -R release-assets/
+
+          # --- AUTOMATED ALIASING (Using 'find' to handle subdirectories) ---
+
           # 1. Alias Python Wheel
-          cp release-assets/nwfsc_data_catalog-*.whl release-assets/nwfsc_data_catalog-latest-py3-none-any.whl
+          WHEEL_PATH=$(find release-assets -name "nwfsc_data_catalog-*.whl" | head -n 1)
+          cp "$WHEEL_PATH" release-assets/nwfsc_data_catalog-latest-py3-none-any.whl
 
           # 2. Alias Standard R Source Package
-          cp release-assets/nwfscDataCatalog_*.tar.gz release-assets/nwfscDataCatalog-latest.tar.gz
+          R_TAR_PATH=$(find release-assets -name "nwfscDataCatalog_*.tar.gz" | head -n 1)
+          cp "$R_TAR_PATH" release-assets/nwfscDataCatalog-latest.tar.gz
 
-          # 3. Alias WebR Binary Package (Built for Emscripten)
-          cp release-assets/nwfscDataCatalog_*.tgz release-assets/nwfscDataCatalog-webr-latest.tgz
-          # --------------------------
+          # 3. Alias WebR Binary Package
+          WEBR_TAR_PATH=$(find release-assets -name "nwfscDataCatalog_*.tgz" | head -n 1)
+          cp "$WEBR_TAR_PATH" release-assets/nwfscDataCatalog-webr-latest.tgz
+
+          # ------------------------------------------------------------------
 
           if ! gh release view "$TAG" > /dev/null 2>&1; then
             echo "Creating new release $TAG..."
@@ -183,5 +191,6 @@ jobs:
             echo "Release $TAG already exists. Proceeding to asset upload."
           fi
 
-          # Upload all files in the directory (versioned + latest aliases)
-          gh release upload "$TAG" release-assets/* --clobber
+          # Upload all files in the directory recursively
+          # (Using find to upload both the nested original files and the new root aliases)
+          find release-assets -type f -exec gh release upload "$TAG" {} --clobber \;
