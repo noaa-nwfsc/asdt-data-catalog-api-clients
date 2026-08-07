@@ -97,6 +97,7 @@ jobs:
   deploy-docs:
     name: Deploy Documentation
     needs: build-and-test
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
