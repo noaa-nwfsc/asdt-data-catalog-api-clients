@@ -1,111 +1,183 @@
-# Creating a New Repository and Understanding GitHub Governance
+# NWFSC Data Catalog R & Python SDKs
 
-This guide describe how to create a fully configured repository from the ASDT template repository using an GitHub template.
+This repository contains the source code and build system for the **NWFSC Data Catalog SDKs**, available for both Python and R. The entire build process is orchestrated through a Python script, requires no containerization (like Docker), and automatically bootstraps its own Java runtime and Pandoc toolchain to remain portable and dependency-free.
 
-Using the workflow, the configuration of new repository will have copied from this repository the following configurations:
-	- Teams and team permissions
-    - Branch protection rulesets.
-    - Individual user access roles.
+## Quick Start
 
-## Contents
+### Python Installation
+```bash
+# Using standard pip
+pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl)
 
-  - [Prerequisites](#prerequisites)
-  - [Running a Workflow (GUI)](#running-a-workflow-gui)
-  - [Running a Workflow (CLI)](#running-a-workflow-cli)
-  - [Core GitHub Concepts](#core-github-concepts)
-    - [Rulesets](#rulesets)
-    - [Teams and Permissions](#teams-and-permissions)
-  - [Additional Infromation](#additional-infromation)
+# Using uv
+uv pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl)
 
-## Prerequisites
+### R Installation
+# Install directly from the latest Release asset URL
+install.packages(
+  "[https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz)", 
+  repos = NULL, 
+  type = "source"
+)
 
-- The following permissions are required to view and run GitHub Actions in the `noaa-nwfsc/asdt-template` repository.
-- _Note for Admins: The `CREATE_FROM_TEMPLATE_APP_PAT` secret must be actively maintained in the template repository's settings for this workflow to function.<br>
-  See [Administrative Guide](./.github/docs/Admin.md) for details._
+---
+
+## Repository Structure
+
+- **/clients**: Contains the source code for the individual language-specific SDKs.
+  - `/python_public`: The public Python SDK package.
+  - `/r_public`: The public R SDK package.
+- **/openapi**: Stores the `openapi-public.json` specification file, which is the single source of truth for all code generation.
+- **/scripts**: Home for all build and automation logic.
+  - `/python/build_tools.py`: The primary build orchestrator.
+  - `/python/version_manager.py`: Automatically bumps package versions when the OpenAPI spec changes.
+  - `/r/`: Contains wrapper generation logic for the R package.
+- **Makefile**: A simple, cross-platform frontend for the build system.
+
+---
+
+## Updating the API Specification (GitOps Workflow)
+
+This repository follows a strict **GitOps (Spec-Driven Development)** model. The CI/CD pipeline does **not** dynamically fetch the live OpenAPI specification from the server; it relies exclusively on the `openapi.json` file that is checked into version control.
+
+To update the API clients, developers must follow these steps:
+
+1. **Connect to the NOAA VPN**: You must be on the VPN to access the internal API endpoint that serves the live specification.
+2. **Fetch the Latest Spec**: Run the following command from the repository root:
+   ```bash
+   make fetch-public-spec
+   ```
+3. **Review the Diff**: Use `git diff openapi/openapi-public.json` to carefully review changes (e.g., new endpoints, updated parameters).
+4. **Verify Version Bump**: The build orchestrator will automatically detect the spec change and increment the package version in `clients/python_public/pyproject.toml`.
+5. **Commit and Open a Pull Request**:
+   ```bash
+   git add openapi/openapi-public.json clients/python_public/pyproject.toml
+   git commit -m "feat: Update API spec to include new endpoints"
+   ```
+   Open a Pull Request to merge your changes into the `main` or `develop` branch.
+6. **Merge to Trigger Release**: Once merged, the GitHub Actions pipeline will automatically:
+   - Generate the new client code from the updated spec.
+   - Build, test, and compile the Python and R packages.
+   - Create a new GitHub Release tagged with the new version number.
+   - Upload the `.whl` and `.tar.gz` packages as release assets.
+   - Deploy the updated documentation to GitHub Pages.
+
+---
+
+## Local Development & Building
+
+The build system is designed to be simple and portable. You only need `uv` (a fast Python package manager) and a modern version of `R` installed on your system.
+
+### Prerequisites
+
+1. **uv**: [Install from astral.sh](https://github.com/astral-sh/uv)
+2. **R**: [Install from CRAN](https://cran.r-project.org/)
+
+### Makefile Menu
+
+All common tasks are handled by the root `Makefile`.
+
+| Command | Description |
+| :--- | :--- |
+| `make all` | **(Default)** Builds all SDKs (Python and R). |
+| `make build-python-public` | Builds and tests only the public Python SDK. |
+| `make build-r-public` | Builds only the public R SDK. |
+| | |
+| `make fetch-public-spec` | Downloads the latest `openapi.json` from the server. |
+| `make fetch-jdk` | Downloads a portable Java 17 JRE. Run automatically as needed. |
+| `make fetch-generator` | Downloads the `openapi-generator-cli.jar`. Run automatically as needed. |
+| | |
+| `make docs` | Generates static HTML documentation for all clients. |
+| `make docs-python` | Generates Python docs using `Sphinx`. |
+| `make docs-r` | Generates R docs using `pkgdown`. |
+| | |
+| `make setup-hooks` | Configures local `pre-commit` Git hooks for Gitleaks security scans. |
+| `make lint` | Runs `pre-commit` checks (including Gitleaks) across all repository files. |
+| `make security-scan` | Executes a deep, verbose Gitleaks scan on the working tree. |
+
+---
+
+## CI/CD Pipeline & Automated Releases
+
+This project features a fully automated, unified CI/CD workflow (`ci-cd.yml`) that strictly gates deployments and releases using a GitOps model. The pipeline operates in three distinct phases depending on the branch:
+
+1. **Continuous Integration (PR Phase)**: On every Pull Request, the pipeline provisions clean `uv` and `R` environments, bootstraps Java, reads the checked-in `openapi-public.json` spec, generates the client source code, and builds the artifacts. This acts as a security gate to ensure broken code or invalid specs never merge.
+2. **Continuous Deployment (Merge to `develop`)**: When code is successfully merged into `develop`, the pipeline rebuilds the artifacts and securely deploys the static Python (`Sphinx`) and R (`pkgdown`) documentation sites directly to GitHub Pages.
+3. **Automated Release (Merge to `main`)**: When code is ready for production and merges into `main`, the pipeline extracts the newly incremented SDK version from `pyproject.toml`, authors a new GitHub Release (e.g., `v1.2.3`), and uploads the `.whl` and `.tar.gz` packages. It also automatically generates `-latest` file aliases so standard installation links never break.
+
+## WebAssembly (WebR) Architecture
+
+This SDK is specifically engineered to run seamlessly across two completely different environments:
+1. **Standard Desktop (Python/R)**: Uses standard system networking libraries (like `libcurl` and `urllib3`).
+2. **Browser-Based WebAssembly**: Runs entirely client-side via **Pyodide** (Python) and **WebR** (R), powering our interactive API Coding Lab.
+
+**The WebR Networking Nuance:**
+Base R compiled for WebAssembly is built without `libcurl` support[cite: 1]. As a result, standard R networking packages (like `httr`) fail when making `https://` requests from the browser[cite: 1]. 
+
+To solve this, our R SDK contains an environment-aware fetch engine. It dynamically detects if it is running inside WebR (`Emscripten`)[cite: 5]. If it is, the SDK completely bypasses the standard R networking stack and instead routes requests through a synchronous **XHR Bridge** (`download.file(method="xhr")`), natively leveraging the browser's JavaScript `fetch` API[cite: 1, 5]. 
+
+As a user, you don't need to change any code—functions like `read_bottom_trawl_tows()` will automatically use the correct networking protocol whether you run them in RStudio or in the browser.
+
+---
 
 
-## Running a Workflow (GUI)
- _Important Note: The "Use this template" button does **not** uses the clone workflow, and will not copy all the standard configuration._
 
-1. **Navigate to the Template Workflow**: Open the template repository at `noaa-nwfsc/asdt-template
-2. **Trigger the Creation Workflow**
-   - **Click on the Actions** tab located near the top of the repository dashboard to open actions dialog page.
-   - On the left-hand sidebar under **All workflows**, click on **Create New ASDT Repository**.  
-     A popup will appear on the right side of the browser screen.
-   - On the right side of the screen, click the **Run workflow** dropdown menu to obtain the configuration form and fill out the form items:
-     - **Name for the new repository:** Name of a NEW repository.  
-       Do not include the organization name (noaa-nwfsc).
-     - **Repository visibility:** Select the desired visibility (`private`, `internal`, or `public`) from the dropdown.
-   - Click the green **Run workflow** button.
+## Documentation & GitHub Pages
 
-3. **Wait for Automation to Complete:**
-   - An icon will appear for the newly initiated worflow.  
-     Click on its icon to watch the progress.
-   - The automation will take a few moments to execute.  
-	 Behind the scenes, it is:
-     - Creating a new repository.
-     - Copying all team permissions from the template.
-     - Copying all branch protection rulesets.
-     - Copying all individual user access roles.
-     - Disabling installation specific workflow files from the new repository.
+Static documentation sites are built on every pipeline execution and deployed directly to **GitHub Pages**.
 
-4. **Access New Repository**
-   - Upon successfully create and configuring the new repo,the workflow icon will show a green checkmark indicating success
-   - Navigate to `https://github.com/noaa-nwfsc/<your-new-repo-name>` to begin working.
+- **Python Documentation**: Generated using `Sphinx`, producing a clean, structured API reference guide.
+- **R Documentation**: Generated using `pkgdown`, featuring organized sections configured in `_pkgdown.yml`.
 
-## Running a Workflow (CLI)
+### Accessing the Docs
+View the live documentation landing page at:
+**`https://noaa-nwfsc.github.io/asdt-data-catalog-api-clients/`**
 
-The GitHub web interface for managing workflows may have problems from time to time.  
-It is officially 'bugged' for its caching the old or broken state, and refusing to re-evaluate it upd1ates.  
-In cases where the web UI gets permanently stuck like this, it is necessary to bypass the browser and use the CLI.
+---
 
-1. **Install GitHub CLI (if needed)** Visit [GitHub CLI website](https://cli.github.com)
-2. **Clone template repository** using:  
-   `git clone git@github.com:noaa-nwfsc/asdt-template.git`  
-   or  
-   `git clone https://github.com/noaa-nwfsc/asdt-template.git`
-3. Go to (cd) the directory housing that repository `cd ./asdt-template`
-4. **Run the CLI Command:**  
-   `gh workflow run create-new-asdt-repo.yml --ref develop -f repo_name="my-test-repo" -f visibility="internal"`
+## Usage Examples
 
-## Core GitHub Concepts
+### Python Example
+```python
+from nwfsc_data_catalog import DataCatalog
 
-### Rulesets
+# Initialize the catalog
+catalog = DataCatalog()
 
-Ruleset are used to provide consistent enforce of repository policies across standard ASDT repositories.
+# Fetch all available survey years from the bottom trawl survey
+survey_years_df = catalog.read_bottom_trawl_survey_years()
+print(survey_years_df)
 
-- **How they work**:
-  - **Scalability**: Unlike traditional branch protection, rulesets can apply to the entire repository or specific patterns (e.g., all `release/` branches) from a single configuration.
-  - **Automation-Friendly**: When using the ASDT template repository creation workflow, rulesets are automatically copied to new repositories to enforce organizational standards.
-  - **Enforcement**: They typically require specific actions before code can be merged, such as pull request reviews or passing status checks.
+# Fetch vessels used in the bottom trawl survey for a specific year
+vessels_df = catalog.read_bottom_trawl_vessels(year=2023)
+print(vessels_df.head())
+```
 
-- **Access & Changes**:
-  - Navigate to repository **Settings**.
-  - In the left sidebar, under the "Code and automation" section, click **Rules** and then **Rulesets**.
-  - At this point, either:
-  - Click on an existing ruleset to edit its requirements.  
-    or
-  - Click **New ruleset** to establish a new policy.
+### R Example
+```r
+# Load the library
+library(nwfscDataCatalog)
 
-### Teams and Permissions
+# Fetch all available survey years from the bottom trawl survey
+survey_years_df <- read_bottom_trawl_survey_years()
+print(head(survey_years_df))
 
-To ensure consistent permissions across the ASDT standard repositories access is managed through **Teams** rather than individual user assignments .
+# Fetch vessels used in the bottom trawl survey for a specific year
+vessels_df <- read_bottom_trawl_vessels(year = 2023)
+print(head(vessels_df))
 
-- **How they work**:
-  - **Access Management**: Permissions (Read, Write, Maintain, Admin) are assigned to GitHub Teams. When the template workflow runs, it maps these teams to the new repository with the correct privilege levels.
-  - **Inherited Permissions**: By managing access at the team level, adding or removing a user from a central team automatically updates their access across all repositories associated with that team.
-  - **Role Consistency**: The automation ensures that individual user access roles and team-based permissions from the template are mirrored exactly in the new repository.
+# Use a UI utility to convert a dataframe to a styled HTML table
+html_output <- to_html(vessels_df)
+```
 
-- **Access & Changes**:
-  - Navigate to your repository **Settings**.
-  - In the left sidebar, under "Access," click **Collaborators and teams**.
-  - **To change permissions**: Locate the team in the list and use the dropdown menu to adjust their role (e.g., changing a team from "Write" to "Maintain").
-  - **To add access**: Click the **Add teams** button to search for and invite an existing organization team to the repository.
+---
 
-## Additional Infromation
+## Maintainers / Contact
+* **Primary Contact:** Jim Fellows (james.fellows@noaa.gov)
+* **Team:** At-Sea Data Team (ASDT)
 
-More information on template administration and implementations see:
+---
 
-- [Administrative Guide: Managing template repository](./Admin.md)
-- [WorkFlows/Git Actions: Documentation of workflows defined in .github/workflows](./.github/workflows/README.md)
-- [Workflow Scripts : Description of scripts used by workflows and found in .github/scripts](./.github/scripts/README.md)
+## Disclaimer
+
+This repository is a scientific product and is not official communication of the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All NOAA GitHub project content is provided on an "as is" basis and the user assumes responsibility for its use. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.

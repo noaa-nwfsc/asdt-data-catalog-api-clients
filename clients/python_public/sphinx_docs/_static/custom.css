@@ -1,0 +1,4 @@
+/* Increase the width of the navbar brand to prevent title wrapping */
+.navbar-brand {
+  min-width: 300px;
+}

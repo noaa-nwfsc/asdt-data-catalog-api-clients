@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nwfsc-data-catalog-private"
+version = "0.1.0"
+description = "Private internal Python client for the NWFSC Data Catalog API"
+requires-python = ">=3.9"
+dependencies = [
+    "urllib3 >= 1.25.3",
+    "python-dateutil >= 2.8.2",
+    "pydantic >= 2.0.0",
+    "typing-extensions >= 4.7.1",
+    "pandas >= 2.0.0"      # Hard dependency for internal data workflows
+]
+
+[project.optional-dependencies]
+# Install via: pip install nwfsc-data-catalog-private[geo]
+geo = [
+    "geopandas >= 0.14.0",
+    "shapely >= 2.0.0"
+]
+# Install via: pip install nwfsc-data-catalog-private[test]
+test = [
+    "pytest >= 7.0.0",
+    "pytest-mock",
+    "openapi-spec-validator >= 0.7.1"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"

@@ -1,0 +1,18 @@
+[project]
+name = "nwfsc-data-catalog-workspace"
+version = "0.1.0"
+description = "Build and workspace tools for the NWFSC Data Catalog SDKs."
+requires-python = ">=3.9"
+dependencies = []
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = false
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.3.0",
+]
