@@ -4,7 +4,6 @@ name: Build and Test API Clients
 on:
   push:
     branches:
-      - main
       - develop
       - "build/**"
   pull_request:
@@ -49,12 +48,23 @@ jobs:
       - name: Build Public R Client
         run: make build-r-public
 
-      # 1. Build WebR Binary (Workspace is now clean!)
+      # 1. Build WebR Binary
       - name: Build WebR Binary
-        uses: r-wasm/actions/build-rwasm@v1
+        uses: r-wasm/actions/build-rwasm@v3
         with:
-          packages: "./clients/r_public" # <-- Added ./ here!
+          packages: "./clients/r_public"
           repo-path: "webr_binaries"
+        env:
+          # Explicitly route to standard CRAN to fetch source packages for Wasm
+          # This completely avoids the Posit Package Manager Linux binary metadata bug
+          RSPM: "https://cloud.r-project.org"
+          RENV_CONFIG_REPOS_OVERRIDE: "https://cloud.r-project.org"
+          # Maintain standard runner environment variables
+          UV_CACHE_DIR: /home/runner/work/_temp/setup-uv-cache
+          R_LIBS_USER: /home/runner/work/_temp/Library
+          TZ: UTC
+          NOT_CRAN: true
+          _R_CHECK_SYSTEM_CLOCK_: FALSE
 
       # 2. Build standard Tarball SECOND
       - name: Build R Tarball
