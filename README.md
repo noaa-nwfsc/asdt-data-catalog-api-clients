@@ -100,20 +100,30 @@ All common tasks are handled by the root `Makefile`.
 
 ---
 
-## CI/CD Pipeline & GitHub Releases
+## CI/CD Pipeline & Automated Releases
 
-This project features a fully automated release workflow (`docs-deployment.yml`) triggered on every commit to the `main` or `develop` branches (as well as manually via `workflow_dispatch`).
+This project features a fully automated, unified CI/CD workflow (`ci-cd.yml`) that strictly gates deployments and releases using a GitOps model. The pipeline operates in three distinct phases depending on the branch:
 
-The pipeline operates in a clean environment as follows:
-1. **Environment Setup**: Configures standard `uv` and `R` environments, then installs pre-compiled binary packages for `roxygen2` and `pkgdown`.
-2. **API Client Generation**: Runs `make build-all` which bootstraps Java, reads the `openapi/openapi-public.json` spec, and generates clean client source code libraries.
-3. **Documentation Site Generation**: Executes `make docs` to build high-quality reference guides.
-4. **Compiling Packages**: Compiles the Python source into a portable Wheel (`.whl`) and R source into a package tarball (`.tar.gz`).
-5. **Automatic Release Management**: Automatically extracts the SDK version from `pyproject.toml`. If the version has incremented, it:
-   - Creates a new GitHub Release with the tag `vX.Y.Z`.
-   - Uploads the Python Wheel and R Tarball as release assets.
+1. **Continuous Integration (PR Phase)**: On every Pull Request, the pipeline provisions clean `uv` and `R` environments, bootstraps Java, reads the checked-in `openapi-public.json` spec, generates the client source code, and builds the artifacts. This acts as a security gate to ensure broken code or invalid specs never merge.
+2. **Continuous Deployment (Merge to `develop`)**: When code is successfully merged into `develop`, the pipeline rebuilds the artifacts and securely deploys the static Python (`Sphinx`) and R (`pkgdown`) documentation sites directly to GitHub Pages.
+3. **Automated Release (Merge to `main`)**: When code is ready for production and merges into `main`, the pipeline extracts the newly incremented SDK version from `pyproject.toml`, authors a new GitHub Release (e.g., `v1.2.3`), and uploads the `.whl` and `.tar.gz` packages. It also automatically generates `-latest` file aliases so standard installation links never break.
+
+## WebAssembly (WebR) Architecture
+
+This SDK is specifically engineered to run seamlessly across two completely different environments:
+1. **Standard Desktop (Python/R)**: Uses standard system networking libraries (like `libcurl` and `urllib3`).
+2. **Browser-Based WebAssembly**: Runs entirely client-side via **Pyodide** (Python) and **WebR** (R), powering our interactive API Coding Lab.
+
+**The WebR Networking Nuance:**
+Base R compiled for WebAssembly is built without `libcurl` support[cite: 1]. As a result, standard R networking packages (like `httr`) fail when making `https://` requests from the browser[cite: 1]. 
+
+To solve this, our R SDK contains an environment-aware fetch engine. It dynamically detects if it is running inside WebR (`Emscripten`)[cite: 5]. If it is, the SDK completely bypasses the standard R networking stack and instead routes requests through a synchronous **XHR Bridge** (`download.file(method="xhr")`), natively leveraging the browser's JavaScript `fetch` API[cite: 1, 5]. 
+
+As a user, you don't need to change any code—functions like `read_bottom_trawl_tows()` will automatically use the correct networking protocol whether you run them in RStudio or in the browser.
 
 ---
+
+
 
 ## Documentation & GitHub Pages
 

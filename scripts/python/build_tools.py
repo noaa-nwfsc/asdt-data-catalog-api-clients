@@ -413,6 +413,21 @@ class BuildOrchestrator:
         )
         client_dir_posix = client_dir.as_posix()
 
+        # --- THE BULLETPROOF NAMESPACE FIX ---
+        print(">>> Appending elite wrappers to NAMESPACE...")
+        namespace_file = client_dir / "NAMESPACE"
+        if namespace_file.exists():
+            with namespace_file.open("a") as f:
+                f.write("\n# --- NWFSC Elite Wrappers ---\n")
+                f.write('exportPattern("^read_")\n')
+                f.write('exportPattern("^fetch_all_")\n')
+                f.write('export("get_sdk_metadata")\n')
+                f.write('export("to_html")\n')
+                f.write('export("to_json_records")\n')
+                f.write('export("to_plot_img")\n')
+                f.write('export("glimpse_html")\n')
+        # -------------------------------------
+
         self._run_subprocess(
             ["Rscript", "-e", f"roxygen2::roxygenize('{client_dir_posix}')"]
         )

@@ -108,7 +108,7 @@ for (path in names(spec$paths)) {
   wrapper_code <- c(wrapper_code, roxygen, func_def, fetch_def, "")
 }
 
-# 3. 🚀 EMBED METADATA AS AN EXPORTED R FUNCTION
+# 3. EMBED METADATA AS AN EXPORTED R FUNCTION
 metadata_json_str <- as.character(jsonlite::toJSON(metadata_list, auto_unbox = TRUE))
 metadata_json_str <- gsub("'", "\\\\'", metadata_json_str) # Escape quotes for R string
 
@@ -122,11 +122,11 @@ embed_code <- c(
 
 wrapper_code <- c(wrapper_code, embed_code)
 
-# CHANGE THIS LINE to target the R directory
-out_file <- file.path(out_dir, "R", "elite_wrappers.R") 
+# ---> CRITICAL: Ensure the file path includes "R" <---
+out_file <- file.path(out_dir, "R", "elite_wrappers.R")
 writeLines(wrapper_code, out_file)
 
-# 4. 🚀 WRITE A RAW JSON ASSET (Put this in inst/ to ensure it bundles with the package!)
+# ---> CRITICAL: Save metadata to inst/ so it builds with the tarball <---
 inst_dir <- file.path(out_dir, "inst")
 if (!dir.exists(inst_dir)) dir.create(inst_dir)
 writeLines(jsonlite::toJSON(metadata_list, auto_unbox = TRUE, pretty = TRUE), file.path(inst_dir, "catalog_metadata.json"))
