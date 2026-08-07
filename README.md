@@ -92,7 +92,7 @@ All common tasks are handled by the root `Makefile`.
 | `make docs-r` | Generates R docs using `pkgdown`. |
 | | |
 | `make setup-hooks` | Configures local `pre-commit` Git hooks for Gitleaks security scans. |
-| `make lint` | Runs `pre-commit` checks (including Gitleaks) across all repository files. |
+| `make gitleaks-precommit` | Runs `pre-commit` checks (including Gitleaks) across all repository files. |
 | `make security-scan` | Executes a deep, verbose Gitleaks scan on the working tree. |
 
 ---
