@@ -165,6 +165,17 @@ jobs:
           VERSION="${{ needs.build-and-test.outputs.version }}"
           TAG="v$VERSION"
 
+          # --- AUTOMATED ALIASING ---
+          # 1. Alias Python Wheel
+          cp release-assets/nwfsc_data_catalog-*.whl release-assets/nwfsc_data_catalog-latest-py3-none-any.whl
+
+          # 2. Alias Standard R Source Package
+          cp release-assets/nwfscDataCatalog_*.tar.gz release-assets/nwfscDataCatalog-latest.tar.gz
+
+          # 3. Alias WebR Binary Package (Built for Emscripten)
+          cp release-assets/nwfscDataCatalog_*.tgz release-assets/nwfscDataCatalog-webr-latest.tgz
+          # --------------------------
+
           if ! gh release view "$TAG" > /dev/null 2>&1; then
             echo "Creating new release $TAG..."
             gh release create "$TAG" --title "Release $TAG" --notes "Automated release of API clients version $VERSION"
@@ -172,4 +183,5 @@ jobs:
             echo "Release $TAG already exists. Proceeding to asset upload."
           fi
 
+          # Upload all files in the directory (versioned + latest aliases)
           gh release upload "$TAG" release-assets/* --clobber

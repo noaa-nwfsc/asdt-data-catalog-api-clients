@@ -7,21 +7,18 @@ This repository contains the source code and build system for the **NWFSC Data C
 ### Python Installation
 ```bash
 # Using standard pip
-pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfsc_data_catalog-0.1.3-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfsc_data_catalog-0.1.3-py3-none-any.whl)
+pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl)
 
 # Using uv
-uv pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfsc_data_catalog-0.1.3-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfsc_data_catalog-0.1.3-py3-none-any.whl)
-```
+uv pip install [https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc_data_catalog-latest-py3-none-any.whl)
 
 ### R Installation
-```r
 # Install directly from the latest Release asset URL
 install.packages(
-  "[https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfscDataCatalog_1.0.0.tar.gz](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.3/nwfscDataCatalog_1.0.0.tar.gz)", 
+  "[https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz](https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz)", 
   repos = NULL, 
   type = "source"
 )
-```
 
 ---
 
