@@ -1,0 +1,13 @@
+#GitHub Actions
+#Actions has a built-in GITHUB_TOKEN, but for creating repos and modifying org-level permissions, you should use a Personal Access Token (PAT) or a GitHub App Token stored as a Secret.
+
+YAML
+jobs:
+  provision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Provisioning
+        env:
+          GH_TOKEN: ${{ secrets.MY_PROVISIONING_TOKEN }}
+        run: bash gh_repo_from_template.sh "my-org" "template-repo" "new-repo"

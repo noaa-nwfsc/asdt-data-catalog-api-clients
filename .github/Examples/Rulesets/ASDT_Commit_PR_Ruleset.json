@@ -1,0 +1,50 @@
+{
+  "id": 7364436,
+  "name": "ASDT Commit & PR Management",
+  "target": "branch",
+  "source_type": "Repository",
+  "source": "noaa-nwfsc/asdt-data-collection",
+  "enforcement": "active",
+  "conditions": {
+    "ref_name": {
+      "exclude": [],
+      "include": [
+        "~DEFAULT_BRANCH",
+        "refs/heads/develop",
+        "refs/heads/main",
+        "refs/heads/master",
+        "refs/heads/production"
+      ]
+    }
+  },
+  "rules": [
+    {
+      "type": "pull_request",
+      "parameters": {
+        "required_approving_review_count": 1,
+        "dismiss_stale_reviews_on_push": false,
+        "required_reviewers": [],
+        "require_code_owner_review": true,
+        "require_last_push_approval": false,
+        "required_review_thread_resolution": true,
+        "allowed_merge_methods": [
+          "merge",
+          "squash",
+          "rebase"
+        ]
+      }
+    }
+  ],
+  "bypass_actors": [
+    {
+      "actor_id": null,
+      "actor_type": "OrganizationAdmin",
+      "bypass_mode": "always"
+    },
+    {
+      "actor_id": 13432381,
+      "actor_type": "Team",
+      "bypass_mode": "always"
+    }
+  ]
+}

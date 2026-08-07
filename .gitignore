@@ -1,0 +1,6 @@
+*.save
+*.bad
+*.log
+?
+save/
+*.save
