@@ -80,8 +80,57 @@ class BuildOrchestrator:
             with urllib.request.urlopen(req, timeout=10) as response:
                 data = json.loads(response.read())
 
+            # --- SANITIZE DUPLICATED OPERATION IDs ---
+            print(">>> Sanitizing duplicated operation IDs...")
+            for path, methods in data.get("paths", {}).items():
+                for method, details in methods.items():
+                    if "operationId" in details:
+                        op_id = details["operationId"]
+                        op_id = op_id.replace("BottomTrawlBottomTrawl", "BottomTrawl")
+                        op_id = op_id.replace("HookAndLineHookAndLine", "HookAndLine")
+                        details["operationId"] = op_id
+
+            # Save the main public spec
             self.PUBLIC_SPEC_PATH.write_text(json.dumps(data, indent=2))
             print(f"Live spec saved to {self.PUBLIC_SPEC_PATH}")
+
+            # --- CREATE SLIM SPEC FOR LLM ---
+            print(">>> Generating slim OpenAPI spec for LLM context...")
+
+            # Create a detached copy in memory using json dumps/loads so we don't mutate the original
+            slim_spec = json.loads(json.dumps(data))
+
+            # 1. Clean paths: Keep endpoint metadata & query params, drop HTTP response bloat
+            for path, methods in slim_spec.get("paths", {}).items():
+                for method, details in methods.items():
+                    # Strip out the huge 200/302 binary response payloads
+                    details["responses"] = {"200": {"description": "Success"}}
+
+                    # Remove redundant component parameter refs
+                    if "parameters" in details:
+                        details["parameters"] = [
+                            p for p in details["parameters"] if "$ref" not in p
+                        ]
+
+            # 2. Clean schemas: Strip internal UI styling & storage metadata, keep field names & descriptions
+            for schema_name, schema_def in (
+                slim_spec.get("components", {}).get("schemas", {}).items()
+            ):
+                if "properties" in schema_def:
+                    for prop_name, prop_meta in schema_def["properties"].items():
+                        # Strip internal UI/storage tags to save thousands of tokens
+                        prop_meta.pop("x-nwfsc-ui", None)
+                        prop_meta.pop("x-nwfsc-source-type", None)
+                        prop_meta.pop("x-nwfsc-storage-type", None)
+                        prop_meta.pop("x-nwfsc-access-tier", None)
+
+            # 3. Save as a minified text file (no extra spaces/newlines)
+            slim_spec_path = self.OPENAPI_DIR / "openapi-public-slim.json"
+            with open(slim_spec_path, "w") as f:
+                json.dump(slim_spec, f, separators=(",", ":"))
+
+            print(f"Slim spec saved to {slim_spec_path}")
+
         except (urllib.error.URLError, TimeoutError):
             print(
                 "Warning: Could not fetch live spec (Timeout/VPN). Falling back to checked-in local copy."

@@ -1,0 +1,174 @@
+# .github/workflows/ci-cd.yml
+name: NWFSC SDK CI/CD Pipeline
+
+on:
+  # Triggers when a PR is merged, or code is committed directly
+  push:
+    branches:
+      - main
+      - develop
+
+  # Triggers whenever a PR is opened or updated targeting these branches
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "sdk-pipeline"
+  cancel-in-progress: true
+
+jobs:
+  # ----------------------------------------------------
+  # JOB 1: Build, Test, and Package Core SDKs
+  # ----------------------------------------------------
+  build-and-test:
+    name: Build & Test Polyglot SDKs
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.VERSION }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.2"
+
+      - name: Install uv
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install R Dependencies
+        run: |
+          R -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite'))"
+
+      - name: Fetch OpenAPI Specification & Generate Clients
+        run: |
+          make fetch-public-spec
+          make build-all
+
+      - name: Test Public Python Client
+        run: make build-python-public
+
+      - name: Build R Tarball & WebR Binary
+        uses: r-wasm/actions/build-rwasm@v3
+        with:
+          packages: "./clients/r_public"
+          repo-path: "webr_binaries"
+        env:
+          RSPM: "https://cloud.r-project.org"
+          RENV_CONFIG_REPOS_OVERRIDE: "https://cloud.r-project.org"
+
+      - name: Build standard R Tarball
+        run: R CMD build clients/r_public
+
+      - name: Extract Version for Subsequent Jobs
+        id: get-version
+        run: |
+          VERSION=$(grep -m 1 '^version =' clients/python_public/pyproject.toml | cut -d '"' -f 2)
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sdk-artifacts
+          path: |
+            clients/python_public/dist/*.whl
+            nwfscDataCatalog_*.tar.gz
+            webr_binaries/bin/emscripten/contrib/*/*.tgz
+
+  # ----------------------------------------------------
+  # JOB 2: Deploy Documentation to GitHub Pages
+  # ----------------------------------------------------
+  deploy-docs:
+    name: Deploy Documentation
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up uv & R
+        uses: astral-sh/setup-uv@v3
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.2"
+
+      - name: Install R Build Tools & Generate Clients
+        run: |
+          Rscript -e "install.packages(c('roxygen2', 'pkgdown'))"
+          make fetch-public-spec
+          make build-all
+
+      - name: Build Python Sphinx Docs
+        run: |
+          cd clients/python_public
+          uv sync
+          uv pip install sphinx pydata-sphinx-theme
+          cd ../..
+          make docs-python
+
+      - name: Build R Pkgdown Docs
+        run: make docs-r
+
+      - name: Prepare Unified Site
+        run: |
+          mkdir -p _site
+          mv docs/python _site/python
+          mv clients/r_public/docs _site/r
+          cp docs/index.html _site/index.html
+          cp docs/data_rockfish_banner.png _site/data_rockfish_banner.png
+
+      - name: Upload GitHub Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: "_site"
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # ----------------------------------------------------
+  # JOB 3: Create GitHub Release (Main Branch Only)
+  # ----------------------------------------------------
+  create-release:
+    name: Create GitHub Release
+    needs: [build-and-test, deploy-docs]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: sdk-artifacts
+          path: release-assets
+
+      - name: Create Release & Upload Assets
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION="${{ needs.build-and-test.outputs.version }}"
+          TAG="v$VERSION"
+
+          if ! gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Creating new release $TAG..."
+            gh release create "$TAG" --title "Release $TAG" --notes "Automated release of API clients version $VERSION"
+          else
+            echo "Release $TAG already exists. Proceeding to asset upload."
+          fi
+
+          gh release upload "$TAG" release-assets/* --clobber
