@@ -144,14 +144,19 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ----------------------------------------------------
-  # JOB 3: Create GitHub Release (Main/Master Branch Only)
+  # JOB 3: Create GitHub Release (Main Branch Only)
   # ----------------------------------------------------
   create-release:
     name: Create GitHub Release
     needs: [build-and-test, deploy-docs]
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     steps:
+      # --- THE FIX: Check out the repo so the 'gh' CLI knows where it is ---
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      # ---------------------------------------------------------------------
+
       - name: Download Build Artifacts
         uses: actions/download-artifact@v4
         with:
@@ -192,5 +197,4 @@ jobs:
           fi
 
           # Upload all files in the directory recursively
-          # (Using find to upload both the nested original files and the new root aliases)
           find release-assets -type f -exec gh release upload "$TAG" {} --clobber \;
