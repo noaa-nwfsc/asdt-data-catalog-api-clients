@@ -31,7 +31,6 @@ get_nwfsc_client <- function() {
 }
 
 # --- 2. DSL TRANSLATION ---
-# --- 2. DSL TRANSLATION ---
 transform_dsl <- function(val) {
   if (is.null(val)) return(NULL)
   
@@ -79,7 +78,15 @@ fetch_as_tibble <- function(api_func, kwargs, fetch_all = FALSE, endpoint_path =
       for (k in names(kwargs)) {
         val <- kwargs[[k]]
         if (!is.null(val)) {
-          if (length(val) > 1 || is.list(val)) val <- paste(unlist(val), collapse = "~")
+          # --- CORRECTED LOGIC: Use comma for 'fields', tilde for everything else ---
+          if (length(val) > 1 || is.list(val)) {
+            if (k == "fields") {
+              val <- paste(unlist(val), collapse = ",")
+            } else {
+              val <- paste(unlist(val), collapse = "~")
+            }
+          }
+          # --------------------------------------------------------------------------
           qs_pairs <- c(qs_pairs, paste0(k, "=", URLencode(as.character(val), reserved = TRUE)))
         }
       }

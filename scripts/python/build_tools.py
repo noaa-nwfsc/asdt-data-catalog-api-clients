@@ -413,12 +413,20 @@ class BuildOrchestrator:
         )
         client_dir_posix = client_dir.as_posix()
 
-        # --- NEW: Delete the manual NAMESPACE so roxygen2 can regenerate it ---
-        print(">>> Clearing manual NAMESPACE to allow roxygen2 to export wrappers...")
+        # --- THE BULLETPROOF NAMESPACE FIX ---
+        print(">>> Appending elite wrappers to NAMESPACE...")
         namespace_file = client_dir / "NAMESPACE"
         if namespace_file.exists():
-            namespace_file.unlink()
-        # ----------------------------------------------------------------------
+            with namespace_file.open("a") as f:
+                f.write("\n# --- NWFSC Elite Wrappers ---\n")
+                f.write('exportPattern("^read_")\n')
+                f.write('exportPattern("^fetch_all_")\n')
+                f.write('export("get_sdk_metadata")\n')
+                f.write('export("to_html")\n')
+                f.write('export("to_json_records")\n')
+                f.write('export("to_plot_img")\n')
+                f.write('export("glimpse_html")\n')
+        # -------------------------------------
 
         self._run_subprocess(
             ["Rscript", "-e", f"roxygen2::roxygenize('{client_dir_posix}')"]
@@ -436,6 +444,8 @@ class BuildOrchestrator:
             d$del('BugReports')
             d$set_dep('dplyr', type = 'Imports')
             d$set_dep('tibble', type = 'Imports')
+            d$set_dep('magrittr', type = 'Imports')
+            d$set_dep('base64enc', type = 'Imports')
             d$write('{client_dir_posix}/DESCRIPTION')
             """
             self._run_subprocess(["Rscript", "-e", r_patch_script])
