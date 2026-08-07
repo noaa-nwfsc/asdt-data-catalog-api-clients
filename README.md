@@ -92,7 +92,7 @@ All common tasks are handled by the root `Makefile`.
 | `make docs-r` | Generates R docs using `pkgdown`. |
 | | |
 | `make setup-hooks` | Configures local `pre-commit` Git hooks for Gitleaks security scans. |
-| `make lint` | Runs `pre-commit` checks (including Gitleaks) across all repository files. |
+| `make gitleaks-precommit` | Runs `pre-commit` checks (including Gitleaks) across all repository files. |
 | `make security-scan` | Executes a deep, verbose Gitleaks scan on the working tree. |
 
 ---
@@ -112,9 +112,9 @@ This SDK is specifically engineered to run seamlessly across two completely diff
 2. **Browser-Based WebAssembly**: Runs entirely client-side via **Pyodide** (Python) and **WebR** (R), powering our interactive API Coding Lab.
 
 **The WebR Networking Nuance:**
-Base R compiled for WebAssembly is built without `libcurl` support[cite: 1]. As a result, standard R networking packages (like `httr`) fail when making `https://` requests from the browser[cite: 1]. 
+Base R compiled for WebAssembly is built without `libcurl` support. As a result, standard R networking packages (like `httr`) fail when making `https://` requests from the browser. 
 
-To solve this, our R SDK contains an environment-aware fetch engine. It dynamically detects if it is running inside WebR (`Emscripten`)[cite: 5]. If it is, the SDK completely bypasses the standard R networking stack and instead routes requests through a synchronous **XHR Bridge** (`download.file(method="xhr")`), natively leveraging the browser's JavaScript `fetch` API[cite: 1, 5]. 
+To solve this, our R SDK contains an environment-aware fetch engine. It dynamically detects if it is running inside WebR (`Emscripten`). If it is, the SDK completely bypasses the standard R networking stack and instead routes requests through a synchronous **XHR Bridge** (`download.file(method="xhr")`), natively leveraging the browser's JavaScript `fetch` API. 
 
 As a user, you don't need to change any code—functions like `read_bottom_trawl_tows()` will automatically use the correct networking protocol whether you run them in RStudio or in the browser.
 
