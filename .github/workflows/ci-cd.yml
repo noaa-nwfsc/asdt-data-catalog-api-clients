@@ -5,13 +5,13 @@ on:
   # Triggers when a PR is merged, or code is committed directly
   push:
     branches:
-      - main
+      - master
       - develop
 
   # Triggers whenever a PR is opened or updated targeting these branches
   pull_request:
     branches:
-      - main
+      - master
       - develop
   workflow_dispatch:
 
@@ -144,12 +144,12 @@ jobs:
         uses: actions/deploy-pages@v4
 
   # ----------------------------------------------------
-  # JOB 3: Create GitHub Release (Main Branch Only)
+  # JOB 3: Create GitHub Release (Main/Master Branch Only)
   # ----------------------------------------------------
   create-release:
     name: Create GitHub Release
     needs: [build-and-test, deploy-docs]
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - name: Download Build Artifacts
