@@ -122,8 +122,11 @@ embed_code <- c(
 
 wrapper_code <- c(wrapper_code, embed_code)
 
-out_file <- file.path(out_dir, "elite_wrappers.R")
+# CHANGE THIS LINE to target the R directory
+out_file <- file.path(out_dir, "R", "elite_wrappers.R") 
 writeLines(wrapper_code, out_file)
 
-# 4. 🚀 WRITE A RAW JSON ASSET (For React to fetch directly if desired!)
-writeLines(jsonlite::toJSON(metadata_list, auto_unbox = TRUE, pretty = TRUE), file.path(out_dir, "catalog_metadata.json"))
+# 4. 🚀 WRITE A RAW JSON ASSET (Put this in inst/ to ensure it bundles with the package!)
+inst_dir <- file.path(out_dir, "inst")
+if (!dir.exists(inst_dir)) dir.create(inst_dir)
+writeLines(jsonlite::toJSON(metadata_list, auto_unbox = TRUE, pretty = TRUE), file.path(inst_dir, "catalog_metadata.json"))

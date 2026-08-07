@@ -4,12 +4,16 @@ name: Build and Test API Clients
 on:
   push:
     branches:
+      - main
       - develop
       - "build/**"
   pull_request:
     branches:
       - main
       - develop
+
+permissions:
+  contents: write # Required for creating GitHub Releases
 
 jobs:
   build-and-test:
@@ -87,3 +91,22 @@ jobs:
         with:
           name: r-sdk-package
           path: nwfscDataCatalog_*.tar.gz
+
+      # 3. Automated Release Management
+      - name: Create GitHub Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(grep -m 1 '^version =' clients/python_public/pyproject.toml | cut -d '"' -f 2)
+          TAG="v$VERSION"
+
+          if ! gh release view "$TAG" > /dev/null 2>&1; then
+            echo "Creating new release $TAG..."
+            gh release create "$TAG" --title "Release $TAG" --notes "Automated release of API clients version $VERSION"
+          else
+            echo "Release $TAG already exists. Proceeding to asset upload."
+          fi
+
+          echo "Uploading assets to $TAG..."
+          gh release upload "$TAG" clients/python_public/dist/*.whl *DataCatalog_*.tar.gz webr_binaries/bin/emscripten/contrib/*/*.tgz --clobber
