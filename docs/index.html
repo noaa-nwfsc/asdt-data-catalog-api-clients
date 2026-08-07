@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NWFSC Groundfish Data Catalog SDK Docs</title>
+  <style>
+    :root {
+      --noaa-navy: #003366;
+      --noaa-dark: #001f3f;
+      --noaa-blue: #0055a5;
+      --noaa-accent: #e65100;
+      --noaa-accent-hover: #c63f00;
+      --bg-light: #f8fafc;
+      --card-border: #e2e8f0;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Top Navigation Header */
+    .top-bar {
+      background-color: var(--noaa-navy);
+      color: #ffffff;
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--noaa-blue);
+    }
+
+    .top-bar .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .top-bar .badge {
+      background-color: var(--noaa-accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, var(--noaa-dark) 0%, var(--noaa-navy) 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: #cbd5e1;
+      max-width: 650px;
+      margin: 0 auto;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      flex: 1;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 1.5rem;
+      color: var(--noaa-navy);
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title h2::after {
+      content: '';
+      display: block;
+      width: 50%;
+      height: 3px;
+      background-color: var(--noaa-blue);
+      margin: 0.4rem auto 0 auto;
+      border-radius: 2px;
+    }
+
+    /* Grid Layout */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    /* Cards */
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 20px -5px rgba(0, 0, 0, 0.08);
+      border-color: #cbd5e1;
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background-color: #f1f5f9;
+      color: var(--noaa-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      color: var(--noaa-navy);
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 1.75rem;
+      flex: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--noaa-navy);
+      background-color: #ffffff;
+      border: 1.5px solid var(--noaa-navy);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: var(--noaa-navy);
+      color: #ffffff;
+    }
+
+    .btn-primary {
+      background-color: var(--noaa-accent);
+      color: #ffffff;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--noaa-accent-hover);
+      color: #ffffff;
+    }
+
+    /* Footer Styling with Rockfish Banner */
+    footer {
+      position: relative;
+      background-color: var(--noaa-navy);
+      /* Layer a dark navy overlay on top of the image so text stays super readable */
+      background-image: 
+        linear-gradient(to right, rgba(0, 51, 102, 0.95) 0%, rgba(0, 51, 102, 0.75) 60%, rgba(0, 51, 102, 0.85) 100%),
+        url('data_rockfish_banner.png');
+      background-repeat: no-repeat;
+      background-size: cover;
+      /* Shifts the rockfish subject off to the right margin */
+      background-position: right center; 
+      color: #ffffff;
+      padding: 3.5rem 1.5rem 1.5rem 1.5rem;
+      margin-top: auto;
+      border-top: 3px solid var(--noaa-blue);
+    }
+
+    .footer-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+      z-index: 2; /* Keeps text layered cleanly above the background */
+    }
+
+    .footer-col h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #93c5fd;
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-col ul li a {
+      color: #e2e8f0;
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 1.5rem auto 0 auto;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #cbd5e1;
+      position: relative;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="brand">
+      NOAA FISHERIES | NWFSC Groundfish Data Catalog
+    </div>
+    <span class="badge">SDK Docs</span>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Developer Documentation</h1>
+    <p>Client SDKs and REST API specifications for seamless integration with West Coast fisheries data platforms.</p>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <div class="section-title">
+      <h2>Select API Client</h2>
+    </div>
+
+    <div class="grid">
+      <!-- Python Card -->
+      <div class="card">
+        <div class="card-icon">
+          <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2c-5.52 0-5 2.39-5 2.39v2.32h5v.71H5.16S2 7.03 2 12c0 4.96 2.76 4.79 2.76 4.79h1.64v-2.32c0-2.61 2.27-2.47 2.27-2.47h4.86s2.17.02 2.17-2.13V4.39S17.52 2 12 2zm-1.8 1.83c.48 0 .87.39.87.87s-.39.87-.87.87-.87-.39-.87-.87.39-.87.87-.87zM12 22c5.52 0 5-2.39 5-2.39v-2.32h-5v-.71h6.84S22 16.97 22 12c0-4.96-2.76-4.79-2.76-4.79h-1.64v2.32c0 2.61-2.27 2.47-2.27 2.47h-4.86s-2.17-.02-2.17 2.13v5.48S6.48 22 12 22zm1.8-1.83c-.48 0-.87-.39-.87-.87s.39-.87.87-.87.87.39.87.87-.39.87-.87.87z"/></svg>
+        </div>
+        <h3>Python SDK</h3>
+        <p>Complete Sphinx documentation for the Python client library, data models, and analytical tools.</p>
+        <a href="python/index.html" class="btn">View Python Docs</a>
+      </div>
+
+      <!-- R Card -->
+      <div class="card">
+        <div class="card-icon">
+          <svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12a10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm1 14.5h-2v-3.8h-1v-1.7h3v5.5zm1.5-7.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </div>
+        <h3>R SDK</h3>
+        <p>Package reference manual generated via pkgdown for data extraction and statistical analysis in R.</p>
+        <a href="r/" class="btn">View R Docs</a>
+      </div>
+
+      <!-- API Card -->
+      <div class="card">
+        <div class="card-icon">
+          <svg width="28" height="28" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+        </div>
+        <h3>REST API (Redoc)</h3>
+        <p>Interactive Redoc OpenAPI specification for direct REST endpoint interaction and schema discovery.</p>
+        <a href="api/index.html" class="btn btn-primary">Explore API Docs</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>NWFSC & FRAM</h4>
+        <ul>
+          <li><a href="https://www.fisheries.noaa.gov/about/northwest-fisheries-science-center" target="_blank" rel="noopener">NWFSC Home</a></li>
+          <li><a href="https://www.fisheries.noaa.gov/about/fishery-resource-analysis-and-monitoring-division-northwest-fisheries-science-center" target="_blank" rel="noopener">FRAM Division</a></li>
+          <li><a href="https://www.fisheries.noaa.gov/about/west-coast-region" target="_blank" rel="noopener">West Coast Region</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Data Platform</h4>
+        <ul>
+          <li><a href="https://connect.fisheries.noaa.gov/nwfsc/data-catalog/" target="_blank" rel="noopener">Data Catalog App</a></li>
+          <li><a href="https://connect.fisheries.noaa.gov/nwfsc/data-catalog/#/api" target="_blank" rel="noopener">API Usage Guide</a></li>
+          <li><a href="https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients" target="_blank" rel="noopener">GitHub Repository</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact & Support</h4>
+        <ul>
+          <li><a href="mailto:nmfs.nwfsc.fram.data.team@noaa.gov">At-Sea Data Team</a></li>
+          <li><a href="https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/issues" target="_blank" rel="noopener">Report an Issue</a></li>
+          <li><a href="https://nsd.rdc.noaa.gov/" target="_blank" rel="noopener">NOAA Staff Directory</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>NOAA Fisheries | Northwest Fisheries Science Center | U.S. Department of Commerce</p>
+    </div>
+  </footer>
+
+</body>
+</html>
