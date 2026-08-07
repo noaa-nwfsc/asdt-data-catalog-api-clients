@@ -1,6 +1,69 @@
-*.save
-*.bad
+# ==========================================
+# 1. Generated Source Code (Build Outputs)
+# ==========================================
+clients/python_public/src/
+clients/python_public/test/
+clients/python_public/sphinx_docs/_build/
+clients/r_public/R/
+clients/r_public/man/
+
+# ==========================================
+# 2. Documentation Build Artifacts
+# ==========================================
+_site/
+site/
+clients/python_public/site/
+
+# ==========================================
+# 3. Python & R Package Build Artifacts
+# ==========================================
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info/
+*.whl
+*.tar.gz
+*.tgz
+.Rhistory
+.RData
+.Rproj.user/
+
+# ==========================================
+# 4. Ephemeral Build Tools & Hashes
+# ==========================================
+.venv/
+.local_jre/
+.local_tools/
+openapi-generator-cli.jar
+.spec_hash
+
+# ==========================================
+# 5. Old Generator Dumps
+# ==========================================
+gen_pub/
+gen_py_pub/
+gen_r_pub/
+
+# ==========================================
+# 6. Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# 7. Logs & Local Context
+# ==========================================
 *.log
-?
-save/
-*.save
+debug.log
+CONTEXT.md
+
+# ==========================================
+# 8. OS & IDE Configurations
+# ==========================================
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

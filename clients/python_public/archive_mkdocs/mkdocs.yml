@@ -1,0 +1,20 @@
+site_name: "Python SDK Documentation"
+theme:
+  name: material
+  palette:
+    primary: blue
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: sphinx
+            separate_signature: true
+            show_signature_annotations: false
+            show_source: false
+nav:
+  - Home: index.md
+  - API Endpoints: endpoints.md
+  - Data Models: models.md

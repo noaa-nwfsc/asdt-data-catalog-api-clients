@@ -1,0 +1,79 @@
+# .github/workflows/build-api-clients.yml
+name: Build and Test API Clients
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - "build/**"
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    name: Build & Test Polyglot SDKs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: "4.2"
+
+      - name: Install uv (Python Package Installer)
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install R Dependencies
+        run: |
+          R -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite'))"
+
+      - name: Fetch OpenAPI Specification
+        run: make fetch-public-spec
+
+      - name: Build and Test Public Python Client
+        run: make build-python-public
+
+      - name: Build Public R Client
+        run: make build-r-public
+
+      # 1. Build WebR Binary (Workspace is now clean!)
+      - name: Build WebR Binary
+        uses: r-wasm/actions/build-rwasm@v1
+        with:
+          packages: "./clients/r_public" # <-- Added ./ here!
+          repo-path: "webr_binaries"
+
+      # 2. Build standard Tarball SECOND
+      - name: Build R Tarball
+        run: R CMD build clients/r_public
+
+      - name: Upload WebR Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: webr-sdk-binary
+          path: "webr_binaries/bin/emscripten/contrib/*/*.tgz"
+
+      - name: Upload Python Wheel Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-sdk-wheel
+          path: clients/python_public/dist/*.whl
+
+      - name: Upload R Package Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: r-sdk-package
+          path: nwfscDataCatalog_*.tar.gz
