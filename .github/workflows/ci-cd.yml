@@ -108,9 +108,9 @@ jobs:
         with:
           r-version: "4.2"
 
-      - name: Install R Build Tools & Generate Clients
+      - name: Install R Build Tools & Dependencies
         run: |
-          Rscript -e "install.packages(c('roxygen2', 'pkgdown'))"
+          Rscript -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite', 'base64enc'))"
           make fetch-public-spec
           make build-all
 
