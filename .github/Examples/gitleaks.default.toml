@@ -1,0 +1,11 @@
+title = "Default GitLeaks control for ASDT Repos"
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Setting to ignore generated lock files, as we can't control their content."
+paths = [
+    '''yarn\.lock''',
+    '''package-lock\.json''',
+    '''\.lock$'''
+]
