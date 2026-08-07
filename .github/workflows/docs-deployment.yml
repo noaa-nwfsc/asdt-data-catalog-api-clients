@@ -36,8 +36,10 @@ jobs:
         with:
           r-version: "4.2"
 
-      - name: Install R Build Tools
-        run: Rscript -e "install.packages(c('roxygen2', 'pkgdown'))"
+      - name: Install R Build Tools & Package Dependencies
+        run: |
+          Rscript -e "install.packages(c('remotes', 'roxygen2', 'pkgdown'))"
+          Rscript -e "remotes::install_deps('clients/r_public', dependencies = TRUE)"
 
       - name: Fetch OpenAPI Specs
         run: make fetch-public-spec
