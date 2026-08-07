@@ -36,8 +36,10 @@ jobs:
         with:
           r-version: "4.2"
 
-      - name: Install R Build Tools
-        run: Rscript -e "install.packages(c('roxygen2', 'pkgdown'))"
+      - name: Install R Build Tools & Package Dependencies
+        run: |
+          Rscript -e "install.packages(c('remotes', 'roxygen2', 'pkgdown'))"
+          Rscript -e "remotes::install_deps('clients/r_public', dependencies = TRUE)"
 
       - name: Fetch OpenAPI Specs
         run: make fetch-public-spec
@@ -62,33 +64,9 @@ jobs:
           cd clients/python_public
           uv build
 
-      # 1. Build WebR Binary FIRST (using ./ local path)
-      - name: Build WebR Binary
-        uses: r-wasm/actions/build-rwasm@v1
-        with:
-          packages: "./clients/r_public"
-          repo-path: "webr_binaries"
-
       # 2. Build standard Tarball SECOND
       - name: Build R Tarball
         run: R CMD build clients/r_public
-
-      - name: Create GitHub Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION=$(grep -m 1 '^version =' clients/python_public/pyproject.toml | cut -d '"' -f 2)
-          TAG="v$VERSION"
-
-          if ! gh release view "$TAG" > /dev/null 2>&1; then
-            echo "Creating new release $TAG..."
-            gh release create "$TAG" --title "Release $TAG" --notes "Automated release of API clients version $VERSION"
-          else
-            echo "Release $TAG already exists. Proceeding to asset upload."
-          fi
-
-          echo "Uploading assets to $TAG..."
-          gh release upload "$TAG" clients/python_public/dist/*.whl *DataCatalog_*.tar.gz webr_binaries/bin/emscripten/contrib/*/*.tgz --clobber
 
       - name: Prepare Unified Site
         run: |
