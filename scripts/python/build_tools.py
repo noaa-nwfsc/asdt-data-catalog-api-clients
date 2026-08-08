@@ -297,6 +297,7 @@ class BuildOrchestrator:
         src_dir.mkdir(parents=True, exist_ok=True)
         shutil.copytree(gen_dir / pkg_name, src_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "python" / "factory.py", src_dir)
+        shutil.copy(self.SCRIPTS_DIR / "python" / "mcp_server.py", src_dir)
         (src_dir / "py.typed").touch()
         with (src_dir / "__init__.py").open("a") as f:
             f.write("\nfrom .factory import DataCatalog\n")
@@ -401,6 +402,7 @@ class BuildOrchestrator:
 
         shutil.copytree(gen_dir, client_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "r" / "nwfsc_utils.R", client_dir / "R")
+        shutil.copy(self.SCRIPTS_DIR / "r" / "mcp_server.R", client_dir / "R")
 
         print(">>> Running R wrapper and documentation generators...")
         self._run_subprocess(
@@ -426,6 +428,7 @@ class BuildOrchestrator:
                 f.write('export("to_json_records")\n')
                 f.write('export("to_plot_img")\n')
                 f.write('export("glimpse_html")\n')
+                f.write('export("run_mcp_server")\n')
         # -------------------------------------
 
         self._run_subprocess(
@@ -435,20 +438,28 @@ class BuildOrchestrator:
         print(">>> Patching DESCRIPTION file robustly via 'desc'...")
         desc_path = client_dir / "DESCRIPTION"
         if desc_path.exists():
-            r_patch_script = f"""
-            if (!requireNamespace('desc', quietly = TRUE)) {{
-                install.packages('desc', repos = 'https://cloud.r-project.org')
-            }}
-            d <- desc::description$new('{client_dir_posix}/DESCRIPTION')
-            d$del('URL')
-            d$del('BugReports')
-            d$set_dep('dplyr', type = 'Imports')
-            d$set_dep('tibble', type = 'Imports')
-            d$set_dep('magrittr', type = 'Imports')
-            d$set_dep('base64enc', type = 'Imports')
-            d$write('{client_dir_posix}/DESCRIPTION')
-            """
-            self._run_subprocess(["Rscript", "-e", r_patch_script])
+            patch_script_path = client_dir / "patch_description.R"
+            r_patch_script = f"""options(repos = c(CRAN = "https://cloud.r-project.org"))
+if (!requireNamespace('desc', quietly = TRUE)) {{
+    install.packages('desc')
+}}
+d <- desc::description$new('{client_dir_posix}/DESCRIPTION')
+d$del('URL')
+d$del('BugReports')
+d$set_dep('R6', type = 'Imports')
+d$set_dep('httr', type = 'Imports')
+d$set_dep('jsonlite', type = 'Imports')
+d$set_dep('stringr', type = 'Imports')
+d$set_dep('dplyr', type = 'Imports')
+d$set_dep('tibble', type = 'Imports')
+d$set_dep('magrittr', type = 'Imports')
+d$set_dep('base64enc', type = 'Imports')
+d$set_dep('mcptools', type = 'Suggests')
+d$write('{client_dir_posix}/DESCRIPTION')
+"""
+            patch_script_path.write_text(r_patch_script, encoding="utf-8")
+            self._run_subprocess(["Rscript", patch_script_path.as_posix()])
+            patch_script_path.unlink(missing_ok=True)
 
         print(">>> Cleaning up generator files...")
         shutil.rmtree(gen_dir)

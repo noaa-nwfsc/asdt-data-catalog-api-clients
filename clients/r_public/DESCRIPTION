@@ -1,25 +1,23 @@
 Package: nwfscDataCatalog
-Title: NWFSC Data Catalog R SDK
-Version: 0.1.4
-Authors@R: c(
-    person("NOAA", "NWFSC", email = "nwfsc.data@noaa.gov", role = c("aut", "cre"))
-  )
-Description: Provides an R SDK for interacting with the NWFSC Data Catalog API, 
-    offering direct access to data models, survey data, and automated tibble/dataframe outputs.
-License: MIT
+Title: R Package Client for NWFSC Data Catalog API v1 - Public
+Version: 1.0.0
+Author: person("OpenAPI Generator community", email = "team@openapitools.org", role = c("aut", "cre"))
+Maintainer: OpenAPI Generator community <team@openapitools.org>
+Description: RESTful API for programmatic access to NOAA Fisheries data.
+Depends: R (>= 3.3)
 Encoding: UTF-8
+License: Unlicense
 LazyData: true
-RoxygenNote: 7.3.1
-Imports:
-    dplyr,
-    tibble,
+Suggests: 
+    mcptools,
+    testthat
+Imports: 
     jsonlite,
     httr,
     R6,
-    methods
-Suggests:
-    testthat (>= 3.0.0),
-    httptest,
-    pkgdown,
-    roxygen2
-Config/testthat/edition: 3
+    base64enc,
+    stringr,
+    dplyr,
+    tibble,
+    magrittr
+Config/roxygen2/version: 8.0.0

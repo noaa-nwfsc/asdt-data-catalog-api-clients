@@ -18,12 +18,10 @@ uv pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/relea
 
 ### R Installation
 ```r
-# Install directly from the latest Release asset URL
-install.packages(
-  "https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz", 
-  repos = NULL, 
-  type = "source"
-)
+# Install pak if missing
+if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+# Install the SDK (pak automatically resolves dependencies from CRAN)
+pak::pkg_install("url::https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz")
 ```
 ---
 
