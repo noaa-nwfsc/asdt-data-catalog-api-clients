@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.scripts]
-nwfsc-mcp = "nwfsc_data_catalog.mcp_server:main"
+nwfsc-data-catalog-mcp = "nwfsc_data_catalog.mcp_server:main"
 
 [project.optional-dependencies]
 # Install via: pip install nwfsc-data-catalog[geo]
