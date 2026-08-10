@@ -1,6 +1,6 @@
 Package: nwfscDataCatalog
 Title: R Package Client for NWFSC Data Catalog API v1 - Public
-Version: 1.0.0
+Version: 1.0.2
 Author: person("OpenAPI Generator community", email = "team@openapitools.org", role = c("aut", "cre"))
 Maintainer: OpenAPI Generator community <team@openapitools.org>
 Description: RESTful API for programmatic access to NOAA Fisheries data.

@@ -78,17 +78,18 @@ class BuildOrchestrator:
                 },
             )
             with urllib.request.urlopen(req, timeout=10) as response:
-                data = json.loads(response.read())
+                raw_json_str = response.read().decode('utf-8')
 
-            # --- SANITIZE DUPLICATED OPERATION IDs ---
-            print(">>> Sanitizing duplicated operation IDs...")
-            for path, methods in data.get("paths", {}).items():
-                for method, details in methods.items():
-                    if "operationId" in details:
-                        op_id = details["operationId"]
-                        op_id = op_id.replace("BottomTrawlBottomTrawl", "BottomTrawl")
-                        op_id = op_id.replace("HookAndLineHookAndLine", "HookAndLine")
-                        details["operationId"] = op_id
+            # --- SANITIZE DUPLICATED NAMES GLOBALLY ---
+            print(">>> Sanitizing duplicated names globally...")
+            raw_json_str = raw_json_str.replace("BottomTrawlBottomTrawl", "BottomTrawl")
+            raw_json_str = raw_json_str.replace("HookAndLineHookAndLine", "HookAndLine")
+            raw_json_str = raw_json_str.replace("bottom-trawl/bottom-trawl", "bottom-trawl")
+            raw_json_str = raw_json_str.replace("hook-and-line/hook-and-line", "hook-and-line")
+            raw_json_str = raw_json_str.replace("bottom_trawl_bottom_trawl", "bottom_trawl")
+            raw_json_str = raw_json_str.replace("hook_and_line_hook_and_line", "hook_and_line")
+
+            data = json.loads(raw_json_str)
 
             # Save the main public spec
             self.PUBLIC_SPEC_PATH.write_text(json.dumps(data, indent=2))

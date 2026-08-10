@@ -8,8 +8,13 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 
-def transform_dsl_value(val: Any) -> str:
+def transform_dsl_value(val: Any) -> Any:
     """Translates Python types into the NWFSC API Filter DSL."""
+    if val is None:
+        return None
+    if isinstance(val, bool):
+        return val
+
     if isinstance(val, str):
         # Allow pass-through if the user explicitly typed an operator prefix (e.g., "contains:rockfish")
         return val
