@@ -108,6 +108,20 @@ def {name}({sig_str}) -> Any:
 
 def main():
     """Runs the FastMCP server."""
+    # Register assessment skills
+    try:
+        from nwfsc_data_catalog.assessment_skills import (
+            skill_generate_design_index, 
+            skill_expand_compositions, 
+            skill_build_ss3
+        )
+        mcp.tool(name="skill_generate_design_index", description="Calculate stratified area-swept biomass indices, SE, and CV across depth/latitude strata.")(skill_generate_design_index)
+        mcp.tool(name="skill_expand_compositions", description="Perform weighted stratum expansions on length and age frequencies.")(skill_expand_compositions)
+        mcp.tool(name="skill_build_ss3", description="Parse an SS3 .dat template file, inject new index/composition data, and write out a new file.")(skill_build_ss3)
+        logger.info("Registered assessment skill tools.")
+    except ImportError as e:
+        logger.warning(f"Could not import assessment skills (this is normal during bootstrapping): {e}")
+
     logger.info("Starting NWFSC Data Catalog FastMCP Server...")
     mcp.run()
 
