@@ -6,6 +6,7 @@ clients/python_public/test/
 clients/python_public/sphinx_docs/_build/
 clients/r_public/R/
 clients/r_public/man/
+clients/r_public/.openapi-generator/
 
 # ==========================================
 # 2. Documentation Build Artifacts
