@@ -6,6 +6,8 @@ clients/python_public/test/
 clients/python_public/sphinx_docs/_build/
 clients/r_public/R/
 clients/r_public/man/
+clients/r_public/.openapi-generator/
+clients/r_public/.github/
 
 # ==========================================
 # 2. Documentation Build Artifacts
@@ -13,6 +15,7 @@ clients/r_public/man/
 _site/
 site/
 clients/python_public/site/
+clients/r_public/docs/
 
 # ==========================================
 # 3. Python & R Package Build Artifacts

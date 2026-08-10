@@ -54,7 +54,7 @@ jobs:
 
       - name: Install R Dependencies
         run: |
-          R -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite'))"
+          R -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite', 'stringr', 'httr', 'R6', 'magrittr', 'base64enc', 'mcptools', 'ellmer'))"
 
       - name: Fetch OpenAPI Specification & Generate Clients
         run: |
@@ -111,7 +111,7 @@ jobs:
 
       - name: Install R Build Tools & Dependencies
         run: |
-          Rscript -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite', 'base64enc'))"
+          Rscript -e "install.packages(c('roxygen2', 'pkgdown', 'httptest', 'testthat', 'dplyr', 'tibble', 'jsonlite', 'stringr', 'httr', 'R6', 'magrittr', 'base64enc', 'mcptools', 'ellmer'))"
           make fetch-public-spec
           make build-all
 

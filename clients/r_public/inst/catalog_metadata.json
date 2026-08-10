@@ -1,0 +1,407 @@
+[
+  {
+    "name": "to_html",
+    "description": "Converts a dataframe into a styled HTML table string for direct UI rendering.",
+    "parameters": {
+      "df": "The tibble/dataframe to convert."
+    }
+  },
+  {
+    "name": "to_json_records",
+    "description": "Converts a dataframe into a JavaScript-friendly JSON array of objects.",
+    "parameters": {
+      "df": "The tibble/dataframe to convert."
+    }
+  },
+  {
+    "name": "to_plot_img",
+    "description": "Generates a base plot and returns a Base64-encoded HTML <img> tag.",
+    "parameters": {
+      "df": "The dataframe.",
+      "x_col": "X-axis column string.",
+      "y_col": "Y-axis column string.",
+      "type": "Plot type ('p' for points, 'l' for lines)."
+    }
+  },
+  {
+    "name": "glimpse_html",
+    "description": "Generates an HTML X-ray profile of the dataset showing types, missing values, and a preview.",
+    "parameters": {
+      "df": "The tibble/dataframe to profile."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_tows",
+    "description": "West Coast Bottom Trawl Tows",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_tows",
+    "description": "Fetch ALL pages for: West Coast Bottom Trawl Tows",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_catch",
+    "description": "West Coast Bottom Trawl Catch Samples",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_catch",
+    "description": "Fetch ALL pages for: West Coast Bottom Trawl Catch Samples",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_survey_taxonomy",
+    "description": "NWFSC Survey Taxonomy",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_survey_taxonomy",
+    "description": "Fetch ALL pages for: NWFSC Survey Taxonomy",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_specimens",
+    "description": "West Coast Bottom Trawl Specimens",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_specimens",
+    "description": "Fetch ALL pages for: West Coast Bottom Trawl Specimens",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_all_survey_years",
+    "description": "all_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_all_survey_years",
+    "description": "Fetch ALL pages for: all_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_station_searches",
+    "description": "West Coast Bottom Trawl Station Searches",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_station_searches",
+    "description": "Fetch ALL pages for: West Coast Bottom Trawl Station Searches",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_sampling_stations",
+    "description": "West Coast Bottom Trawl Station Grid",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_sampling_stations",
+    "description": "Fetch ALL pages for: West Coast Bottom Trawl Station Grid",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_all_taxon_categories",
+    "description": "all_taxon_categories",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_all_taxon_categories",
+    "description": "Fetch ALL pages for: all_taxon_categories",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_vessels",
+    "description": "bottom_trawl_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_vessels",
+    "description": "Fetch ALL pages for: bottom_trawl_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_hook_and_line_hook_and_line_vessels",
+    "description": "hook_and_line_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_hook_and_line_hook_and_line_vessels",
+    "description": "Fetch ALL pages for: hook_and_line_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_all_taxon_subcategories",
+    "description": "all_taxon_subcategories",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_all_taxon_subcategories",
+    "description": "Fetch ALL pages for: all_taxon_subcategories",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_survey_years",
+    "description": "bottom_trawl_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_survey_years",
+    "description": "Fetch ALL pages for: bottom_trawl_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_nmfs_projects",
+    "description": "bottom_trawl_nmfs_projects",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_nmfs_projects",
+    "description": "Fetch ALL pages for: bottom_trawl_nmfs_projects",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_hook_and_line_hook_and_line_common_names",
+    "description": "hook_and_line_common_names",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_hook_and_line_hook_and_line_common_names",
+    "description": "Fetch ALL pages for: hook_and_line_common_names",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_hook_and_line_survey_years",
+    "description": "hook_and_line_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_hook_and_line_survey_years",
+    "description": "Fetch ALL pages for: hook_and_line_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_search_results",
+    "description": "bottom_trawl_search_results",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_search_results",
+    "description": "Fetch ALL pages for: bottom_trawl_search_results",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_nwfsc_triennial_specimen_lengths",
+    "description": "AFSC/RACE Bottom Trawl Triennial Specimen Lengths",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_nwfsc_triennial_specimen_lengths",
+    "description": "Fetch ALL pages for: AFSC/RACE Bottom Trawl Triennial Specimen Lengths",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_triennial_vessels",
+    "description": "bottom_trawl_triennial_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_triennial_vessels",
+    "description": "Fetch ALL pages for: bottom_trawl_triennial_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_shelf_slope_vessels",
+    "description": "bottom_trawl_shelf_slope_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_shelf_slope_vessels",
+    "description": "Fetch ALL pages for: bottom_trawl_shelf_slope_vessels",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_triennial_survey_years",
+    "description": "bottom_trawl_triennial_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_triennial_survey_years",
+    "description": "Fetch ALL pages for: bottom_trawl_triennial_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_triennial_nmfs_projects",
+    "description": "bottom_trawl_triennial_nmfs_projects",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_triennial_nmfs_projects",
+    "description": "Fetch ALL pages for: bottom_trawl_triennial_nmfs_projects",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "read_bottom_trawl_bottom_trawl_shelf_slope_survey_years",
+    "description": "bottom_trawl_shelf_slope_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "limit": "Max records to retrieve per page.",
+      "fields": "Comma-separated columns to return."
+    }
+  },
+  {
+    "name": "fetch_all_bottom_trawl_bottom_trawl_shelf_slope_survey_years",
+    "description": "Fetch ALL pages for: bottom_trawl_shelf_slope_survey_years",
+    "parameters": {
+      "...": "Dynamic filter parameters.",
+      "fields": "Comma-separated columns to return."
+    }
+  }
+]
