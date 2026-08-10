@@ -22,7 +22,9 @@ from nwfsc_data_catalog.factory import (
         ({"contains": "hake"}, "contains:hake"),
         ("direct_string", "direct_string"),
         (42, "42"),
-        (None, "None"),
+        (None, None),
+        (True, True),
+        (False, False),
     ],
 )
 def test_transform_dsl_value(value, expected):

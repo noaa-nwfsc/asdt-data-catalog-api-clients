@@ -78,17 +78,18 @@ class BuildOrchestrator:
                 },
             )
             with urllib.request.urlopen(req, timeout=10) as response:
-                data = json.loads(response.read())
+                raw_json_str = response.read().decode('utf-8')
 
-            # --- SANITIZE DUPLICATED OPERATION IDs ---
-            print(">>> Sanitizing duplicated operation IDs...")
-            for path, methods in data.get("paths", {}).items():
-                for method, details in methods.items():
-                    if "operationId" in details:
-                        op_id = details["operationId"]
-                        op_id = op_id.replace("BottomTrawlBottomTrawl", "BottomTrawl")
-                        op_id = op_id.replace("HookAndLineHookAndLine", "HookAndLine")
-                        details["operationId"] = op_id
+            # --- SANITIZE DUPLICATED NAMES GLOBALLY ---
+            print(">>> Sanitizing duplicated names globally...")
+            raw_json_str = raw_json_str.replace("BottomTrawlBottomTrawl", "BottomTrawl")
+            raw_json_str = raw_json_str.replace("HookAndLineHookAndLine", "HookAndLine")
+            raw_json_str = raw_json_str.replace("bottom-trawl/bottom-trawl", "bottom-trawl")
+            raw_json_str = raw_json_str.replace("hook-and-line/hook-and-line", "hook-and-line")
+            raw_json_str = raw_json_str.replace("bottom_trawl_bottom_trawl", "bottom_trawl")
+            raw_json_str = raw_json_str.replace("hook_and_line_hook_and_line", "hook_and_line")
+
+            data = json.loads(raw_json_str)
 
             # Save the main public spec
             self.PUBLIC_SPEC_PATH.write_text(json.dumps(data, indent=2))
@@ -297,6 +298,7 @@ class BuildOrchestrator:
         src_dir.mkdir(parents=True, exist_ok=True)
         shutil.copytree(gen_dir / pkg_name, src_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "python" / "factory.py", src_dir)
+        shutil.copy(self.SCRIPTS_DIR / "python" / "mcp_server.py", src_dir)
         (src_dir / "py.typed").touch()
         with (src_dir / "__init__.py").open("a") as f:
             f.write("\nfrom .factory import DataCatalog\n")
@@ -401,6 +403,11 @@ class BuildOrchestrator:
 
         shutil.copytree(gen_dir, client_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "r" / "nwfsc_utils.R", client_dir / "R")
+        shutil.copy(self.SCRIPTS_DIR / "r" / "mcp_server.R", client_dir / "R")
+        shutil.copy(self.SCRIPTS_DIR / "r" / "assessment_skills.R", client_dir / "R")
+        
+        # Strip out redundant OpenAPI-generated github workflows
+        shutil.rmtree(client_dir / ".github", ignore_errors=True)
 
         print(">>> Running R wrapper and documentation generators...")
         self._run_subprocess(
@@ -426,6 +433,10 @@ class BuildOrchestrator:
                 f.write('export("to_json_records")\n')
                 f.write('export("to_plot_img")\n')
                 f.write('export("glimpse_html")\n')
+                f.write('export("run_mcp_server")\n')
+                f.write('export("skill_expand_compositions")\n')
+                f.write('export("skill_generate_index")\n')
+                f.write('export("skill_build_ss3")\n')
         # -------------------------------------
 
         self._run_subprocess(
@@ -435,20 +446,32 @@ class BuildOrchestrator:
         print(">>> Patching DESCRIPTION file robustly via 'desc'...")
         desc_path = client_dir / "DESCRIPTION"
         if desc_path.exists():
-            r_patch_script = f"""
-            if (!requireNamespace('desc', quietly = TRUE)) {{
-                install.packages('desc', repos = 'https://cloud.r-project.org')
-            }}
-            d <- desc::description$new('{client_dir_posix}/DESCRIPTION')
-            d$del('URL')
-            d$del('BugReports')
-            d$set_dep('dplyr', type = 'Imports')
-            d$set_dep('tibble', type = 'Imports')
-            d$set_dep('magrittr', type = 'Imports')
-            d$set_dep('base64enc', type = 'Imports')
-            d$write('{client_dir_posix}/DESCRIPTION')
-            """
-            self._run_subprocess(["Rscript", "-e", r_patch_script])
+            patch_script_path = client_dir / "patch_description.R"
+            r_patch_script = f"""options(repos = c(CRAN = "https://cloud.r-project.org"))
+if (!requireNamespace('desc', quietly = TRUE)) {{
+    install.packages('desc')
+}}
+d <- desc::description$new('{client_dir_posix}/DESCRIPTION')
+d$del('URL')
+d$del('BugReports')
+d$set_dep('R6', type = 'Imports')
+d$set_dep('httr', type = 'Imports')
+d$set_dep('jsonlite', type = 'Imports')
+d$set_dep('stringr', type = 'Imports')
+d$set_dep('dplyr', type = 'Imports')
+d$set_dep('tibble', type = 'Imports')
+d$set_dep('magrittr', type = 'Imports')
+d$set_dep('base64enc', type = 'Imports')
+d$set_dep('mcptools', type = 'Suggests')
+d$set_dep('ellmer', type = 'Suggests')
+d$set_dep('nwfscSurvey', type = 'Suggests')
+d$set_dep('sdmTMB', type = 'Suggests')
+d$set_dep('r4ss', type = 'Suggests')
+d$write('{client_dir_posix}/DESCRIPTION')
+"""
+            patch_script_path.write_text(r_patch_script, encoding="utf-8")
+            self._run_subprocess(["Rscript", patch_script_path.as_posix()])
+            patch_script_path.unlink(missing_ok=True)
 
         print(">>> Cleaning up generator files...")
         shutil.rmtree(gen_dir)

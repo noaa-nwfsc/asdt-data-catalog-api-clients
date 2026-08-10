@@ -1,3 +1,5 @@
+**NOTE: SDKs and the NWFSC Data Catalog is in pre-release and actively being developed for first release**
+
 # NWFSC Data Catalog R & Python SDKs
 
 This repository contains the source code and build system for the **NWFSC Data Catalog SDKs**, available for both Python and R. The entire build process is orchestrated through a Python script, requires no containerization (like Docker), and automatically bootstraps its own Java runtime and Pandoc toolchain to remain portable and dependency-free.
@@ -18,12 +20,10 @@ uv pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/relea
 
 ### R Installation
 ```r
-# Install directly from the latest Release asset URL
-install.packages(
-  "https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz", 
-  repos = NULL, 
-  type = "source"
-)
+# Install pak if missing
+if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
+# Install the SDK (pak automatically resolves dependencies from CRAN)
+pak::pkg_install("url::https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz")
 ```
 ---
 
@@ -173,6 +173,24 @@ print(head(vessels_df))
 
 # Use a UI utility to convert a dataframe to a styled HTML table
 html_output <- to_html(vessels_df)
+```
+
+---
+
+## Model Context Protocol (MCP) Servers
+
+The NWFSC Data Catalog provides built-in **Model Context Protocol (MCP)** servers for both Python and R. Developers can hook these servers into local AI environments (like Claude Desktop or Cursor) to allow large language models to securely pull catalog data and run advanced fisheries biometrics analyses.
+
+### Running the Python MCP Server
+The Python SDK registers a console script entry point upon installation. You can launch the server using the official MCP Inspector or hook it directly into an AI app using `stdio`:
+```bash
+npx @modelcontextprotocol/inspector nwfsc-data-catalog-mcp
+```
+
+### Running the R MCP Server (w/ Stock Assessment Skills)
+The R SDK exposes the exact same dataset catalog alongside advanced fisheries stock assessment capabilities using standard R biometrics packages (`sdmTMB`, `nwfscSurvey`, `r4ss`). 
+```bash
+npx @modelcontextprotocol/inspector Rscript -e "nwfscDataCatalog::run_mcp_server()"
 ```
 
 ---

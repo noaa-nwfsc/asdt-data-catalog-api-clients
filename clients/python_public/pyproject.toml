@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "nwfsc-data-catalog"
-version = "0.1.7"
+version = "0.1.10"
 description = "Public Python client for the NWFSC Data Catalog API"
 requires-python = ">=3.9"
 dependencies = [
@@ -12,8 +12,12 @@ dependencies = [
     "python-dateutil >= 2.8.2",
     "pydantic >= 2.0.0",
     "typing-extensions >= 4.7.1",
-    "pandas >= 2.0.0"      # Hard dependency for .read_ and .to_dataframe()
+    "pandas >= 2.0.0",      # Hard dependency for .read_ and .to_dataframe()
+    "mcp>=1.0.0,<2.0.0"
 ]
+
+[project.scripts]
+nwfsc-data-catalog-mcp = "nwfsc_data_catalog.mcp_server:main"
 
 [project.optional-dependencies]
 # Install via: pip install nwfsc-data-catalog[geo]

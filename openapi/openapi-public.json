@@ -97,7 +97,7 @@
         "description": "All fields returned when true, else only core fields returned."
       }
     ],
-    "x-nwfsc-api-spec-generated-at": "2026-08-05T14:53:31.469443-07:00"
+    "x-nwfsc-api-spec-generated-at": "2026-08-10T03:50:13.514468-07:00"
   },
   "paths": {
     "/bottom-trawl/tows": {
@@ -189,7 +189,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
           },
           {
             "in": "query",
@@ -287,7 +287,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the\r median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data\r used to estimate the gear track is an alternative method typically used."
+            "description": "Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data used to estimate the gear track is an alternative method typically used."
           },
           {
             "in": "query",
@@ -315,7 +315,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
           },
           {
             "in": "query",
@@ -343,7 +343,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).\r \r Values include:\r * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review.\r * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends.\r * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication.\r * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units.\r * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids."
+            "description": "The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).  Values include: * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review. * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends. * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication. * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units. * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids."
           },
           {
             "in": "query",
@@ -357,7 +357,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The formatted display name representing the data readiness level, combining the level code and its status label.\r \r Values include:\r * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors.\r * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review.\r * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits.\r * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys.\r * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids."
+            "description": "The formatted display name representing the data readiness level, combining the level code and its status label.  Values include: * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors. * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review. * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits. * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys. * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids."
           },
           {
             "in": "query",
@@ -371,7 +371,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best."
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best."
           },
           {
             "in": "query",
@@ -1253,7 +1253,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded\r In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder,\r with real-time data streamed via serial protocol into the wheelhouse for an average calculation."
+            "description": "Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder, with real-time data streamed via serial protocol into the wheelhouse for an average calculation."
           },
           {
             "in": "query",
@@ -1337,7 +1337,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship \r or vessel prefix (i.e. Last Straw, NOT F/V Last Straw)."
+            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw)."
           },
           {
             "in": "query",
@@ -1399,12 +1399,13 @@
         "x-nwfsc-ui": {
           "sort_order": 101,
           "catalog_tags": [
-            "Bottom Trawl"
+            "Bottom Trawl",
+            "Operations"
           ],
           "display_name": "West Coast Bottom Trawl Tows",
           "is_standard_report": true
         },
-        "description": "Report storing one record per groundfish bottom trawl tow/haul sampling operation along the West Coast. \r \r Tows from the following West Coast Bottom Trawl Groundfish surveys are included in this report:\r \r * **West Coast Groundfish Bottom Trawl Slope/Shelf Combination Survey** (2003 \u2013 Present)\r * **West Coast Groundfish Bottom Trawl Slope Survey** (1998 \u2013 2002)\r * **West Coast Groundfish Bottom Trawl Shelf Survey** (2001)\r * **West Coast Groundfish Bottom Trawl Hypoxia Study** (2007 \u2013 2011)\r * **West Coast Groundfish Bottom Trawl Video Study** (2009)\r * **AFSC/RACE Triennial Groundfish Surveys** (1977 \u2013 2001)\r \r Included in this report are tow-level net mensuration statistics, various spatiotemporal data points related to vessel and gear positioning, \r qualitative and quantitative environmental metrics, aggregate catch weight values, personnel and scheduling information, \r and overall tow performance. Availability of individual data points may vary between surveys.\r \r > **Note on Survey Comparability:** Because the Slope and Shelf series are based on distinct statistical designs, \r they are generally not amenable to combined long-term time series analysis. Analysts should filter by the project field to isolate consistent data series.",
+        "description": "Report storing one record per groundfish bottom trawl tow/haul sampling operation along the West Coast.   Tows from the following West Coast Bottom Trawl Groundfish surveys are included in this report:  * **West Coast Groundfish Bottom Trawl Slope/Shelf Combination Survey** (2003 \u2013 Present) * **West Coast Groundfish Bottom Trawl Slope Survey** (1998 \u2013 2002) * **West Coast Groundfish Bottom Trawl Shelf Survey** (2001) * **West Coast Groundfish Bottom Trawl Hypoxia Study** (2007 \u2013 2011) * **West Coast Groundfish Bottom Trawl Video Study** (2009) * **AFSC/RACE Triennial Groundfish Surveys** (1977 \u2013 2001)  Included in this report are tow-level net mensuration statistics, various spatiotemporal data points related to vessel and gear positioning,  qualitative and quantitative environmental metrics, aggregate catch weight values, personnel and scheduling information,  and overall tow performance. Availability of individual data points may vary between surveys.  > **Note on Survey Comparability:** Because the Slope and Shelf series are based on distinct statistical designs,  they are generally not amenable to combined long-term time series analysis. Analysts should filter by the project field to isolate consistent data series.",
         "operationId": "getBottomTrawlTows",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-stac-anchors": {
@@ -1517,7 +1518,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
           },
           {
             "in": "query",
@@ -1787,6 +1788,20 @@
           },
           {
             "in": "query",
+            "name": "catch_per_unit_effort_kg_per_ha",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/NwfscNumericFilter"
+                }
+              ],
+              "nullable": true
+            },
+            "required": false,
+            "description": "Catch per unit effort (CPUE) of the catch sample, where the total catch weight of the specific sample is divided by the seafloor area swept by the tow."
+          },
+          {
+            "in": "query",
             "name": "data_readiness_level_code",
             "schema": {
               "allOf": [
@@ -1797,7 +1812,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The code representing the data readiness level. \r \r Values include:\r * `L0`\r * `L1`\r * `L2`\r * `L3`\r * `L4`"
+            "description": "The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4`"
           },
           {
             "in": "query",
@@ -1811,7 +1826,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The formatted display name combining the readiness level code and its status. \r \r Values include:\r * `L0 - RAW`\r * `L1 - PRELIMINARY`\r * `L2 - VERIFIED`\r * `L3 - HARMONIZED`\r * `L4 - DERIVED`"
+            "description": "The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED`"
           },
           {
             "in": "query",
@@ -1825,7 +1840,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best."
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best."
           },
           {
             "in": "query",
@@ -2117,7 +2132,7 @@
           "display_name": "West Coast Bottom Trawl Catch Samples",
           "is_standard_report": true
         },
-        "description": "Report storing one record per catch sample sorted out to its taxonomic classification sampled on all bottom trawl tows. A typical catch sample can be defined as having: \r \r * **A.** A taxonomic classification or marine debris designation\r * **B.** Total weight of the sample, and subsample weight if one is taken\r * **C.** Total individual organism tally (extrapolated or actual) and subsample tally if one is taken\r \r Depending on sampling protocols for a given species and amount caught, all individuals in a sample are tallied, or the catch is subsampled, with the entire sample being weighed but only a portion of the individuals tallied. In the event of an incomplete tally, the total individuals estimated for the catch is calculated by:\r \r 1. Finding the average weight per fish from individuals that are both weighed and counted.\r 2. Using that average weight per fish to estimate a tally for the uncounted portion.\r \r > **Note:** Taxonomic classifications may change post-season due to indeterminate field ID, genetic analysis, etc., and are represented in this report by both `field_identified` and `best_available` taxonomic designations.",
+        "description": "Report storing one record per catch sample sorted out to its taxonomic classification sampled on all bottom trawl tows. A typical catch sample can be defined as having:   * **A.** A taxonomic classification or marine debris designation * **B.** Total weight of the sample, and subsample weight if one is taken * **C.** Total individual organism tally (extrapolated or actual) and subsample tally if one is taken  Depending on sampling protocols for a given species and amount caught, all individuals in a sample are tallied, or the catch is subsampled, with the entire sample being weighed but only a portion of the individuals tallied. In the event of an incomplete tally, the total individuals estimated for the catch is calculated by:  1. Finding the average weight per fish from individuals that are both weighed and counted. 2. Using that average weight per fish to estimate a tally for the uncounted portion.  > **Note:** Taxonomic classifications may change post-season due to indeterminate field ID, genetic analysis, etc., and are represented in this report by both `field_identified` and `best_available` taxonomic designations.",
         "operationId": "getBottomTrawlCatch",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-stac-anchors": {
@@ -2737,7 +2752,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
           },
           {
             "in": "query",
@@ -3059,7 +3074,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The code representing the data readiness level. \r \r Values include:\r * `L0`\r * `L1`\r * `L2`\r * `L3`\r * `L4`"
+            "description": "The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4`"
           },
           {
             "in": "query",
@@ -3073,7 +3088,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "The formatted display name combining the readiness level code and its status. \r \r Values include:\r * `L0 - RAW`\r * `L1 - PRELIMINARY`\r * `L2 - VERIFIED`\r * `L3 - HARMONIZED`\r * `L4 - DERIVED`"
+            "description": "The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED`"
           },
           {
             "in": "query",
@@ -3087,7 +3102,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best."
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best."
           },
           {
             "in": "query",
@@ -3705,7 +3720,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
           },
           {
             "in": "query",
@@ -3907,12 +3922,13 @@
         "x-nwfsc-ui": {
           "sort_order": 102,
           "catalog_tags": [
-            "Bottom Trawl"
+            "Bottom Trawl",
+            "Operations"
           ],
           "display_name": "West Coast Bottom Trawl Station Searches",
           "is_standard_report": true
         },
-        "description": "Report storing one record per station search operation on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey. A search is performed when first assessing a sampling station for trawlability. The vessel will search a cell for up to an hour before determining one of the following outcomes:\r \r * **A.** Station is trawlable and will be sampled now\r * **B.** Station is trawlable and will be sampled later\r * **C.** Station is not trawlable now due to temporary circumstances (e.g., weather, commercial fishing gear, military presence)\r * **D.** Station is not trawlable and is likely permanently untrawlable (e.g., due to harsh bottom features)\r \r > **Note:** Typically, scientists and crew are required to search a given site for at least an hour before deeming it untrawlable, \r but circumstances may cause this time requirement to be missed or shortened.",
+        "description": "Report storing one record per station search operation on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey. A search is performed when first assessing a sampling station for trawlability. The vessel will search a cell for up to an hour before determining one of the following outcomes:  * **A.** Station is trawlable and will be sampled now * **B.** Station is trawlable and will be sampled later * **C.** Station is not trawlable now due to temporary circumstances (e.g., weather, commercial fishing gear, military presence) * **D.** Station is not trawlable and is likely permanently untrawlable (e.g., due to harsh bottom features)  > **Note:** Typically, scientists and crew are required to search a given site for at least an hour before deeming it untrawlable,  but circumstances may cause this time requirement to be missed or shortened.",
         "operationId": "getBottomTrawlStationSearches",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-stac-anchors": {
@@ -4095,7 +4111,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
           },
           {
             "in": "query",
@@ -4386,7 +4402,7 @@
           ],
           "display_name": "West Coast Bottom Trawl Station Grid"
         },
-        "description": "Report storing one record per station grid sampling cell used in the random stratified survey design for the West Coast Groundfish Bottom Trawl Shelf/Slope Survey. \r \r Stations span the entire West Coast from Northern Washington to Southern California, reaching out to cover the entire shelf up to ~700 fathoms. The majority of stations are rectangular with four vertices and have an approximate area of 1,028 hectares. Each station is assigned a unique station code and a centroid key (see individual column definitions for details).\r \r For randomized annual selection, stations are stratified into the following groups:\r \r **Depth Strata:**\r * 30 \u2013 100 fathoms\r * 100 \u2013 300 fathoms\r * 300 \u2013 700 fathoms\r \r **Latitude Strata:**\r * North of Point Conception\r * South of Point Conception\r \r > **Note on Station Activation:** Stations may be deactivated and excluded from the survey over time due to changes in viable or allowed sampling areas. They may also be reactivated if these environmental or regulatory conditions change.",
+        "description": "Report storing one record per station grid sampling cell used in the random stratified survey design for the West Coast Groundfish Bottom Trawl Shelf/Slope Survey.   Stations span the entire West Coast from Northern Washington to Southern California, reaching out to cover the entire shelf up to ~700 fathoms. The majority of stations are rectangular with four vertices and have an approximate area of 1,028 hectares. Each station is assigned a unique station code and a centroid key (see individual column definitions for details).  For randomized annual selection, stations are stratified into the following groups:  **Depth Strata:** * 30 \u2013 100 fathoms * 100 \u2013 300 fathoms * 300 \u2013 700 fathoms  **Latitude Strata:** * North of Point Conception * South of Point Conception  > **Note on Station Activation:** Stations may be deactivated and excluded from the survey over time due to changes in viable or allowed sampling areas. They may also be reactivated if these environmental or regulatory conditions change.",
         "operationId": "getBottomTrawlSamplingStations",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-stac-anchors": {
@@ -4531,7 +4547,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_vessels"
+                    "$ref": "#/components/schemas/bottom_trawl_vessels"
                   }
                 }
               }
@@ -4656,7 +4672,7 @@
           }
         ],
         "description": "A distinct list of all vessels that participated in the bottom trawl survey.",
-        "operationId": "getBottomTrawlBottomTrawlVessels",
+        "operationId": "getBottomTrawlVessels",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -4675,7 +4691,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/hook_and_line_hook_and_line_vessels"
+                    "$ref": "#/components/schemas/hook_and_line_vessels"
                   }
                 }
               }
@@ -4786,7 +4802,7 @@
           }
         ],
         "description": "A distinct list of all vessels that participated in the Southern California Hook & Line survey.",
-        "operationId": "getHookAndLineHookAndLineVessels",
+        "operationId": "getHookAndLineVessels",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -4925,6 +4941,122 @@
         "x-nwfsc-allowed-download-formats": "[\"json\", \"csv\", \"parquet\"]"
       }
     },
+    "/reference/bottom-trawl-common-names": {
+      "get": {
+        "summary": "bottom_trawl_common_names",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/bottom_trawl_common_names"
+                  }
+                }
+              }
+            },
+            "description": "Success"
+          },
+          "302": {
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/zip": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/vnd.apache.parquet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "The pre-signed S3 URL"
+              }
+            },
+            "description": "Redirect to S3 for large sets or alternative formats"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LimitParam"
+          },
+          {
+            "$ref": "#/components/parameters/FieldsParam"
+          },
+          {
+            "$ref": "#/components/parameters/OffsetParam"
+          },
+          {
+            "$ref": "#/components/parameters/RedirectParam"
+          },
+          {
+            "$ref": "#/components/parameters/DataFormatParam"
+          },
+          {
+            "$ref": "#/components/parameters/ResponseModeParam"
+          },
+          {
+            "$ref": "#/components/parameters/IncludeNoncoreFieldsParam"
+          },
+          {
+            "in": "query",
+            "name": "label",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/NwfscFilterString"
+                }
+              ],
+              "nullable": true
+            },
+            "required": false,
+            "description": "Filter by label"
+          },
+          {
+            "in": "query",
+            "name": "value",
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/NwfscFilterString"
+                }
+              ],
+              "nullable": true
+            },
+            "required": false,
+            "description": "Filter by value"
+          }
+        ],
+        "description": "A distinct list of all common names caught on NWFSC bottom trawl surveys.",
+        "operationId": "getBottomTrawlCommonNames",
+        "x-nwfsc-access-tier": "public",
+        "x-nwfsc-endpoint-type": "tabular",
+        "x-nwfsc-readiness-levels": [
+          1
+        ],
+        "x-nwfsc-allowed-download-formats": "[\"json\", \"csv\", \"parquet\"]"
+      }
+    },
     "/reference/bottom-trawl-survey-years": {
       "get": {
         "summary": "bottom_trawl_survey_years",
@@ -4935,7 +5067,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_survey_years"
+                    "$ref": "#/components/schemas/bottom_trawl_survey_years"
                   }
                 }
               }
@@ -5046,7 +5178,7 @@
           }
         ],
         "description": "A distinct list of all survey years with bottom trawl survey data in the NWFSC database.",
-        "operationId": "getBottomTrawlBottomTrawlSurveyYears",
+        "operationId": "getBottomTrawlSurveyYears",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -5065,7 +5197,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_nmfs_projects"
+                    "$ref": "#/components/schemas/bottom_trawl_nmfs_projects"
                   }
                 }
               }
@@ -5162,7 +5294,7 @@
           }
         ],
         "description": "A distinct list of all bottom trawl surveys.",
-        "operationId": "getBottomTrawlBottomTrawlNmfsProjects",
+        "operationId": "getBottomTrawlNmfsProjects",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -5181,7 +5313,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/hook_and_line_hook_and_line_common_names"
+                    "$ref": "#/components/schemas/hook_and_line_common_names"
                   }
                 }
               }
@@ -5264,20 +5396,6 @@
           },
           {
             "in": "query",
-            "name": "survey_years",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/NwfscFilterString"
-                }
-              ],
-              "nullable": true
-            },
-            "required": false,
-            "description": "Filter by survey_years"
-          },
-          {
-            "in": "query",
             "name": "value",
             "schema": {
               "allOf": [
@@ -5289,24 +5407,10 @@
             },
             "required": false,
             "description": "Filter by value"
-          },
-          {
-            "in": "query",
-            "name": "vessels",
-            "schema": {
-              "allOf": [
-                {
-                  "$ref": "#/components/schemas/NwfscFilterString"
-                }
-              ],
-              "nullable": true
-            },
-            "required": false,
-            "description": "Filter by vessels"
           }
         ],
-        "description": "A distinct list of all historical common names caught on Southern California Hook & Line surveys.",
-        "operationId": "getHookAndLineHookAndLineCommonNames",
+        "description": "A distinct list of all common names caught on Southern California Hook & Line surveys.",
+        "operationId": "getHookAndLineCommonNames",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -5441,7 +5545,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_search_results"
+                    "$ref": "#/components/schemas/bottom_trawl_search_results"
                   }
                 }
               }
@@ -5538,7 +5642,7 @@
           }
         ],
         "description": "A distinct list of all search result types recognized on the West Coast Bottom Trawl Groundfish surveys.",
-        "operationId": "getBottomTrawlBottomTrawlSearchResults",
+        "operationId": "getBottomTrawlSearchResults",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -5636,7 +5740,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**."
           },
           {
             "in": "query",
@@ -5790,7 +5894,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`)."
           },
           {
             "in": "query",
@@ -6042,7 +6146,7 @@
               "nullable": true
             },
             "required": false,
-            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship \r or vessel prefix (i.e. Last Straw, NOT F/V Last Straw)."
+            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw)."
           },
           {
             "in": "query",
@@ -6082,7 +6186,7 @@
           "display_name": "AFSC/RACE Bottom Trawl Triennial Specimen Lengths",
           "is_standard_report": true
         },
-        "description": "Report storing one record per lengthed individual fish from the AFSC/RACE triennial bottom trawl surveys. \r Each record must contain the best taxonomic identification of the individual and a length/width. Width measurements are\r restricted to skate disc width measurements, with a majority of other measurements categorized as fork/anal/total lengths.\r \r Lenghts from the following AFSC/RACE surveys, typically occuring at three-year increments:\r \r Lengths from the following AFSC/RACE surveys, typically occurring at three-year increments:\r \r * **AFSC/RACE Triennial Groundfish Shelf Survey** (1977 \u2013 2001)\r * **AFSC/RACE Slope Survey Fishing Power Comparative Study** (1988, 1993)\r * **AFSC/RACE Slope Survey Nonstandard Sampling** (1996)\r \r Included in this report are select spatiotemporal and environmental data points related to vessel and tow performance, \r taxonomic identification, and size values and size (length/width) types.",
+        "description": "Report storing one record per lengthed individual fish from the AFSC/RACE triennial bottom trawl surveys.  Each record must contain the best taxonomic identification of the individual and a length/width. Width measurements are restricted to skate disc width measurements, with a majority of other measurements categorized as fork/anal/total lengths.  Lenghts from the following AFSC/RACE surveys, typically occuring at three-year increments:  Lengths from the following AFSC/RACE surveys, typically occurring at three-year increments:  * **AFSC/RACE Triennial Groundfish Shelf Survey** (1977 \u2013 2001) * **AFSC/RACE Slope Survey Fishing Power Comparative Study** (1988, 1993) * **AFSC/RACE Slope Survey Nonstandard Sampling** (1996)  Included in this report are select spatiotemporal and environmental data points related to vessel and tow performance,  taxonomic identification, and size values and size (length/width) types.",
         "operationId": "getNwfscTriennialSpecimenLengths",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-stac-anchors": {
@@ -6113,7 +6217,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_triennial_vessels"
+                    "$ref": "#/components/schemas/bottom_trawl_triennial_vessels"
                   }
                 }
               }
@@ -6238,7 +6342,7 @@
           }
         ],
         "description": "A distinct list of all vessels that participated in the bottom trawl triennial surveys.",
-        "operationId": "getBottomTrawlBottomTrawlTriennialVessels",
+        "operationId": "getBottomTrawlTriennialVessels",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -6257,7 +6361,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_shelf_slope_vessels"
+                    "$ref": "#/components/schemas/bottom_trawl_shelf_slope_vessels"
                   }
                 }
               }
@@ -6382,7 +6486,7 @@
           }
         ],
         "description": "A distinct list of all vessels that participated in the shelf/slope bottom trawl survey.",
-        "operationId": "getBottomTrawlBottomTrawlShelfSlopeVessels",
+        "operationId": "getBottomTrawlShelfSlopeVessels",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -6401,7 +6505,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_triennial_survey_years"
+                    "$ref": "#/components/schemas/bottom_trawl_triennial_survey_years"
                   }
                 }
               }
@@ -6512,7 +6616,7 @@
           }
         ],
         "description": "A distinct list of all survey years with bottom trawl triennial data in the NWFSC database.",
-        "operationId": "getBottomTrawlBottomTrawlTriennialSurveyYears",
+        "operationId": "getBottomTrawlTriennialSurveyYears",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -6531,7 +6635,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_triennial_nmfs_projects"
+                    "$ref": "#/components/schemas/bottom_trawl_triennial_nmfs_projects"
                   }
                 }
               }
@@ -6628,7 +6732,7 @@
           }
         ],
         "description": "A distinct list of all bottom trawl surveys.",
-        "operationId": "getBottomTrawlBottomTrawlTriennialNmfsProjects",
+        "operationId": "getBottomTrawlTriennialNmfsProjects",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -6647,7 +6751,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/bottom_trawl_bottom_trawl_shelf_slope_survey_years"
+                    "$ref": "#/components/schemas/bottom_trawl_shelf_slope_survey_years"
                   }
                 }
               }
@@ -6758,7 +6862,7 @@
           }
         ],
         "description": "A distinct list of all survey years with shelf/slope bottom trawl survey data in the NWFSC database.",
-        "operationId": "getBottomTrawlBottomTrawlShelfSlopeSurveyYears",
+        "operationId": "getBottomTrawlShelfSlopeSurveyYears",
         "x-nwfsc-access-tier": "public",
         "x-nwfsc-endpoint-type": "tabular",
         "x-nwfsc-readiness-levels": [
@@ -6885,7 +6989,7 @@
                 "nmfs_project_name"
               ]
             },
-            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship \r or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).",
+            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -6997,7 +7101,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best.",
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -7335,7 +7439,7 @@
             "x-nwfsc-ui": {
               "sort_order": 8
             },
-            "description": "The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).\r \r Values include:\r * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review.\r * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends.\r * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication.\r * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units.\r * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids.",
+            "description": "The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).  Values include: * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review. * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends. * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication. * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units. * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -7376,7 +7480,7 @@
             "x-nwfsc-ui": {
               "sort_order": 6
             },
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
             "x-nwfsc-stac": {
               "role": "id"
             },
@@ -7419,7 +7523,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "BIGINT",
             "x-nwfsc-storage-type": "BIGINT",
@@ -7836,7 +7940,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "The formatted display name representing the data readiness level, combining the level code and its status label.\r \r Values include:\r * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors.\r * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review.\r * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits.\r * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys.\r * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids.",
+            "description": "The formatted display name representing the data readiness level, combining the level code and its status label.  Values include: * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors. * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review. * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits. * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys. * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -8024,7 +8128,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded\r In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder,\r with real-time data streamed via serial protocol into the wheelhouse for an average calculation.",
+            "description": "Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder, with real-time data streamed via serial protocol into the wheelhouse for an average calculation.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "NUMERIC",
             "x-nwfsc-storage-type": "DOUBLE",
@@ -8137,7 +8241,7 @@
             "x-nwfsc-ui": {
               "sort_order": 10
             },
-            "description": "Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the\r median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data\r used to estimate the gear track is an alternative method typically used.",
+            "description": "Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data used to estimate the gear track is an alternative method typically used.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -8264,7 +8368,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best.",
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -8420,7 +8524,7 @@
             "x-nwfsc-ui": {
               "sort_order": 10
             },
-            "description": "The code representing the data readiness level. \r \r Values include:\r * `L0`\r * `L1`\r * `L2`\r * `L3`\r * `L4`",
+            "description": "The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4`",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -8444,7 +8548,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "BIGINT",
             "x-nwfsc-storage-type": "BIGINT",
@@ -8520,7 +8624,7 @@
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "INTEGER",
             "x-nwfsc-storage-type": "INTEGER",
-            "x-nwfsc-is-noncore-field": true
+            "x-nwfsc-is-noncore-field": false
           },
           "best_available_taxon_is_sponge": {
             "type": "boolean",
@@ -8534,6 +8638,18 @@
             "x-nwfsc-storage-type": "BOOLEAN",
             "x-nwfsc-is-noncore-field": true
           },
+          "catch_per_unit_effort_kg_per_ha": {
+            "type": "number",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "description": "Catch per unit effort (CPUE) of the catch sample, where the total catch weight of the specific sample is divided by the seafloor area swept by the tow.",
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "NUMERIC",
+            "x-nwfsc-storage-type": "DOUBLE",
+            "x-nwfsc-is-noncore-field": false
+          },
           "sampled_catch_individuals_count": {
             "type": "integer",
             "nullable": true,
@@ -8544,7 +8660,7 @@
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "INTEGER",
             "x-nwfsc-storage-type": "INTEGER",
-            "x-nwfsc-is-noncore-field": true
+            "x-nwfsc-is-noncore-field": false
           },
           "actual_station_deactivation_year": {
             "type": "integer",
@@ -8567,11 +8683,7 @@
               "filter_type": "multiselect",
               "filter_label": "Select Species(s)",
               "filter_source": "reference/bottom-trawl-common-names",
-              "is_filter_field": true,
-              "parent_filter_keys": [
-                "nmfs_project_name",
-                "survey_year"
-              ]
+              "is_filter_field": true
             },
             "description": "Common name of the species preferred by the Northwest Fisheries Science Center. \"Best available\" designation reflects the taxonomic classification of the species after postseason review, which may be the same or different than the taxonomic classification determined in the field at time of collection.",
             "x-nwfsc-access-tier": "public",
@@ -8633,7 +8745,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "The formatted display name combining the readiness level code and its status. \r \r Values include:\r * `L0 - RAW`\r * `L1 - PRELIMINARY`\r * `L2 - VERIFIED`\r * `L3 - HARMONIZED`\r * `L4 - DERIVED`",
+            "description": "The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED`",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -9277,7 +9389,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "Name of the data point's current status with respect to its finalization/QC status.\r Typically new data submitted directly from the field is flagged as \"Under Review\", \r until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may\r be used for any purpose, but for fisheries stock assessment, using/filtering for\r finalized data is best.",
+            "description": "Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -9519,7 +9631,7 @@
             "x-nwfsc-ui": {
               "sort_order": 8
             },
-            "description": "The code representing the data readiness level. \r \r Values include:\r * `L0`\r * `L1`\r * `L2`\r * `L3`\r * `L4`",
+            "description": "The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4`",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -9555,7 +9667,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "BIGINT",
             "x-nwfsc-storage-type": "BIGINT",
@@ -9702,11 +9814,7 @@
               "filter_type": "multiselect",
               "filter_label": "Select Species(s)",
               "filter_source": "reference/bottom-trawl-common-names",
-              "is_filter_field": true,
-              "parent_filter_keys": [
-                "nmfs_project_name",
-                "survey_year"
-              ]
+              "is_filter_field": true
             },
             "description": "Common name of the species preferred by the Northwest Fisheries Science Center. \"Best available\" designation reflects the taxonomic classification of the species after postseason review, which may be the same or different than the taxonomic classification determined in the field at time of collection.",
             "x-nwfsc-access-tier": "public",
@@ -9768,7 +9876,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "The formatted display name combining the readiness level code and its status. \r \r Values include:\r * `L0 - RAW`\r * `L1 - PRELIMINARY`\r * `L2 - VERIFIED`\r * `L3 - HARMONIZED`\r * `L4 - DERIVED`",
+            "description": "The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED`",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -10157,7 +10265,7 @@
               }
             ],
             "nullable": true,
-            "description": "Aggregated geospatial trackline representing the vessel's high-precision GPS positions recorded during a station search operation.\r Trackline timeseries tracks are typically downsampled into 10 second bins per search to increase performance. Data presented as GeoJSON open standard format following IEFT RFC7646.",
+            "description": "Aggregated geospatial trackline representing the vessel's high-precision GPS positions recorded during a station search operation. Trackline timeseries tracks are typically downsampled into 10 second bins per search to increase performance. Data presented as GeoJSON open standard format following IEFT RFC7646.",
             "x-nwfsc-stac": {
               "role": "geometry",
               "priority": 1,
@@ -10173,7 +10281,7 @@
             "x-nwfsc-ui": {
               "sort_order": 6
             },
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
             "x-nwfsc-stac": {
               "role": "id"
             },
@@ -10340,7 +10448,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "BIGINT",
             "x-nwfsc-storage-type": "BIGINT",
@@ -10711,7 +10819,7 @@
               "filter_priority": 3,
               "is_filter_field": true
             },
-            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship \r or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).",
+            "description": "Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
@@ -10904,7 +11012,7 @@
             "x-nwfsc-ui": {
               "sort_order": 4
             },
-            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. \r \r It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:\r \r * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).\r * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).\r * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).\r * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
+            "description": "A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`).",
             "x-nwfsc-stac": {
               "role": "id"
             },
@@ -10935,7 +11043,7 @@
             "x-nwfsc-ui": {
               "sort_order": 999
             },
-            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell. \r \r This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.\r \r ### Component Breakdown\r The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:\r \r * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).\r * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).\r * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).\r * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).\r \r > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
+            "description": "A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**.",
             "x-nwfsc-access-tier": "public",
             "x-nwfsc-source-type": "BIGINT",
             "x-nwfsc-storage-type": "BIGINT",
@@ -11168,7 +11276,7 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_vessels": {
+      "bottom_trawl_vessels": {
         "type": "object",
         "properties": {
           "label": {
@@ -11217,7 +11325,7 @@
           }
         }
       },
-      "hook_and_line_hook_and_line_vessels": {
+      "hook_and_line_vessels": {
         "type": "object",
         "properties": {
           "label": {
@@ -11255,7 +11363,34 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_survey_years": {
+      "bottom_trawl_common_names": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "VARCHAR",
+            "x-nwfsc-is-noncore-field": false
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "VARCHAR",
+            "x-nwfsc-is-noncore-field": false
+          }
+        }
+      },
+      "bottom_trawl_survey_years": {
         "type": "object",
         "properties": {
           "label": {
@@ -11293,7 +11428,7 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_nmfs_projects": {
+      "bottom_trawl_nmfs_projects": {
         "type": "object",
         "properties": {
           "label": {
@@ -11320,7 +11455,7 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_search_results": {
+      "bottom_trawl_search_results": {
         "type": "object",
         "properties": {
           "label": {
@@ -11347,7 +11482,7 @@
           }
         }
       },
-      "hook_and_line_hook_and_line_common_names": {
+      "hook_and_line_common_names": {
         "type": "object",
         "properties": {
           "label": {
@@ -11371,81 +11506,10 @@
             "x-nwfsc-source-type": "TEXT",
             "x-nwfsc-storage-type": "VARCHAR",
             "x-nwfsc-is-noncore-field": false
-          },
-          "vessels": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "TEXT[]",
-            "x-nwfsc-is-noncore-field": false
-          },
-          "survey_years": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "BIGINT[]",
-            "x-nwfsc-is-noncore-field": false
           }
         }
       },
-      "bottom_trawl_bottom_trawl_triennial_vessels": {
-        "type": "object",
-        "properties": {
-          "label": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "VARCHAR",
-            "x-nwfsc-is-noncore-field": false
-          },
-          "value": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "VARCHAR",
-            "x-nwfsc-is-noncore-field": false
-          },
-          "survey_years": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "BIGINT[]",
-            "x-nwfsc-is-noncore-field": false
-          },
-          "nmfs_project_names": {
-            "type": "string",
-            "nullable": true,
-            "x-nwfsc-ui": {
-              "sort_order": 999
-            },
-            "x-nwfsc-access-tier": "public",
-            "x-nwfsc-source-type": "TEXT",
-            "x-nwfsc-storage-type": "TEXT[]",
-            "x-nwfsc-is-noncore-field": false
-          }
-        }
-      },
-      "bottom_trawl_bottom_trawl_shelf_slope_vessels": {
+      "bottom_trawl_triennial_vessels": {
         "type": "object",
         "properties": {
           "label": {
@@ -11494,7 +11558,56 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_triennial_survey_years": {
+      "bottom_trawl_shelf_slope_vessels": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "VARCHAR",
+            "x-nwfsc-is-noncore-field": false
+          },
+          "value": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "VARCHAR",
+            "x-nwfsc-is-noncore-field": false
+          },
+          "survey_years": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "BIGINT[]",
+            "x-nwfsc-is-noncore-field": false
+          },
+          "nmfs_project_names": {
+            "type": "string",
+            "nullable": true,
+            "x-nwfsc-ui": {
+              "sort_order": 999
+            },
+            "x-nwfsc-access-tier": "public",
+            "x-nwfsc-source-type": "TEXT",
+            "x-nwfsc-storage-type": "TEXT[]",
+            "x-nwfsc-is-noncore-field": false
+          }
+        }
+      },
+      "bottom_trawl_triennial_survey_years": {
         "type": "object",
         "properties": {
           "label": {
@@ -11532,7 +11645,7 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_triennial_nmfs_projects": {
+      "bottom_trawl_triennial_nmfs_projects": {
         "type": "object",
         "properties": {
           "label": {
@@ -11559,7 +11672,7 @@
           }
         }
       },
-      "bottom_trawl_bottom_trawl_shelf_slope_survey_years": {
+      "bottom_trawl_shelf_slope_survey_years": {
         "type": "object",
         "properties": {
           "label": {
