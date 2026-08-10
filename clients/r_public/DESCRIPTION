@@ -9,7 +9,11 @@ Encoding: UTF-8
 License: Unlicense
 LazyData: true
 Suggests: 
+    ellmer,
     mcptools,
+    nwfscSurvey,
+    r4ss,
+    sdmTMB,
     testthat
 Imports: 
     jsonlite,

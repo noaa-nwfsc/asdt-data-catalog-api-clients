@@ -403,6 +403,7 @@ class BuildOrchestrator:
         shutil.copytree(gen_dir, client_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "r" / "nwfsc_utils.R", client_dir / "R")
         shutil.copy(self.SCRIPTS_DIR / "r" / "mcp_server.R", client_dir / "R")
+        shutil.copy(self.SCRIPTS_DIR / "r" / "assessment_skills.R", client_dir / "R")
 
         print(">>> Running R wrapper and documentation generators...")
         self._run_subprocess(
@@ -429,6 +430,9 @@ class BuildOrchestrator:
                 f.write('export("to_plot_img")\n')
                 f.write('export("glimpse_html")\n')
                 f.write('export("run_mcp_server")\n')
+                f.write('export("skill_expand_compositions")\n')
+                f.write('export("skill_generate_index")\n')
+                f.write('export("skill_build_ss3")\n')
         # -------------------------------------
 
         self._run_subprocess(
@@ -455,6 +459,10 @@ d$set_dep('tibble', type = 'Imports')
 d$set_dep('magrittr', type = 'Imports')
 d$set_dep('base64enc', type = 'Imports')
 d$set_dep('mcptools', type = 'Suggests')
+d$set_dep('ellmer', type = 'Suggests')
+d$set_dep('nwfscSurvey', type = 'Suggests')
+d$set_dep('sdmTMB', type = 'Suggests')
+d$set_dep('r4ss', type = 'Suggests')
 d$write('{client_dir_posix}/DESCRIPTION')
 """
             patch_script_path.write_text(r_patch_script, encoding="utf-8")
