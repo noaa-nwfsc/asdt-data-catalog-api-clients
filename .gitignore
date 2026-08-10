@@ -13,6 +13,7 @@ clients/r_public/man/
 _site/
 site/
 clients/python_public/site/
+clients/r_public/docs/
 
 # ==========================================
 # 3. Python & R Package Build Artifacts
