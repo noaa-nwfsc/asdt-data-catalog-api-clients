@@ -405,6 +405,9 @@ class BuildOrchestrator:
         shutil.copy(self.SCRIPTS_DIR / "r" / "nwfsc_utils.R", client_dir / "R")
         shutil.copy(self.SCRIPTS_DIR / "r" / "mcp_server.R", client_dir / "R")
         shutil.copy(self.SCRIPTS_DIR / "r" / "assessment_skills.R", client_dir / "R")
+        
+        # Strip out redundant OpenAPI-generated github workflows
+        shutil.rmtree(client_dir / ".github", ignore_errors=True)
 
         print(">>> Running R wrapper and documentation generators...")
         self._run_subprocess(
