@@ -299,6 +299,7 @@ class BuildOrchestrator:
         shutil.copytree(gen_dir / pkg_name, src_dir, dirs_exist_ok=True)
         shutil.copy(self.SCRIPTS_DIR / "python" / "factory.py", src_dir)
         shutil.copy(self.SCRIPTS_DIR / "python" / "mcp_server.py", src_dir)
+        shutil.copy(self.SCRIPTS_DIR / "python" / "assessment_skills.py", src_dir)
         (src_dir / "py.typed").touch()
         with (src_dir / "__init__.py").open("a") as f:
             f.write("\nfrom .factory import DataCatalog\n")
