@@ -10,12 +10,12 @@ This repository contains the source code and build system for the **NWFSC Data C
 
 #### Using standard pip:
 ```bash
-uv pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.8/nwfsc_data_catalog-0.1.8-py3-none-any.whl
+pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.12/nwfsc_data_catalog-0.1.12-py3-none-any.whl
 ```
 
 #### Using uv:
 ```bash
-uv pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.8/nwfsc_data_catalog-0.1.8-py3-none-any.whl
+uv pip install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/download/v0.1.12/nwfsc_data_catalog-0.1.12-py3-none-any.whl
 ```
 
 ### R Installation
