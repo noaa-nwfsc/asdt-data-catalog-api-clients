@@ -17,7 +17,7 @@ ifeq ($(OS),Windows_NT)
 endif
 
 # Declare all non-file targets to prevent Makefile target name collisions
-.PHONY: all build-all build-python-public build-r-public \
+.PHONY: all build-all build-python-public build-r-public build-ts-public \
         fetch-public-spec fetch-generator fetch-jdk \
         docs docs-python docs-r \
         gemini setup-hooks security-scan gitleaks-precommit
@@ -28,7 +28,7 @@ endif
 all: build-all
 
 # Build all supported SDKs sequentially
-build-all: build-python-public build-r-public
+build-all: build-python-public build-r-public build-ts-public
 
 # Downloads the latest OpenAPI specification
 fetch-public-spec:
@@ -49,6 +49,10 @@ build-python-public:
 # Builds the public R client
 build-r-public:
 	uv run python scripts/python/build_tools.py build --lang r --scope public
+
+# Builds the public TypeScript client
+build-ts-public:
+	uv run python scripts/python/build_tools.py build --lang typescript --scope public
 
 # --- 3. DOCUMENTATION TARGETS ---
 

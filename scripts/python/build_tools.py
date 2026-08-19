@@ -252,8 +252,208 @@ class BuildOrchestrator:
             self._build_python_public(java_path)
         elif lang == "r":
             self._build_r_public(java_path)
+        elif lang in ("typescript", "ts"):
+            self._build_typescript_public(java_path)
         else:
             raise NotImplementedError(f"Language '{lang}' is not supported.")
+
+    def _get_current_version(self):
+        """Reads the current version from Python's pyproject.toml."""
+        pyproject_path = self.CLIENTS_DIR / "python_public" / "pyproject.toml"
+        if pyproject_path.exists():
+            import re
+            content = pyproject_path.read_text()
+            match = re.search(r'version\s*=\s*"(\d+\.\d+\.\d+)"', content)
+            if match:
+                return match.group(1)
+        return "1.0.0"
+
+    def _build_typescript_public(self, java_path):
+        print(">>> Building TypeScript Public Client...")
+        client_dir = self.CLIENTS_DIR / "typescript_public"
+        gen_dir = self.ROOT_DIR / "gen_ts_pub"
+        src_dir = client_dir / "src"
+        generated_dir = src_dir / "generated"
+
+        # Clean old generation and old dist
+        shutil.rmtree(gen_dir, ignore_errors=True)
+        shutil.rmtree(generated_dir, ignore_errors=True)
+        shutil.rmtree(client_dir / "dist", ignore_errors=True)
+
+        cmd = [
+            str(java_path),
+            "-jar",
+            str(self.GENERATOR_JAR),
+            "generate",
+            "-i",
+            str(self.OPENAPI_DIR / "openapi-public.json"),
+            "-g",
+            "typescript-fetch",
+            "-o",
+            str(gen_dir),
+            "--additional-properties=npmName=@nwfsc/data-catalog-client,supportsES6=true,modelPropertyNaming=camelCase",
+        ]
+        self._run_subprocess(cmd)
+
+        # Ensure directories exist
+        src_dir.mkdir(parents=True, exist_ok=True)
+        generated_dir.mkdir(parents=True, exist_ok=True)
+
+        # Copy generated files to src/generated
+        shutil.copytree(gen_dir / "src", generated_dir, dirs_exist_ok=True)
+
+        # Write package.json
+        version = self._get_current_version()
+        package_json_content = f"""{{
+  "name": "@nwfsc/data-catalog-client",
+  "version": "{version}",
+  "description": "TypeScript SDK for the NWFSC Data Catalog",
+  "author": "NWFSC Data Catalog Team",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {{
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "test": "tsc --noEmit tests/test_catalog.ts"
+  }},
+  "devDependencies": {{
+    "typescript": "^5.0"
+  }}
+}}
+"""
+        (client_dir / "package.json").write_text(package_json_content, encoding="utf-8")
+
+        # Write tsconfig.json
+        tsconfig_content = """{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["es2020", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
+}
+"""
+        (client_dir / "tsconfig.json").write_text(tsconfig_content, encoding="utf-8")
+
+        # Write tsconfig.esm.json
+        tsconfig_esm_content = """{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "outDir": "dist/esm"
+  }
+}
+"""
+        (client_dir / "tsconfig.esm.json").write_text(tsconfig_esm_content, encoding="utf-8")
+
+        # Write custom ergonomic index.ts wrapper
+        wrapper_content = """import { Configuration, DefaultApi } from './generated';
+
+export * from './generated';
+
+function toCamelCase(str: string): string {
+  return str.replace(/_([a-z0-9])/g, (g) => g[1].toUpperCase());
+}
+
+export class NWFSCDataCatalog {
+  private api: DefaultApi;
+
+  constructor(basePath?: string) {
+    const config = new Configuration({ basePath });
+    this.api = new DefaultApi(config);
+
+    return new Proxy(this, {
+      get(target, prop, receiver) {
+        if (prop in target) {
+          return (target as any)[prop];
+        }
+
+        const propStr = String(prop);
+        if (propStr.startsWith('fetch_all_')) {
+          const baseMethodName = propStr.replace('fetch_all_', 'get_');
+          const camelBaseMethodName = toCamelCase(baseMethodName);
+          const apiMethod = (target.api as any)[camelBaseMethodName];
+
+          if (typeof apiMethod === 'function') {
+            return async function (requestParams: any = {}, initOverrides?: any) {
+              const allData: any[] = [];
+              const limit = requestParams.limit || 1000;
+              let offset = requestParams.offset || 0;
+
+              while (true) {
+                const params = { ...requestParams, limit, offset };
+                const batch = await apiMethod.call(target.api, params, initOverrides);
+                if (!batch || batch.length === 0) {
+                  break;
+                }
+                allData.push(...batch);
+                offset += limit;
+              }
+              return allData;
+            };
+          }
+        }
+
+        if (propStr.startsWith('read_')) {
+          const baseMethodName = propStr.replace('read_', 'get_');
+          const camelBaseMethodName = toCamelCase(baseMethodName);
+          const apiMethod = (target.api as any)[camelBaseMethodName];
+          if (typeof apiMethod === 'function') {
+            return function (requestParams: any = {}, initOverrides?: any) {
+              return apiMethod.call(target.api, requestParams, initOverrides);
+            };
+          }
+        }
+
+        const camelProp = toCamelCase(propStr);
+        if (typeof (target.api as any)[camelProp] === 'function') {
+          return (target.api as any)[camelProp].bind(target.api);
+        }
+
+        return (target.api as any)[prop];
+      }
+    }) as any;
+  }
+}
+"""
+        (src_dir / "index.ts").write_text(wrapper_content, encoding="utf-8")
+
+        # Write simple test file to verify compilation
+        tests_dir = client_dir / "tests"
+        tests_dir.mkdir(exist_ok=True)
+        test_content = """import { NWFSCDataCatalog } from '../src/index';
+
+const catalog = new NWFSCDataCatalog('https://example.com/api');
+console.log('Catalog instantiated successfully:', !!catalog);
+"""
+        (tests_dir / "test_catalog.ts").write_text(test_content, encoding="utf-8")
+
+        # Compile TypeScript
+        print(">>> Installing package dependencies and compiling TypeScript...")
+        self._run_subprocess(["npm", "install"], cwd=client_dir)
+        self._run_subprocess(["npm", "run", "build"], cwd=client_dir)
+
+        # Validate with tests
+        print(">>> Running TypeScript compilation tests...")
+        self._run_subprocess(["npm", "run", "test"], cwd=client_dir)
+
+        # Cleanup generator files
+        shutil.rmtree(gen_dir, ignore_errors=True)
+        print("\\n>>> TypeScript build and test complete. <<<")
 
     def docs_r(self):
         """Builds the R documentation using a bootstrapped Pandoc."""
