@@ -10,7 +10,17 @@ clients/r_public/.openapi-generator/
 clients/r_public/.github/
 
 # ==========================================
-# 2. Documentation Build Artifacts
+# 2. TypeScript & Node Artifacts
+# ==========================================
+node_modules/
+.pnpm-store/
+clients/typescript_public/dist/
+clients/typescript_public/lib/
+clients/typescript_public/build/
+*.tsbuildinfo
+
+# ==========================================
+# 3. Documentation Build Artifacts
 # ==========================================
 _site/
 site/
@@ -18,7 +28,7 @@ clients/python_public/site/
 clients/r_public/docs/
 
 # ==========================================
-# 3. Python & R Package Build Artifacts
+# 4. Package Build Artifacts (Python, R, Node)
 # ==========================================
 __pycache__/
 *.py[oc]
@@ -34,7 +44,7 @@ wheels/
 .Rproj.user/
 
 # ==========================================
-# 4. Ephemeral Build Tools & Hashes
+# 5. Ephemeral Build Tools & Hashes
 # ==========================================
 .venv/
 .local_jre/
@@ -43,28 +53,31 @@ openapi-generator-cli.jar
 .spec_hash
 
 # ==========================================
-# 5. Old Generator Dumps
+# 6. Old Generator Dumps
 # ==========================================
 gen_pub/
 gen_py_pub/
 gen_r_pub/
 
 # ==========================================
-# 6. Environment Variables & Secrets
+# 7. Environment Variables & Secrets
 # ==========================================
 .env
 .env.*
 !.env.example
 
 # ==========================================
-# 7. Logs & Local Context
+# 8. Logs & Local Context
 # ==========================================
 *.log
 debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 CONTEXT.md
 
 # ==========================================
-# 8. OS & IDE Configurations
+# 9. OS & IDE Configurations
 # ==========================================
 .DS_Store
 Thumbs.db
