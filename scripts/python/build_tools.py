@@ -280,6 +280,8 @@ class BuildOrchestrator:
 
         cmd = [
             str(java_path),
+            "-Xmx512m",
+            "-Xms128m",
             "-jar",
             str(self.GENERATOR_JAR),
             "generate",
@@ -388,6 +390,8 @@ class BuildOrchestrator:
 
         cmd = [
             str(java_path),
+            "-Xmx512m",
+            "-Xms128m",
             "-jar",
             str(self.GENERATOR_JAR),
             "generate",

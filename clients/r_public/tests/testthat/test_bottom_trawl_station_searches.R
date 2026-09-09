@@ -126,7 +126,7 @@ test_that("search_vessel_track_geom", {
 
 test_that("bottom_trawl_operation_key", {
   # tests for the property `bottom_trawl_operation_key` (character)
-  # A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.     It is constructed by concatenating key operational attributes into a single string. For example, the operation key **&#x60;202203020001&#x60;** breaks down as follows:    * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., &#x60;2022&#x60;).  * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., &#x60;03&#x60;).  * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., &#x60;020&#x60;).  * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., &#x60;001&#x60;).
+  # A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **&#x60;202203020001&#x60;** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., &#x60;2022&#x60;). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., &#x60;03&#x60;). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., &#x60;020&#x60;). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., &#x60;001&#x60;).
 
   # uncomment below to test the property
   #expect_equal(model.instance$`bottom_trawl_operation_key`, "EXPECTED_RESULT")
