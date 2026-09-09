@@ -9,22 +9,22 @@ from nwfsc_data_catalog.mcp_server import dynamic_funcs
 def test_mcp_dynamic_funcs_serialize_dataframe():
     # Verify that we have some dynamic functions registered
     assert len(dynamic_funcs) > 0
-    assert "read_bottom_trawl_tows" in dynamic_funcs
+    assert "read_bottom_trawl_data" in dynamic_funcs
 
-    dynamic_read_func = dynamic_funcs["read_bottom_trawl_tows"]
+    dynamic_read_func = dynamic_funcs["read_bottom_trawl_data"]
 
-    # Mock the catalog.read_bottom_trawl_tows method to return a DataFrame containing different types of data,
+    # Mock the catalog.read_bottom_trawl_data method to return a DataFrame containing different types of data,
     # including NaN values and standard values.
     dummy_df = pd.DataFrame([
         {"tow_id": 1, "vessel_name": "Aggressor", "survey_year": 2023, "depth_m": float("nan")},
         {"tow_id": 2, "vessel_name": "Oceanus", "survey_year": 2024, "depth_m": 123.4},
     ])
 
-    with patch("nwfsc_data_catalog.mcp_server.catalog.read_bottom_trawl_tows") as mock_read:
+    with patch("nwfsc_data_catalog.mcp_server.catalog.read_bottom_trawl_data") as mock_read:
         mock_read.return_value = dummy_df
 
         # Call the dynamic MCP tool function
-        res = dynamic_read_func(limit=10)
+        res = dynamic_read_func(data_type="tows", limit=10)
 
         # Assertions
         assert isinstance(res, dict)
