@@ -58,18 +58,7 @@ for (path in names(spec$paths)) {
   
   summary <- if (!is.null(endpoint$summary)) endpoint$summary else "Fetch API Data"
   
-  # 🚀 ADD TO METADATA DRAWER
-  metadata_list[[length(metadata_list) + 1]] <- list(
-    name = read_func,
-    description = summary,
-    parameters = list("..." = "Dynamic filter parameters.", limit = "Max records to retrieve per page.", fields = "Comma-separated columns to return.")
-  )
-  
-  metadata_list[[length(metadata_list) + 1]] <- list(
-    name = fetch_func,
-    description = paste("Fetch ALL pages for:", summary),
-    parameters = list("..." = "Dynamic filter parameters.", fields = "Comma-separated columns to return.")
-  )
+  # 🚀 OMIT DYNAMIC 1:1 ENDPOINTS FROM THE METADATA DRAWER TO KEEP MCP SERVER CONSOLIDATED
   
   roxygen <- c(
     sprintf("#' %s", summary),
@@ -108,7 +97,119 @@ for (path in names(spec$paths)) {
   wrapper_code <- c(wrapper_code, roxygen, func_def, fetch_def, "")
 }
 
-# 3. EMBED METADATA AS AN EXPORTED R FUNCTION
+# 3. 🚀 APPEND CONSOLIDATED TOOLS TO METADATA DRAWER & WRAPPER CODE
+metadata_list[[length(metadata_list) + 1]] <- list(
+  name = "read_bottom_trawl_data",
+  description = "Consolidated fetcher for the West Coast Bottom Trawl survey datasets.",
+  parameters = list(
+    data_type = "Dataset type: tows, catch, specimens, vessels, sampling_stations, station_searches, search_results, common_names, survey_years, nmfs_projects, triennial_vessels, triennial_survey_years, triennial_nmfs_projects, shelf_slope_vessels, shelf_slope_survey_years.",
+    limit = "Max records to retrieve.",
+    fields = "Comma-separated columns to return."
+  )
+)
+
+metadata_list[[length(metadata_list) + 1]] <- list(
+  name = "read_hook_and_line_data",
+  description = "Consolidated fetcher for the West Coast Hook and Line survey datasets.",
+  parameters = list(
+    data_type = "Dataset type: vessels, common_names.",
+    limit = "Max records to retrieve.",
+    fields = "Comma-separated columns to return."
+  )
+)
+
+metadata_list[[length(metadata_list) + 1]] <- list(
+  name = "read_nwfsc_metadata",
+  description = "Consolidated fetcher for general NWFSC survey metadata and taxonomy.",
+  parameters = list(
+    data_type = "Dataset type: survey_taxonomy, all_survey_years, all_taxon_categories, all_taxon_subcategories, hook_and_line_survey_years, triennial_specimen_lengths.",
+    limit = "Max records to retrieve.",
+    fields = "Comma-separated columns to return."
+  )
+)
+
+consolidated_code <- c(
+  "#' Consolidated Bottom Trawl Data Fetcher",
+  "#' @description Fetch consolidated datasets for West Coast Bottom Trawl.",
+  "#' @param data_type Dataset type (e.g., tows, catch, specimens, vessels, sampling_stations, station_searches, search_results, common_names, survey_years, nmfs_projects, triennial_vessels, triennial_survey_years, triennial_nmfs_projects, shelf_slope_vessels, shelf_slope_survey_years).",
+  "#' @param limit Max records to retrieve.",
+  "#' @param fields Column selection.",
+  "#' @param ... Dynamic filter parameters.",
+  "#' @export",
+  "read_bottom_trawl_data <- function(data_type, limit = 1000, fields = NULL, ...) {",
+  "  mapping <- list(",
+  "    tows = 'read_bottom_trawl_tows',",
+  "    catch = 'read_bottom_trawl_catch',",
+  "    specimens = 'read_bottom_trawl_specimens',",
+  "    vessels = 'read_bottom_trawl_vessels',",
+  "    sampling_stations = 'read_bottom_trawl_sampling_stations',",
+  "    station_searches = 'read_bottom_trawl_station_searches',",
+  "    search_results = 'read_bottom_trawl_search_results',",
+  "    common_names = 'read_bottom_trawl_common_names',",
+  "    survey_years = 'read_bottom_trawl_survey_years',",
+  "    nmfs_projects = 'read_bottom_trawl_nmfs_projects',",
+  "    triennial_vessels = 'read_bottom_trawl_triennial_vessels',",
+  "    triennial_survey_years = 'read_bottom_trawl_triennial_survey_years',",
+  "    triennial_nmfs_projects = 'read_bottom_trawl_triennial_nmfs_projects',",
+  "    shelf_slope_vessels = 'read_bottom_trawl_shelf_slope_vessels',",
+  "    shelf_slope_survey_years = 'read_bottom_trawl_shelf_slope_survey_years'",
+  "  )",
+  "  if (!(data_type %in% names(mapping))) {",
+  "    stop(paste('Invalid data_type. Valid options:', paste(names(mapping), collapse = ', ')))",
+  "  }",
+  "  func_name <- mapping[[data_type]]",
+  "  func <- get(func_name, envir = asNamespace('nwfscDataCatalog'))",
+  "  func(limit = limit, fields = fields, ...)",
+  "}",
+  "",
+  "#' Consolidated Hook and Line Data Fetcher",
+  "#' @description Fetch consolidated datasets for West Coast Hook and Line.",
+  "#' @param data_type Dataset type (e.g., vessels, common_names).",
+  "#' @param limit Max records to retrieve.",
+  "#' @param fields Column selection.",
+  "#' @param ... Dynamic filter parameters.",
+  "#' @export",
+  "read_hook_and_line_data <- function(data_type, limit = 1000, fields = NULL, ...) {",
+  "  mapping <- list(",
+  "    vessels = 'read_hook_and_line_vessels',",
+  "    common_names = 'read_hook_and_line_common_names'",
+  "  )",
+  "  if (!(data_type %in% names(mapping))) {",
+  "    stop(paste('Invalid data_type. Valid options:', paste(names(mapping), collapse = ', ')))",
+  "  }",
+  "  func_name <- mapping[[data_type]]",
+  "  func <- get(func_name, envir = asNamespace('nwfscDataCatalog'))",
+  "  func(limit = limit, fields = fields, ...)",
+  "}",
+  "",
+  "#' Consolidated NWFSC Metadata and Taxonomy Fetcher",
+  "#' @description Fetch general NWFSC survey metadata and taxonomy.",
+  "#' @param data_type Dataset type (e.g., survey_taxonomy, all_survey_years, all_taxon_categories, all_taxon_subcategories, hook_and_line_survey_years, triennial_specimen_lengths).",
+  "#' @param limit Max records to retrieve.",
+  "#' @param fields Column selection.",
+  "#' @param ... Dynamic filter parameters.",
+  "#' @export",
+  "read_nwfsc_metadata <- function(data_type, limit = 1000, fields = NULL, ...) {",
+  "  mapping <- list(",
+  "    survey_taxonomy = 'read_nwfsc_survey_taxonomy',",
+  "    all_survey_years = 'read_nwfsc_all_survey_years',",
+  "    all_taxon_categories = 'read_nwfsc_all_taxon_categories',",
+  "    all_taxon_subcategories = 'read_nwfsc_all_taxon_subcategories',",
+  "    hook_and_line_survey_years = 'read_nwfsc_hook_and_line_survey_years',",
+  "    triennial_specimen_lengths = 'read_nwfsc_triennial_specimen_lengths'",
+  "  )",
+  "  if (!(data_type %in% names(mapping))) {",
+  "    stop(paste('Invalid data_type. Valid options:', paste(names(mapping), collapse = ', ')))",
+  "  }",
+  "  func_name <- mapping[[data_type]]",
+  "  func <- get(func_name, envir = asNamespace('nwfscDataCatalog'))",
+  "  func(limit = limit, fields = fields, ...)",
+  "}"
+)
+
+wrapper_code <- c(wrapper_code, consolidated_code)
+
+# 4. EMBED METADATA AS AN EXPORTED R FUNCTION
 metadata_json_str <- as.character(jsonlite::toJSON(metadata_list, auto_unbox = TRUE))
 metadata_json_str <- gsub("'", "\\\\'", metadata_json_str) # Escape quotes for R string
 

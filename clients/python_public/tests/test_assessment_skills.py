@@ -100,3 +100,38 @@ def test_skill_build_ss3(temp_csv_files):
     with open(out_file, "r") as f:
         content = f.read()
     assert "# --- APPENDED VIA NWFSC MCP SKILL ---" in content
+
+
+def test_skills_with_longhand_sdk_columns():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Create a dummy catch CSV with actual SDK longhand columns
+        catch_df = pd.DataFrame([
+            {"survey_year": 2024, "on_bottom_seafloor_depth_m": 100, "best_tow_latitude_dd": 45.0, "catch_per_unit_effort_kg_per_ha": 10.0},
+            {"survey_year": 2024, "on_bottom_seafloor_depth_m": 150, "best_tow_latitude_dd": 45.0, "catch_per_unit_effort_kg_per_ha": 15.0},
+            {"survey_year": 2024, "on_bottom_seafloor_depth_m": 250, "best_tow_latitude_dd": 35.0, "catch_per_unit_effort_kg_per_ha": 5.0},
+        ])
+        catch_path = os.path.join(temp_dir, "catch_sdk.csv")
+        catch_df.to_csv(catch_path, index=False)
+
+        # Create a dummy biological CSV with actual SDK longhand columns
+        bio_df = pd.DataFrame([
+            {"survey_year": 2024, "length_cm": 30.0, "age_years": 5},
+            {"survey_year": 2024, "length_cm": 35.0, "age_years": 6},
+        ])
+        bio_path = os.path.join(temp_dir, "bio_sdk.csv")
+        bio_df.to_csv(bio_path, index=False)
+
+        # Test index generation
+        index_path = skill_generate_design_index(catch_csv_path=catch_path)
+        assert os.path.exists(index_path)
+        out_df = pd.read_csv(index_path)
+        assert not out_df.empty
+        assert "biomass_mt" in out_df.columns
+        assert "cv" in out_df.columns
+
+        # Test expansion compositions
+        comps = skill_expand_compositions(catch_csv_path=catch_path, bio_csv_path=bio_path)
+        assert "length_comps" in comps
+        assert "age_comps" in comps
+        assert os.path.exists(comps["length_comps"])
+        assert os.path.exists(comps["age_comps"])

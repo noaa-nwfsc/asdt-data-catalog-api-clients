@@ -55,7 +55,7 @@ test_that("ageing_lab_name", {
 
 test_that("data_status_name", {
   # tests for the property `data_status_name` (character)
-  # Name of the data point&#39;s current status with respect to its finalization/QC status.  Typically new data submitted directly from the field is flagged as \&quot;Under Review\&quot;,   until it is reviewed, where it is then marked as \&quot;Finalized\&quot;.  Unfinalized data may  be used for any purpose, but for fisheries stock assessment, using/filtering for  finalized data is best.
+  # Name of the data point&#39;s current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \&quot;Under Review\&quot;,  until it is reviewed, where it is then marked as \&quot;Finalized\&quot;.  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_status_name`, "EXPECTED_RESULT")
@@ -206,7 +206,7 @@ test_that("specimen_life_stage_name", {
 
 test_that("data_readiness_level_code", {
   # tests for the property `data_readiness_level_code` (character)
-  # The code representing the data readiness level.     Values include:  * &#x60;L0&#x60;  * &#x60;L1&#x60;  * &#x60;L2&#x60;  * &#x60;L3&#x60;  * &#x60;L4&#x60;
+  # The code representing the data readiness level.   Values include: * &#x60;L0&#x60; * &#x60;L1&#x60; * &#x60;L2&#x60; * &#x60;L3&#x60; * &#x60;L4&#x60;
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_readiness_level_code`, "EXPECTED_RESULT")
@@ -230,7 +230,7 @@ test_that("bottom_trawl_operation_key", {
 
 test_that("actual_station_centroid_key", {
   # tests for the property `actual_station_centroid_key` (integer)
-  # A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **&#x60;[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]&#x60;**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., &#x60;43.58&#x60; becomes &#x60;43&#x60;).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.58139 * 60 &#x3D; 34.88&#x60;, which rounds to &#x60;35&#x60;).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., &#x60;-124.61&#x60; becomes &#x60;24&#x60;).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.61465 * 60 &#x3D; 36.87&#x60;, which rounds to &#x60;37&#x60;).    &gt; **Example:** A grid cell centroid located at decimal coordinates **&#x60;43.58139678, -124.61465068&#x60;** results in the centroid key **&#x60;43352437&#x60;**.
+  # A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **&#x60;[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]&#x60;**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., &#x60;43.58&#x60; becomes &#x60;43&#x60;). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.58139 * 60 &#x3D; 34.88&#x60;, which rounds to &#x60;35&#x60;). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., &#x60;-124.61&#x60; becomes &#x60;24&#x60;). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.61465 * 60 &#x3D; 36.87&#x60;, which rounds to &#x60;37&#x60;).  &gt; **Example:** A grid cell centroid located at decimal coordinates **&#x60;43.58139678, -124.61465068&#x60;** results in the centroid key **&#x60;43352437&#x60;**.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`actual_station_centroid_key`, "EXPECTED_RESULT")
@@ -366,7 +366,7 @@ test_that("actual_station_depth_stratum_name", {
 
 test_that("data_readiness_level_display_name", {
   # tests for the property `data_readiness_level_display_name` (character)
-  # The formatted display name combining the readiness level code and its status.     Values include:  * &#x60;L0 - RAW&#x60;  * &#x60;L1 - PRELIMINARY&#x60;  * &#x60;L2 - VERIFIED&#x60;  * &#x60;L3 - HARMONIZED&#x60;  * &#x60;L4 - DERIVED&#x60;
+  # The formatted display name combining the readiness level code and its status.   Values include: * &#x60;L0 - RAW&#x60; * &#x60;L1 - PRELIMINARY&#x60; * &#x60;L2 - VERIFIED&#x60; * &#x60;L3 - HARMONIZED&#x60; * &#x60;L4 - DERIVED&#x60;
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_readiness_level_display_name`, "EXPECTED_RESULT")

@@ -82,7 +82,13 @@ for item in metadata:
     fn_code = f"""
 def {name}({sig_str}) -> Any:
     \"\"\"{description}\"\"\"
-    return catalog.{name}({call_str})
+    result = catalog.{name}({call_str})
+    import pandas as pd
+    if isinstance(result, pd.DataFrame):
+        import json
+        json_str = result.to_json(orient="records", date_format="iso")
+        return {{"records": json.loads(json_str)}}
+    return result
 """
 
     ctx = {

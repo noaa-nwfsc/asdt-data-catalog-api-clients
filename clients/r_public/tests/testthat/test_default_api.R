@@ -5,200 +5,11 @@ context("Test DefaultApi")
 
 api_instance <- DefaultApi$new()
 
-test_that("GetBottomTrawlBottomTrawlNmfsProjects", {
-  # tests for GetBottomTrawlBottomTrawlNmfsProjects
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_nmfs_projects
-  # A distinct list of all bottom trawl surveys.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlNmfsProjects]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlSearchResults", {
-  # tests for GetBottomTrawlBottomTrawlSearchResults
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_search_results
-  # A distinct list of all search result types recognized on the West Coast Bottom Trawl Groundfish surveys.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlSearchResults]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlShelfSlopeSurveyYears", {
-  # tests for GetBottomTrawlBottomTrawlShelfSlopeSurveyYears
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_shelf_slope_survey_years
-  # A distinct list of all survey years with shelf/slope bottom trawl survey data in the NWFSC database.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlShelfSlopeSurveyYears]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlShelfSlopeVessels", {
-  # tests for GetBottomTrawlBottomTrawlShelfSlopeVessels
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_shelf_slope_vessels
-  # A distinct list of all vessels that participated in the shelf/slope bottom trawl survey.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param survey_years character Filter by survey_years (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlShelfSlopeVessels]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlSurveyYears", {
-  # tests for GetBottomTrawlBottomTrawlSurveyYears
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_survey_years
-  # A distinct list of all survey years with bottom trawl survey data in the NWFSC database.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlSurveyYears]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlTriennialNmfsProjects", {
-  # tests for GetBottomTrawlBottomTrawlTriennialNmfsProjects
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_triennial_nmfs_projects
-  # A distinct list of all bottom trawl surveys.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlTriennialNmfsProjects]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlTriennialSurveyYears", {
-  # tests for GetBottomTrawlBottomTrawlTriennialSurveyYears
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_triennial_survey_years
-  # A distinct list of all survey years with bottom trawl triennial data in the NWFSC database.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlTriennialSurveyYears]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlTriennialVessels", {
-  # tests for GetBottomTrawlBottomTrawlTriennialVessels
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_triennial_vessels
-  # A distinct list of all vessels that participated in the bottom trawl triennial surveys.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param survey_years character Filter by survey_years (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlTriennialVessels]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
-test_that("GetBottomTrawlBottomTrawlVessels", {
-  # tests for GetBottomTrawlBottomTrawlVessels
-  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # bottom_trawl_vessels
-  # A distinct list of all vessels that participated in the bottom trawl survey.
-  # @param limit integer Max rows to return (optional)
-  # @param fields array[character] Comma-separated column filter (optional)
-  # @param offset integer Rows to skip before beginning to return records. (optional)
-  # @param redirect character Force S3 pre-signed redirect (optional)
-  # @param data_format character Response format: json, csv, or parquet (optional)
-  # @param response_mode character Delivery mode: data, package (optional)
-  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param label character Filter by label (optional)
-  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
-  # @param survey_years character Filter by survey_years (optional)
-  # @param value character Filter by value (optional)
-  # @return [array[BottomTrawlBottomTrawlVessels]]
-
-  # uncomment below to test the operation
-  #expect_equal(result, "EXPECTED_RESULT")
-})
-
 test_that("GetBottomTrawlCatch", {
   # tests for GetBottomTrawlCatch
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
   # West Coast Bottom Trawl Catch Samples
-  # Report storing one record per catch sample sorted out to its taxonomic classification sampled on all bottom trawl tows. A typical catch sample can be defined as having:     * **A.** A taxonomic classification or marine debris designation  * **B.** Total weight of the sample, and subsample weight if one is taken  * **C.** Total individual organism tally (extrapolated or actual) and subsample tally if one is taken    Depending on sampling protocols for a given species and amount caught, all individuals in a sample are tallied, or the catch is subsampled, with the entire sample being weighed but only a portion of the individuals tallied. In the event of an incomplete tally, the total individuals estimated for the catch is calculated by:    1. Finding the average weight per fish from individuals that are both weighed and counted.  2. Using that average weight per fish to estimate a tally for the uncounted portion.    &gt; **Note:** Taxonomic classifications may change post-season due to indeterminate field ID, genetic analysis, etc., and are represented in this report by both &#x60;field_identified&#x60; and &#x60;best_available&#x60; taxonomic designations.
+  # Report storing one record per catch sample sorted out to its taxonomic classification sampled on all bottom trawl tows. A typical catch sample can be defined as having:   * **A.** A taxonomic classification or marine debris designation * **B.** Total weight of the sample, and subsample weight if one is taken * **C.** Total individual organism tally (extrapolated or actual) and subsample tally if one is taken  Depending on sampling protocols for a given species and amount caught, all individuals in a sample are tallied, or the catch is subsampled, with the entire sample being weighed but only a portion of the individuals tallied. In the event of an incomplete tally, the total individuals estimated for the catch is calculated by:  1. Finding the average weight per fish from individuals that are both weighed and counted. 2. Using that average weight per fish to estimate a tally for the uncounted portion.  &gt; **Note:** Taxonomic classifications may change post-season due to indeterminate field ID, genetic analysis, etc., and are represented in this report by both &#x60;field_identified&#x60; and &#x60;best_available&#x60; taxonomic designations.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -206,7 +17,7 @@ test_that("GetBottomTrawlCatch", {
   # @param data_format character Response format: json, csv, or parquet (optional)
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).    > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
+  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
   # @param actual_station_code character Unique identifier for the sampling site visited. For the West Coast Groundfish Bottom Trawl Shelf/Slope Survey, sites follow a gridded pattern. Site codes incrementing sequentially by one from North to South and West to East, with the site furthest to the North starting at 4039 and the site furthest to the south ending at 23399. Most site codes are integers, but present as text data types to accommodate historical formats which included alphanumeric values. Historical site splits are represented by floating point numbers (site 44444 split to 44444.1 and 44444.2). The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_current_deactivation_reasons character Comma-separated list of current reasons that a station is listed as inactive.  Value should be null unless the station is currently inactive. (optional)
   # @param actual_station_deactivation_year character The year YYYY when the actual station sampled was last deactivated, if the site is currently inactive. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
@@ -226,9 +37,10 @@ test_that("GetBottomTrawlCatch", {
   # @param best_tow_latitude_dd character Summarized location of the tow representing the single point in space that best represents where the tow sampling took place. Typically this location is derived by combining the median latitude and longitude of the estimated gear track wihle the gear is fishing and in contact with the bottom. Latitude presented as decimal degrees with up to eight points of precision. Latitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param best_tow_longitude_dd character Summarized location of the tow representing the single point in space that best represents where the tow sampling took place. Typically this location is derived by combining the median latitude and longitude of the estimated gear track wihle the gear is fishing and in contact with the bottom. Longitude presented as decimal degrees with up to eight points of precision. Longitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param bottom_trawl_operation_key character 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. Digits 1-4 represent the year (YYYY) of sampling, digits 5-6 represent the survey operation type, digits 7-9 represent the zero-padded vessel identifier, digits 10-12 represent the zero-padded sequential operation increment. (optional)
-  # @param data_readiness_level_code character The code representing the data readiness level.     Values include:  * `L0`  * `L1`  * `L2`  * `L3`  * `L4` (optional)
-  # @param data_readiness_level_display_name character The formatted display name combining the readiness level code and its status.     Values include:  * `L0 - RAW`  * `L1 - PRELIMINARY`  * `L2 - VERIFIED`  * `L3 - HARMONIZED`  * `L4 - DERIVED` (optional)
-  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status.  Typically new data submitted directly from the field is flagged as \"Under Review\",   until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may  be used for any purpose, but for fisheries stock assessment, using/filtering for  finalized data is best. (optional)
+  # @param catch_per_unit_effort_kg_per_ha character Catch per unit effort (CPUE) of the catch sample, where the total catch weight of the specific sample is divided by the seafloor area swept by the tow. (optional)
+  # @param data_readiness_level_code character The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4` (optional)
+  # @param data_readiness_level_display_name character The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED` (optional)
+  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best. (optional)
   # @param field_identified_common_name character Common name of the species preferred by the Northwest Fisheries Science Center. \"Field identified\" designation reflects the taxonomic classification of the species/organism at time of collection in the field. (optional)
   # @param field_identified_scientific_name character Scientific name or latinized nomenclature of the species caught used to uniquely identify taxonomic classification. \"Field identified\" designation reflects the taxonomic classification of the species/organism at time of collection in the field. (optional)
   # @param is_actual_station_currently_active character Boolean indicating if the actual station sampled is currently active. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
@@ -255,11 +67,51 @@ test_that("GetBottomTrawlCatch", {
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
+test_that("GetBottomTrawlCommonNames", {
+  # tests for GetBottomTrawlCommonNames
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_common_names
+  # A distinct list of all common names caught on NWFSC bottom trawl surveys.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlCommonNames]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlNmfsProjects", {
+  # tests for GetBottomTrawlNmfsProjects
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_nmfs_projects
+  # A distinct list of all bottom trawl surveys.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlNmfsProjects]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
 test_that("GetBottomTrawlSamplingStations", {
   # tests for GetBottomTrawlSamplingStations
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
   # West Coast Bottom Trawl Station Grid
-  # Report storing one record per station grid sampling cell used in the random stratified survey design for the West Coast Groundfish Bottom Trawl Shelf/Slope Survey.     Stations span the entire West Coast from Northern Washington to Southern California, reaching out to cover the entire shelf up to ~700 fathoms. The majority of stations are rectangular with four vertices and have an approximate area of 1,028 hectares. Each station is assigned a unique station code and a centroid key (see individual column definitions for details).    For randomized annual selection, stations are stratified into the following groups:    **Depth Strata:**  * 30 – 100 fathoms  * 100 – 300 fathoms  * 300 – 700 fathoms    **Latitude Strata:**  * North of Point Conception  * South of Point Conception    &gt; **Note on Station Activation:** Stations may be deactivated and excluded from the survey over time due to changes in viable or allowed sampling areas. They may also be reactivated if these environmental or regulatory conditions change.
+  # Report storing one record per station grid sampling cell used in the random stratified survey design for the West Coast Groundfish Bottom Trawl Shelf/Slope Survey.   Stations span the entire West Coast from Northern Washington to Southern California, reaching out to cover the entire shelf up to ~700 fathoms. The majority of stations are rectangular with four vertices and have an approximate area of 1,028 hectares. Each station is assigned a unique station code and a centroid key (see individual column definitions for details).  For randomized annual selection, stations are stratified into the following groups:  **Depth Strata:** * 30 – 100 fathoms * 100 – 300 fathoms * 300 – 700 fathoms  **Latitude Strata:** * North of Point Conception * South of Point Conception  &gt; **Note on Station Activation:** Stations may be deactivated and excluded from the survey over time due to changes in viable or allowed sampling areas. They may also be reactivated if these environmental or regulatory conditions change.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -272,7 +124,7 @@ test_that("GetBottomTrawlSamplingStations", {
   # @param sampling_station_code character The unique alphanumeric code identifying the sampling station (e.g., cell or grid ID). (optional)
   # @param source_wcgbts_id character The primary key identifier from the upstream source application database, retained for auditing and exact record matching. (optional)
   # @param station_area_ha character The total geographic area of the station boundary, in hectares. (optional)
-  # @param station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).    > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
+  # @param station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
   # @param station_centroid_latitude_dd character The sampling sites centroid location latitude. Latitude presented as decimal degrees with up to eight points of precision. Latitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param station_centroid_longitude_dd character The sampling sites centroid location longitude. Longitude presented as decimal degrees with up to eight points of precision. Longitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param station_current_deactivation_reasons character If the station is currently inactive, the reason(s) why it was removed from the selection pool (e.g., untrawlable, hard bottom, shipping lane). (optional)
@@ -299,6 +151,69 @@ test_that("GetBottomTrawlSamplingStations", {
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
+test_that("GetBottomTrawlSearchResults", {
+  # tests for GetBottomTrawlSearchResults
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_search_results
+  # A distinct list of all search result types recognized on the West Coast Bottom Trawl Groundfish surveys.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlSearchResults]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlShelfSlopeSurveyYears", {
+  # tests for GetBottomTrawlShelfSlopeSurveyYears
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_shelf_slope_survey_years
+  # A distinct list of all survey years with shelf/slope bottom trawl survey data in the NWFSC database.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlShelfSlopeSurveyYears]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlShelfSlopeVessels", {
+  # tests for GetBottomTrawlShelfSlopeVessels
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_shelf_slope_vessels
+  # A distinct list of all vessels that participated in the shelf/slope bottom trawl survey.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param survey_years character Filter by survey_years (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlShelfSlopeVessels]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
 test_that("GetBottomTrawlSpecimens", {
   # tests for GetBottomTrawlSpecimens
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
@@ -311,7 +226,7 @@ test_that("GetBottomTrawlSpecimens", {
   # @param data_format character Response format: json, csv, or parquet (optional)
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).    > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
+  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
   # @param actual_station_code character Unique identifier for the sampling site visited. For the West Coast Groundfish Bottom Trawl Shelf/Slope Survey, sites follow a gridded pattern. Site codes incrementing sequentially by one from North to South and West to East, with the site furthest to the North starting at 4039 and the site furthest to the south ending at 23399. Most site codes are integers, but present as text data types to accommodate historical formats which included alphanumeric values. Historical site splits are represented by floating point numbers (site 44444 split to 44444.1 and 44444.2). The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_current_deactivation_reasons character Comma-separated list of current reasons that a station is listed as inactive.  Value should be null unless the station is currently inactive. (optional)
   # @param actual_station_deactivation_year character The year YYYY when the actual station sampled was last deactivated, if the site is currently inactive. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
@@ -334,9 +249,9 @@ test_that("GetBottomTrawlSpecimens", {
   # @param best_tow_latitude_dd character Summarized location of the tow representing the single point in space that best represents where the tow sampling took place. Typically this location is derived by combining the median latitude and longitude of the estimated gear track wihle the gear is fishing and in contact with the bottom. Latitude presented as decimal degrees with up to eight points of precision. Latitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param best_tow_longitude_dd character Summarized location of the tow representing the single point in space that best represents where the tow sampling took place. Typically this location is derived by combining the median latitude and longitude of the estimated gear track wihle the gear is fishing and in contact with the bottom. Longitude presented as decimal degrees with up to eight points of precision. Longitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param bottom_trawl_operation_key character 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation. Digits 1-4 represent the year (YYYY) of sampling, digits 5-6 represent the survey operation type, digits 7-9 represent the zero-padded vessel identifier, digits 10-12 represent the zero-padded sequential operation increment. (optional)
-  # @param data_readiness_level_code character The code representing the data readiness level.     Values include:  * `L0`  * `L1`  * `L2`  * `L3`  * `L4` (optional)
-  # @param data_readiness_level_display_name character The formatted display name combining the readiness level code and its status.     Values include:  * `L0 - RAW`  * `L1 - PRELIMINARY`  * `L2 - VERIFIED`  * `L3 - HARMONIZED`  * `L4 - DERIVED` (optional)
-  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status.  Typically new data submitted directly from the field is flagged as \"Under Review\",   until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may  be used for any purpose, but for fisheries stock assessment, using/filtering for  finalized data is best. (optional)
+  # @param data_readiness_level_code character The code representing the data readiness level.   Values include: * `L0` * `L1` * `L2` * `L3` * `L4` (optional)
+  # @param data_readiness_level_display_name character The formatted display name combining the readiness level code and its status.   Values include: * `L0 - RAW` * `L1 - PRELIMINARY` * `L2 - VERIFIED` * `L3 - HARMONIZED` * `L4 - DERIVED` (optional)
+  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best. (optional)
   # @param is_actual_station_currently_active character Boolean indicating if the actual station sampled is currently active. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param lab_analyzed_maturity_stage_name character Maturity designation and certainty of the designation summary. (optional)
   # @param leg_number character Leg increment number when a sampling operation took place.  Each vessel participating in the survey partakes in multiple legs (leg #1, #2...) as part of the survey schedule within a given pass, with each survey containing multiple passes per year.  A vessel on the WCGBTS Shelf/Slope Survey typically is scheduled for 5 legs per year, although this is subject to change due to year-to-year schedule differences. (optional)
@@ -374,7 +289,7 @@ test_that("GetBottomTrawlStationSearches", {
   # tests for GetBottomTrawlStationSearches
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
   # West Coast Bottom Trawl Station Searches
-  # Report storing one record per station search operation on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey. A search is performed when first assessing a sampling station for trawlability. The vessel will search a cell for up to an hour before determining one of the following outcomes:    * **A.** Station is trawlable and will be sampled now  * **B.** Station is trawlable and will be sampled later  * **C.** Station is not trawlable now due to temporary circumstances (e.g., weather, commercial fishing gear, military presence)  * **D.** Station is not trawlable and is likely permanently untrawlable (e.g., due to harsh bottom features)    &gt; **Note:** Typically, scientists and crew are required to search a given site for at least an hour before deeming it untrawlable,   but circumstances may cause this time requirement to be missed or shortened.
+  # Report storing one record per station search operation on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey. A search is performed when first assessing a sampling station for trawlability. The vessel will search a cell for up to an hour before determining one of the following outcomes:  * **A.** Station is trawlable and will be sampled now * **B.** Station is trawlable and will be sampled later * **C.** Station is not trawlable now due to temporary circumstances (e.g., weather, commercial fishing gear, military presence) * **D.** Station is not trawlable and is likely permanently untrawlable (e.g., due to harsh bottom features)  &gt; **Note:** Typically, scientists and crew are required to search a given site for at least an hour before deeming it untrawlable,  but circumstances may cause this time requirement to be missed or shortened.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -382,7 +297,7 @@ test_that("GetBottomTrawlStationSearches", {
   # @param data_format character Response format: json, csv, or parquet (optional)
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.     It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:    * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).  * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).  * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).  * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
+  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
   # @param captain_name character Full name of the vessel captain. (optional)
   # @param field_party_chief_name character Full name of the field party chief. (optional)
   # @param leg_number character Leg increment number when a sampling operation took place.  Each vessel participating in the survey partakes in multiple legs (leg #1, #2...) as part of the survey schedule within a given pass, with each survey containing multiple passes per year.  A vessel on the WCGBTS Shelf/Slope Survey typically is scheduled for 5 legs per year, although this is subject to change due to year-to-year schedule differences. (optional)
@@ -403,11 +318,11 @@ test_that("GetBottomTrawlStationSearches", {
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("GetBottomTrawlTows", {
-  # tests for GetBottomTrawlTows
+test_that("GetBottomTrawlSurveyYears", {
+  # tests for GetBottomTrawlSurveyYears
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # West Coast Bottom Trawl Tows
-  # Report storing one record per groundfish bottom trawl tow/haul sampling operation along the West Coast.     Tows from the following West Coast Bottom Trawl Groundfish surveys are included in this report:    * **West Coast Groundfish Bottom Trawl Slope/Shelf Combination Survey** (2003 – Present)  * **West Coast Groundfish Bottom Trawl Slope Survey** (1998 – 2002)  * **West Coast Groundfish Bottom Trawl Shelf Survey** (2001)  * **West Coast Groundfish Bottom Trawl Hypoxia Study** (2007 – 2011)  * **West Coast Groundfish Bottom Trawl Video Study** (2009)  * **AFSC/RACE Triennial Groundfish Surveys** (1977 – 2001)    Included in this report are tow-level net mensuration statistics, various spatiotemporal data points related to vessel and gear positioning,   qualitative and quantitative environmental metrics, aggregate catch weight values, personnel and scheduling information,   and overall tow performance. Availability of individual data points may vary between surveys.    &gt; **Note on Survey Comparability:** Because the Slope and Shelf series are based on distinct statistical designs,   they are generally not amenable to combined long-term time series analysis. Analysts should filter by the project field to isolate consistent data series.
+  # bottom_trawl_survey_years
+  # A distinct list of all survey years with bottom trawl survey data in the NWFSC database.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -415,20 +330,41 @@ test_that("GetBottomTrawlTows", {
   # @param data_format character Response format: json, csv, or parquet (optional)
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).    > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlSurveyYears]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlTows", {
+  # tests for GetBottomTrawlTows
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # West Coast Bottom Trawl Tows
+  # Report storing one record per groundfish bottom trawl tow/haul sampling operation along the West Coast.   Tows from the following West Coast Bottom Trawl Groundfish surveys are included in this report:  * **West Coast Groundfish Bottom Trawl Slope/Shelf Combination Survey** (2003 – Present) * **West Coast Groundfish Bottom Trawl Slope Survey** (1998 – 2002) * **West Coast Groundfish Bottom Trawl Shelf Survey** (2001) * **West Coast Groundfish Bottom Trawl Hypoxia Study** (2007 – 2011) * **West Coast Groundfish Bottom Trawl Video Study** (2009) * **AFSC/RACE Triennial Groundfish Surveys** (1977 – 2001)  Included in this report are tow-level net mensuration statistics, various spatiotemporal data points related to vessel and gear positioning,  qualitative and quantitative environmental metrics, aggregate catch weight values, personnel and scheduling information,  and overall tow performance. Availability of individual data points may vary between surveys.  &gt; **Note on Survey Comparability:** Because the Slope and Shelf series are based on distinct statistical designs,  they are generally not amenable to combined long-term time series analysis. Analysts should filter by the project field to isolate consistent data series.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
   # @param actual_station_code character Unique identifier for the sampling site visited. For the West Coast Groundfish Bottom Trawl Shelf/Slope Survey, sites follow a gridded pattern. Site codes incrementing sequentially by one from North to South and West to East, with the site furthest to the North starting at 4039 and the site furthest to the south ending at 23399. Most site codes are integers, but present as text data types to accommodate historical formats which included alphanumeric values. Historical site splits are represented by floating point numbers (site 44444 split to 44444.1 and 44444.2). The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_current_deactivation_reasons character Comma-separated list of current reasons that a station is listed as inactive.  Value should be null unless the station is currently inactive. (optional)
   # @param actual_station_deactivation_year character The year YYYY when the actual station sampled was last deactivated, if the site is currently inactive. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_depth_stratum_name character Name of the depth stratum that the sampling site falls into. Sampling on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey follows a randomly stratified design, with sampling sites falling into one of three depth strata: 30-100 fathoms, 100-300 fathoms, and 300-700 fathoms. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_latitude_stratum_name character Name of the latitude stratum that the sampling site falls into. Sampling on the West Coast Groundfish Bottom Trawl Shelf/Slope Survey follows a randomly stratified design, with sampling sites falling into one of two latitude strata: North of Point Conception (>34°30'N) or South of Point Conception (<34°30'N). The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param best_tow_latitude_dd character Latitude of the single point in space that best represents where the tow sampling took place. Latitude presented as decimal degrees with up to eight points of precision. (optional)
-  # @param best_tow_location_calculation_method_name character Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the  median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data  used to estimate the gear track is an alternative method typically used. (optional)
+  # @param best_tow_location_calculation_method_name character Calculation method used to determine the single \"best\" location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data used to estimate the gear track is an alternative method typically used. (optional)
   # @param best_tow_longitude_dd character Longitude of the single point in space that best represents where the tow sampling took place. Longitude presented as decimal degrees with up to eight points of precision. (optional)
-  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.     It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:    * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).  * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).  * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).  * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
+  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
   # @param captain_name character The captain or skipper in charge of operating the vessel during an operation's sampling. (optional)
-  # @param data_readiness_level_code character The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).    Values include:  * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review.  * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends.  * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication.  * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units.  * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids. (optional)
-  # @param data_readiness_level_display_name character The formatted display name representing the data readiness level, combining the level code and its status label.    Values include:  * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors.  * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review.  * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits.  * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys.  * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids. (optional)
-  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status.  Typically new data submitted directly from the field is flagged as \"Under Review\",   until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may  be used for any purpose, but for fisheries stock assessment, using/filtering for  finalized data is best. (optional)
+  # @param data_readiness_level_code character The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).  Values include: * **`L0` (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review. * **`L1` (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends. * **`L2` (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication. * **`L3` (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units. * **`L4` (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids. (optional)
+  # @param data_readiness_level_display_name character The formatted display name representing the data readiness level, combining the level code and its status label.  Values include: * **`L0 - RAW`:** Unaltered sensor or field output containing noise and errors. * **`L1 - PRELIMINARY`:** Ingested and schema-validated, pending Scientific PI review. * **`L2 - VERIFIED`:** Finalized after Scientific PI Review and QA/QC audits. * **`L3 - HARMONIZED`:** Integrated across multi-year programs or disparate surveys. * **`L4 - DERIVED`:** High-value analytic products, aggregations, or model-based spatial grids. (optional)
+  # @param data_status_name character Name of the data point's current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \"Under Review\",  until it is reviewed, where it is then marked as \"Finalized\".  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best. (optional)
   # @param direction_to_current_name character Direction of the vessel relative to the current. (optional)
   # @param doors_out_at character when the trawl doors are fully out, wire is fully deployed, and winch is stopped. UTC Date and time with timezone offset following in ISO 8601 (`YYYY-MM-DD HH:MM:SS+00`). Timestamp is to seconds precision (no fractional seconds). (optional)
   # @param doors_out_vessel_latitude_dd character Latitude of the vessel when the trawl doors are fully out, wire is wire fully deployed, and winch is stopped. Latitude presented as decimal degrees with up to eight points of precision. (optional)
@@ -491,13 +427,13 @@ test_that("GetBottomTrawlTows", {
   # @param total_catch_weight_kg character The aggregate total weight of the catch for the tow, measured in kg. (optional)
   # @param tow_performance_name character Descriptive name of the tow performance status. (optional)
   # @param tow_sea_surface_fluorescence_mg_per_m3 character water fluorescence measured in ml/m3 (dbar). (optional)
-  # @param tow_sea_surface_water_temperature_c character Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded  In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder,  with real-time data streamed via serial protocol into the wheelhouse for an average calculation. (optional)
+  # @param tow_sea_surface_water_temperature_c character Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder, with real-time data streamed via serial protocol into the wheelhouse for an average calculation. (optional)
   # @param tow_sequence_number character Sequential number incrementing by one for each tow from the same vessel by year. (optional)
   # @param tow_started_at character when the tow was first initiated and gear was deployed. UTC Date and time with timezone offset following in ISO 8601 (`YYYY-MM-DD HH:MM:SS+00`). Timestamp is to seconds precision (no fractional seconds). (optional)
   # @param tow_started_vessel_latitude_dd character Latitude of the vessel when the tow was first initiated and gear was deployed. Latitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param tow_started_vessel_longitude_dd character Longitude of the vessel when the tow was first initiated and gear was deployed. Longitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param vertebrate_catch_weight_kg character The aggregate total weight of all vertebrates caught on tow, measured in kg. (optional)
-  # @param vessel_name character Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship   or vessel prefix (i.e. Last Straw, NOT F/V Last Straw). (optional)
+  # @param vessel_name character Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw). (optional)
   # @param was_actual_station_active_when_sampled character Boolean indicating if the actual station was active at the time it was sampled. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param was_target_station_active_when_sampled character Boolean indicating if the target station was active at the time of sampling. The \"target\" sampling site designation indicates that the site was the target for sampling for the particular operation. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to the \"best\" preferred geolocated site. (optional)
   # @param wave_direction_code character Direction of waves during operation. (optional)
@@ -508,11 +444,11 @@ test_that("GetBottomTrawlTows", {
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("GetHookAndLineHookAndLineCommonNames", {
-  # tests for GetHookAndLineHookAndLineCommonNames
+test_that("GetBottomTrawlTriennialNmfsProjects", {
+  # tests for GetBottomTrawlTriennialNmfsProjects
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
-  # hook_and_line_common_names
-  # A distinct list of all historical common names caught on Southern California Hook &amp; Line surveys.
+  # bottom_trawl_triennial_nmfs_projects
+  # A distinct list of all bottom trawl surveys.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -521,17 +457,100 @@ test_that("GetHookAndLineHookAndLineCommonNames", {
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
   # @param label character Filter by label (optional)
-  # @param survey_years character Filter by survey_years (optional)
   # @param value character Filter by value (optional)
-  # @param vessels character Filter by vessels (optional)
-  # @return [array[HookAndLineHookAndLineCommonNames]]
+  # @return [array[BottomTrawlTriennialNmfsProjects]]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
 })
 
-test_that("GetHookAndLineHookAndLineVessels", {
-  # tests for GetHookAndLineHookAndLineVessels
+test_that("GetBottomTrawlTriennialSurveyYears", {
+  # tests for GetBottomTrawlTriennialSurveyYears
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_triennial_survey_years
+  # A distinct list of all survey years with bottom trawl triennial data in the NWFSC database.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlTriennialSurveyYears]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlTriennialVessels", {
+  # tests for GetBottomTrawlTriennialVessels
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_triennial_vessels
+  # A distinct list of all vessels that participated in the bottom trawl triennial surveys.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param survey_years character Filter by survey_years (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlTriennialVessels]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetBottomTrawlVessels", {
+  # tests for GetBottomTrawlVessels
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # bottom_trawl_vessels
+  # A distinct list of all vessels that participated in the bottom trawl survey.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param nmfs_project_names character Filter by nmfs_project_names (optional)
+  # @param survey_years character Filter by survey_years (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[BottomTrawlVessels]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetHookAndLineCommonNames", {
+  # tests for GetHookAndLineCommonNames
+  # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
+  # hook_and_line_common_names
+  # A distinct list of all common names caught on Southern California Hook &amp; Line surveys.
+  # @param limit integer Max rows to return (optional)
+  # @param fields array[character] Comma-separated column filter (optional)
+  # @param offset integer Rows to skip before beginning to return records. (optional)
+  # @param redirect character Force S3 pre-signed redirect (optional)
+  # @param data_format character Response format: json, csv, or parquet (optional)
+  # @param response_mode character Delivery mode: data, package (optional)
+  # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
+  # @param label character Filter by label (optional)
+  # @param value character Filter by value (optional)
+  # @return [array[HookAndLineCommonNames]]
+
+  # uncomment below to test the operation
+  #expect_equal(result, "EXPECTED_RESULT")
+})
+
+test_that("GetHookAndLineVessels", {
+  # tests for GetHookAndLineVessels
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
   # hook_and_line_vessels
   # A distinct list of all vessels that participated in the Southern California Hook &amp; Line survey.
@@ -545,7 +564,7 @@ test_that("GetHookAndLineHookAndLineVessels", {
   # @param label character Filter by label (optional)
   # @param survey_years character Filter by survey_years (optional)
   # @param value character Filter by value (optional)
-  # @return [array[HookAndLineHookAndLineVessels]]
+  # @return [array[HookAndLineVessels]]
 
   # uncomment below to test the operation
   #expect_equal(result, "EXPECTED_RESULT")
@@ -683,7 +702,7 @@ test_that("GetNwfscTriennialSpecimenLengths", {
   # tests for GetNwfscTriennialSpecimenLengths
   # base path: https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
   # AFSC/RACE Bottom Trawl Triennial Specimen Lengths
-  # Report storing one record per lengthed individual fish from the AFSC/RACE triennial bottom trawl surveys.   Each record must contain the best taxonomic identification of the individual and a length/width. Width measurements are  restricted to skate disc width measurements, with a majority of other measurements categorized as fork/anal/total lengths.    Lenghts from the following AFSC/RACE surveys, typically occuring at three-year increments:    Lengths from the following AFSC/RACE surveys, typically occurring at three-year increments:    * **AFSC/RACE Triennial Groundfish Shelf Survey** (1977 – 2001)  * **AFSC/RACE Slope Survey Fishing Power Comparative Study** (1988, 1993)  * **AFSC/RACE Slope Survey Nonstandard Sampling** (1996)    Included in this report are select spatiotemporal and environmental data points related to vessel and tow performance,   taxonomic identification, and size values and size (length/width) types.
+  # Report storing one record per lengthed individual fish from the AFSC/RACE triennial bottom trawl surveys.  Each record must contain the best taxonomic identification of the individual and a length/width. Width measurements are restricted to skate disc width measurements, with a majority of other measurements categorized as fork/anal/total lengths.  Lenghts from the following AFSC/RACE surveys, typically occuring at three-year increments:  Lengths from the following AFSC/RACE surveys, typically occurring at three-year increments:  * **AFSC/RACE Triennial Groundfish Shelf Survey** (1977 – 2001) * **AFSC/RACE Slope Survey Fishing Power Comparative Study** (1988, 1993) * **AFSC/RACE Slope Survey Nonstandard Sampling** (1996)  Included in this report are select spatiotemporal and environmental data points related to vessel and tow performance,  taxonomic identification, and size values and size (length/width) types.
   # @param limit integer Max rows to return (optional)
   # @param fields array[character] Comma-separated column filter (optional)
   # @param offset integer Rows to skip before beginning to return records. (optional)
@@ -691,7 +710,7 @@ test_that("GetNwfscTriennialSpecimenLengths", {
   # @param data_format character Response format: json, csv, or parquet (optional)
   # @param response_mode character Delivery mode: data, package (optional)
   # @param include_noncore_fields character All fields returned when true, else only core fields returned. (optional)
-  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).    > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
+  # @param actual_station_centroid_key character A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **`[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]`**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., `43.58` becomes `43`). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.58139 * 60 = 34.88`, which rounds to `35`). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., `-124.61` becomes `24`). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., `0.61465 * 60 = 36.87`, which rounds to `37`).  > **Example:** A grid cell centroid located at decimal coordinates **`43.58139678, -124.61465068`** results in the centroid key **`43352437`**. (optional)
   # @param actual_station_code character Unique identifier for the sampling site visited. For the West Coast Groundfish Bottom Trawl Shelf/Slope Survey, sites follow a gridded pattern. Site codes incrementing sequentially by one from North to South and West to East, with the site furthest to the North starting at 4039 and the site furthest to the south ending at 23399. Most site codes are integers, but present as text data types to accommodate historical formats which included alphanumeric values. Historical site splits are represented by floating point numbers (site 44444 split to 44444.1 and 44444.2). The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param actual_station_current_deactivation_reasons character Comma-separated list of current reasons that a station is listed as inactive.  Value should be null unless the station is currently inactive. (optional)
   # @param actual_station_deactivation_year character The year YYYY when the actual station sampled was last deactivated, if the site is currently inactive. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
@@ -702,7 +721,7 @@ test_that("GetNwfscTriennialSpecimenLengths", {
   # @param best_tow_latitude_dd character Latitude of the single point in space that best represents where the tow sampling took place. Latitude presented as decimal degrees with up to eight points of precision. (optional)
   # @param best_tow_location_calculation_method_id character Filter by best_tow_location_calculation_method_id (optional)
   # @param best_tow_longitude_dd character Longitude of the single point in space that best represents where the tow sampling took place. Longitude presented as decimal degrees with up to eight points of precision. (optional)
-  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.     It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:    * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`).  * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`).  * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`).  * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
+  # @param bottom_trawl_operation_key character A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **`202203020001`** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., `2022`). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., `03`). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., `020`). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., `001`). (optional)
   # @param bottom_trawl_triennial_specimen_length_id character Surrogate unique key for each triennial specimen length record. (optional)
   # @param is_actual_station_currently_active character Boolean indicating if the actual station sampled is currently active. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param net_off_bottom_at character when the footrope loses contact with the bottom after haulback has begun, marking the end of \"sampling\" / \"fishing\" for the tow. UTC Date and time with timezone offset following in ISO 8601 (`YYYY-MM-DD HH:MM:SS+00`). Timestamp is to seconds precision (no fractional seconds). (optional)
@@ -720,7 +739,7 @@ test_that("GetNwfscTriennialSpecimenLengths", {
   # @param specimen_size_type_name character Descriptive name of the associated specimen size (e.g. lenght/width) (optional)
   # @param survey_year character Calendar year in integer format YYYY during which data was collected. (optional)
   # @param tow_performance_name character Descriptive name of the tow performance status. (optional)
-  # @param vessel_name character Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship   or vessel prefix (i.e. Last Straw, NOT F/V Last Straw). (optional)
+  # @param vessel_name character Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw). (optional)
   # @param was_actual_station_active_when_sampled character Boolean indicating if the actual station was active at the time it was sampled. The \"best\" sampling site designation indicates that the single summarized tow/haul location falls within this site boundary. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to this preferred geolocated site. (optional)
   # @param was_target_station_active_when_sampled character Boolean indicating if the target station was active at the time of sampling. The \"target\" sampling site designation indicates that the site was the target for sampling for the particular operation. The \"target\" site may diverge from the \"best\" in the event that the tow operation carries the sampling outside of the intended site boundary, and the tow is then actually assigned to the \"best\" preferred geolocated site. (optional)
   # @return [array[NwfscTriennialSpecimenLengths]]
