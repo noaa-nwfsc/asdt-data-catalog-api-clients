@@ -39,7 +39,7 @@ test_that("survey_year", {
 
 test_that("vessel_name", {
   # tests for the property `vessel_name` (character)
-  # Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship   or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).
+  # Full capitalized name of the commercial or research vessel used to collect the data at sea.  As a general rule, names do not include the preceiding ship  or vessel prefix (i.e. Last Straw, NOT F/V Last Straw).
 
   # uncomment below to test the property
   #expect_equal(model.instance$`vessel_name`, "EXPECTED_RESULT")
@@ -103,7 +103,7 @@ test_that("swell_height_ft", {
 
 test_that("data_status_name", {
   # tests for the property `data_status_name` (character)
-  # Name of the data point&#39;s current status with respect to its finalization/QC status.  Typically new data submitted directly from the field is flagged as \&quot;Under Review\&quot;,   until it is reviewed, where it is then marked as \&quot;Finalized\&quot;.  Unfinalized data may  be used for any purpose, but for fisheries stock assessment, using/filtering for  finalized data is best.
+  # Name of the data point&#39;s current status with respect to its finalization/QC status. Typically new data submitted directly from the field is flagged as \&quot;Under Review\&quot;,  until it is reviewed, where it is then marked as \&quot;Finalized\&quot;.  Unfinalized data may be used for any purpose, but for fisheries stock assessment, using/filtering for finalized data is best.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_status_name`, "EXPECTED_RESULT")
@@ -309,7 +309,7 @@ test_that("on_bottom_elapsed_time_s", {
 
 test_that("data_readiness_level_code", {
   # tests for the property `data_readiness_level_code` (character)
-  # The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).    Values include:  * **&#x60;L0&#x60; (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review.  * **&#x60;L1&#x60; (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends.  * **&#x60;L2&#x60; (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication.  * **&#x60;L3&#x60; (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units.  * **&#x60;L4&#x60; (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids.
+  # The code representing the data readiness level (Data Readiness Index). Readiness levels classify data across a spectrum from raw field collection to fully validated, analysis-ready products, and can be applied at the most granular level possible (entire datasets or specific row subsets).  Values include: * **&#x60;L0&#x60; (RAW):** Unaltered sensor or field output. Contains noise and errors. Intended for technical diagnostics and engineering review. * **&#x60;L1&#x60; (PRELIMINARY):** Ingested and schema-validated. Technical QC complete; Scientific PI review pending. Intended for in-season pulse checks and preliminary trends. * **&#x60;L2&#x60; (VERIFIED):** Finalized after Scientific PI Review and QA/QC audits. Intended for authoritative Stock Assessments and publication. * **&#x60;L3&#x60; (HARMONIZED):** Integrated across multi-year programs or disparate surveys using standard taxonomies and units. * **&#x60;L4&#x60; (DERIVED):** High-value analytic products, aggregations (e.g., CPUE indices), or model-based spatial grids.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_readiness_level_code`, "EXPECTED_RESULT")
@@ -332,7 +332,7 @@ test_that("on_bottom_gear_track_geom", {
 
 test_that("bottom_trawl_operation_key", {
   # tests for the property `bottom_trawl_operation_key` (character)
-  # A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.     It is constructed by concatenating key operational attributes into a single string. For example, the operation key **&#x60;202203020001&#x60;** breaks down as follows:    * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., &#x60;2022&#x60;).  * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., &#x60;03&#x60;).  * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., &#x60;020&#x60;).  * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., &#x60;001&#x60;).
+  # A 12-character numeric unique identifier for a West Coast Groundfish Bottom Trawl sampling operation.   It is constructed by concatenating key operational attributes into a single string. For example, the operation key **&#x60;202203020001&#x60;** breaks down as follows:  * **Survey Year (Digits 1-4):** The 4-digit year (YYYY) of sampling (e.g., &#x60;2022&#x60;). * **Operation Type (Digits 5-6):** The 2-digit code representing the survey operation type (e.g., &#x60;03&#x60;). * **Vessel ID (Digits 7-9):** The 3-digit, zero-padded identifier for the participating vessel (e.g., &#x60;020&#x60;). * **Operation Increment (Digits 10-12):** The 3-digit, zero-padded sequential operation increment (e.g., &#x60;001&#x60;).
 
   # uncomment below to test the property
   #expect_equal(model.instance$`bottom_trawl_operation_key`, "EXPECTED_RESULT")
@@ -356,7 +356,7 @@ test_that("vertebrate_catch_weight_kg", {
 
 test_that("actual_station_centroid_key", {
   # tests for the property `actual_station_centroid_key` (integer)
-  # A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.     This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.    ### Component Breakdown  The 8-character format strictly follows the pattern **&#x60;[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]&#x60;**:    * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., &#x60;43.58&#x60; becomes &#x60;43&#x60;).  * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.58139 * 60 &#x3D; 34.88&#x60;, which rounds to &#x60;35&#x60;).  * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., &#x60;-124.61&#x60; becomes &#x60;24&#x60;).  * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.61465 * 60 &#x3D; 36.87&#x60;, which rounds to &#x60;37&#x60;).    &gt; **Example:** A grid cell centroid located at decimal coordinates **&#x60;43.58139678, -124.61465068&#x60;** results in the centroid key **&#x60;43352437&#x60;**.
+  # A composite spatial key that uniquely identifies the centroid of a WCGBTS (West Coast Groundfish Bottom Trawl Survey) sampling station grid cell.   This key is a fixed 8-character string constructed by converting decimal degree coordinates into Degrees and Decimal Minutes (DDM), stripping away negative signs and truncating specific digits to create a consistent spatial identifier.  ### Component Breakdown The 8-character format strictly follows the pattern **&#x60;[Lat Degrees][Lat Minutes][Lon Degrees][Lon Minutes]&#x60;**:  * **Latitude Degrees (2 characters):** The whole number of the decimal latitude (e.g., &#x60;43.58&#x60; becomes &#x60;43&#x60;). * **Latitude Minutes (2 characters):** The decimal remainder of the latitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.58139 * 60 &#x3D; 34.88&#x60;, which rounds to &#x60;35&#x60;). * **Longitude Degrees (2 characters):** The whole number of the longitude, ignoring the negative sign (West) and dropping the leading hundreds place (e.g., &#x60;-124.61&#x60; becomes &#x60;24&#x60;). * **Longitude Minutes (2 characters):** The decimal remainder of the longitude multiplied by 60 and rounded to the nearest whole number (e.g., &#x60;0.61465 * 60 &#x3D; 36.87&#x60;, which rounds to &#x60;37&#x60;).  &gt; **Example:** A grid cell centroid located at decimal coordinates **&#x60;43.58139678, -124.61465068&#x60;** results in the centroid key **&#x60;43352437&#x60;**.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`actual_station_centroid_key`, "EXPECTED_RESULT")
@@ -607,7 +607,7 @@ test_that("actual_station_depth_stratum_name", {
 
 test_that("data_readiness_level_display_name", {
   # tests for the property `data_readiness_level_display_name` (character)
-  # The formatted display name representing the data readiness level, combining the level code and its status label.    Values include:  * **&#x60;L0 - RAW&#x60;:** Unaltered sensor or field output containing noise and errors.  * **&#x60;L1 - PRELIMINARY&#x60;:** Ingested and schema-validated, pending Scientific PI review.  * **&#x60;L2 - VERIFIED&#x60;:** Finalized after Scientific PI Review and QA/QC audits.  * **&#x60;L3 - HARMONIZED&#x60;:** Integrated across multi-year programs or disparate surveys.  * **&#x60;L4 - DERIVED&#x60;:** High-value analytic products, aggregations, or model-based spatial grids.
+  # The formatted display name representing the data readiness level, combining the level code and its status label.  Values include: * **&#x60;L0 - RAW&#x60;:** Unaltered sensor or field output containing noise and errors. * **&#x60;L1 - PRELIMINARY&#x60;:** Ingested and schema-validated, pending Scientific PI review. * **&#x60;L2 - VERIFIED&#x60;:** Finalized after Scientific PI Review and QA/QC audits. * **&#x60;L3 - HARMONIZED&#x60;:** Integrated across multi-year programs or disparate surveys. * **&#x60;L4 - DERIVED&#x60;:** High-value analytic products, aggregations, or model-based spatial grids.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`data_readiness_level_display_name`, "EXPECTED_RESULT")
@@ -715,7 +715,7 @@ test_that("started_haulback_vessel_latitude_dd", {
 
 test_that("tow_sea_surface_water_temperature_c", {
   # tests for the property `tow_sea_surface_water_temperature_c` (numeric)
-  # Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded  In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder,  with real-time data streamed via serial protocol into the wheelhouse for an average calculation.
+  # Mean water temperature recorded at the sea surface during the extent of the tow. Temperature is typically recorded In recent years this metric is typically collected via a hull-mounted Seabird Scientific SBE39plus temperature recorder, with real-time data streamed via serial protocol into the wheelhouse for an average calculation.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`tow_sea_surface_water_temperature_c`, "EXPECTED_RESULT")
@@ -786,7 +786,7 @@ test_that("was_target_station_active_when_sampled", {
 
 test_that("best_tow_location_calculation_method_name", {
   # tests for the property `best_tow_location_calculation_method_name` (character)
-  # Calculation method used to determine the single \&quot;best\&quot; location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the  median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data  used to estimate the gear track is an alternative method typically used.
+  # Calculation method used to determine the single \&quot;best\&quot; location for a tow.  For Shelf/Slope tows, the preferred and primary method to date is to identify the median latitude and median longitude values of the on-bottom estimated gear track, and combine to derive the best location.  Only in the absence of data used to estimate the gear track is an alternative method typically used.
 
   # uncomment below to test the property
   #expect_equal(model.instance$`best_tow_location_calculation_method_name`, "EXPECTED_RESULT")

@@ -70,3 +70,4 @@ CONTEXT.md
 Thumbs.db
 .idea/
 .vscode/
+.r_libs/

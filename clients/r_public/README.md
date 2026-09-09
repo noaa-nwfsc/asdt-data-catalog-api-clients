@@ -73,22 +73,23 @@ All URIs are relative to *https://www.webapps.nwfsc.noaa.gov/data-catalog/api/v1
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**GetBottomTrawlBottomTrawlNmfsProjects**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlNmfsProjects) | **GET** /reference/bottom-trawl-nmfs-projects | bottom_trawl_nmfs_projects
-*DefaultApi* | [**GetBottomTrawlBottomTrawlSearchResults**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlSearchResults) | **GET** /reference/bottom-trawl-search-results | bottom_trawl_search_results
-*DefaultApi* | [**GetBottomTrawlBottomTrawlShelfSlopeSurveyYears**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlShelfSlopeSurveyYears) | **GET** /reference/bottom-trawl-shelf-slope-survey-years | bottom_trawl_shelf_slope_survey_years
-*DefaultApi* | [**GetBottomTrawlBottomTrawlShelfSlopeVessels**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlShelfSlopeVessels) | **GET** /reference/bottom-trawl-shelf-slope-vessels | bottom_trawl_shelf_slope_vessels
-*DefaultApi* | [**GetBottomTrawlBottomTrawlSurveyYears**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlSurveyYears) | **GET** /reference/bottom-trawl-survey-years | bottom_trawl_survey_years
-*DefaultApi* | [**GetBottomTrawlBottomTrawlTriennialNmfsProjects**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlTriennialNmfsProjects) | **GET** /reference/bottom-trawl-triennial-nmfs-projects | bottom_trawl_triennial_nmfs_projects
-*DefaultApi* | [**GetBottomTrawlBottomTrawlTriennialSurveyYears**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlTriennialSurveyYears) | **GET** /reference/bottom-trawl-triennial-survey-years | bottom_trawl_triennial_survey_years
-*DefaultApi* | [**GetBottomTrawlBottomTrawlTriennialVessels**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlTriennialVessels) | **GET** /reference/bottom-trawl-triennial-vessels | bottom_trawl_triennial_vessels
-*DefaultApi* | [**GetBottomTrawlBottomTrawlVessels**](docs/DefaultApi.md#GetBottomTrawlBottomTrawlVessels) | **GET** /reference/bottom-trawl-vessels | bottom_trawl_vessels
 *DefaultApi* | [**GetBottomTrawlCatch**](docs/DefaultApi.md#GetBottomTrawlCatch) | **GET** /bottom-trawl/catch | West Coast Bottom Trawl Catch Samples
+*DefaultApi* | [**GetBottomTrawlCommonNames**](docs/DefaultApi.md#GetBottomTrawlCommonNames) | **GET** /reference/bottom-trawl-common-names | bottom_trawl_common_names
+*DefaultApi* | [**GetBottomTrawlNmfsProjects**](docs/DefaultApi.md#GetBottomTrawlNmfsProjects) | **GET** /reference/bottom-trawl-nmfs-projects | bottom_trawl_nmfs_projects
 *DefaultApi* | [**GetBottomTrawlSamplingStations**](docs/DefaultApi.md#GetBottomTrawlSamplingStations) | **GET** /bottom-trawl/sampling-stations | West Coast Bottom Trawl Station Grid
+*DefaultApi* | [**GetBottomTrawlSearchResults**](docs/DefaultApi.md#GetBottomTrawlSearchResults) | **GET** /reference/bottom-trawl-search-results | bottom_trawl_search_results
+*DefaultApi* | [**GetBottomTrawlShelfSlopeSurveyYears**](docs/DefaultApi.md#GetBottomTrawlShelfSlopeSurveyYears) | **GET** /reference/bottom-trawl-shelf-slope-survey-years | bottom_trawl_shelf_slope_survey_years
+*DefaultApi* | [**GetBottomTrawlShelfSlopeVessels**](docs/DefaultApi.md#GetBottomTrawlShelfSlopeVessels) | **GET** /reference/bottom-trawl-shelf-slope-vessels | bottom_trawl_shelf_slope_vessels
 *DefaultApi* | [**GetBottomTrawlSpecimens**](docs/DefaultApi.md#GetBottomTrawlSpecimens) | **GET** /bottom-trawl/specimens | West Coast Bottom Trawl Specimens
 *DefaultApi* | [**GetBottomTrawlStationSearches**](docs/DefaultApi.md#GetBottomTrawlStationSearches) | **GET** /bottom-trawl/station-searches | West Coast Bottom Trawl Station Searches
+*DefaultApi* | [**GetBottomTrawlSurveyYears**](docs/DefaultApi.md#GetBottomTrawlSurveyYears) | **GET** /reference/bottom-trawl-survey-years | bottom_trawl_survey_years
 *DefaultApi* | [**GetBottomTrawlTows**](docs/DefaultApi.md#GetBottomTrawlTows) | **GET** /bottom-trawl/tows | West Coast Bottom Trawl Tows
-*DefaultApi* | [**GetHookAndLineHookAndLineCommonNames**](docs/DefaultApi.md#GetHookAndLineHookAndLineCommonNames) | **GET** /reference/hook-and-line-common-names | hook_and_line_common_names
-*DefaultApi* | [**GetHookAndLineHookAndLineVessels**](docs/DefaultApi.md#GetHookAndLineHookAndLineVessels) | **GET** /reference/hook-and-line-vessels | hook_and_line_vessels
+*DefaultApi* | [**GetBottomTrawlTriennialNmfsProjects**](docs/DefaultApi.md#GetBottomTrawlTriennialNmfsProjects) | **GET** /reference/bottom-trawl-triennial-nmfs-projects | bottom_trawl_triennial_nmfs_projects
+*DefaultApi* | [**GetBottomTrawlTriennialSurveyYears**](docs/DefaultApi.md#GetBottomTrawlTriennialSurveyYears) | **GET** /reference/bottom-trawl-triennial-survey-years | bottom_trawl_triennial_survey_years
+*DefaultApi* | [**GetBottomTrawlTriennialVessels**](docs/DefaultApi.md#GetBottomTrawlTriennialVessels) | **GET** /reference/bottom-trawl-triennial-vessels | bottom_trawl_triennial_vessels
+*DefaultApi* | [**GetBottomTrawlVessels**](docs/DefaultApi.md#GetBottomTrawlVessels) | **GET** /reference/bottom-trawl-vessels | bottom_trawl_vessels
+*DefaultApi* | [**GetHookAndLineCommonNames**](docs/DefaultApi.md#GetHookAndLineCommonNames) | **GET** /reference/hook-and-line-common-names | hook_and_line_common_names
+*DefaultApi* | [**GetHookAndLineVessels**](docs/DefaultApi.md#GetHookAndLineVessels) | **GET** /reference/hook-and-line-vessels | hook_and_line_vessels
 *DefaultApi* | [**GetNwfscAllSurveyYears**](docs/DefaultApi.md#GetNwfscAllSurveyYears) | **GET** /reference/all-survey-years | all_survey_years
 *DefaultApi* | [**GetNwfscAllTaxonCategories**](docs/DefaultApi.md#GetNwfscAllTaxonCategories) | **GET** /reference/all-taxon-categories | all_taxon_categories
 *DefaultApi* | [**GetNwfscAllTaxonSubcategories**](docs/DefaultApi.md#GetNwfscAllTaxonSubcategories) | **GET** /reference/all-taxon-subcategories | all_taxon_subcategories
@@ -99,23 +100,24 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [BottomTrawlBottomTrawlNmfsProjects](docs/BottomTrawlBottomTrawlNmfsProjects.md)
- - [BottomTrawlBottomTrawlSearchResults](docs/BottomTrawlBottomTrawlSearchResults.md)
- - [BottomTrawlBottomTrawlShelfSlopeSurveyYears](docs/BottomTrawlBottomTrawlShelfSlopeSurveyYears.md)
- - [BottomTrawlBottomTrawlShelfSlopeVessels](docs/BottomTrawlBottomTrawlShelfSlopeVessels.md)
- - [BottomTrawlBottomTrawlSurveyYears](docs/BottomTrawlBottomTrawlSurveyYears.md)
- - [BottomTrawlBottomTrawlTriennialNmfsProjects](docs/BottomTrawlBottomTrawlTriennialNmfsProjects.md)
- - [BottomTrawlBottomTrawlTriennialSurveyYears](docs/BottomTrawlBottomTrawlTriennialSurveyYears.md)
- - [BottomTrawlBottomTrawlTriennialVessels](docs/BottomTrawlBottomTrawlTriennialVessels.md)
- - [BottomTrawlBottomTrawlVessels](docs/BottomTrawlBottomTrawlVessels.md)
  - [BottomTrawlCatch](docs/BottomTrawlCatch.md)
+ - [BottomTrawlCommonNames](docs/BottomTrawlCommonNames.md)
+ - [BottomTrawlNmfsProjects](docs/BottomTrawlNmfsProjects.md)
  - [BottomTrawlSamplingStations](docs/BottomTrawlSamplingStations.md)
+ - [BottomTrawlSearchResults](docs/BottomTrawlSearchResults.md)
+ - [BottomTrawlShelfSlopeSurveyYears](docs/BottomTrawlShelfSlopeSurveyYears.md)
+ - [BottomTrawlShelfSlopeVessels](docs/BottomTrawlShelfSlopeVessels.md)
  - [BottomTrawlSpecimens](docs/BottomTrawlSpecimens.md)
  - [BottomTrawlStationSearches](docs/BottomTrawlStationSearches.md)
+ - [BottomTrawlSurveyYears](docs/BottomTrawlSurveyYears.md)
  - [BottomTrawlTows](docs/BottomTrawlTows.md)
+ - [BottomTrawlTriennialNmfsProjects](docs/BottomTrawlTriennialNmfsProjects.md)
+ - [BottomTrawlTriennialSurveyYears](docs/BottomTrawlTriennialSurveyYears.md)
+ - [BottomTrawlTriennialVessels](docs/BottomTrawlTriennialVessels.md)
+ - [BottomTrawlVessels](docs/BottomTrawlVessels.md)
  - [GeoJSON](docs/GeoJSON.md)
- - [HookAndLineHookAndLineCommonNames](docs/HookAndLineHookAndLineCommonNames.md)
- - [HookAndLineHookAndLineVessels](docs/HookAndLineHookAndLineVessels.md)
+ - [HookAndLineCommonNames](docs/HookAndLineCommonNames.md)
+ - [HookAndLineVessels](docs/HookAndLineVessels.md)
  - [NwfscAllSurveyYears](docs/NwfscAllSurveyYears.md)
  - [NwfscAllTaxonCategories](docs/NwfscAllTaxonCategories.md)
  - [NwfscAllTaxonSubcategories](docs/NwfscAllTaxonSubcategories.md)

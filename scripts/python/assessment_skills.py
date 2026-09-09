@@ -23,6 +23,15 @@ def skill_generate_design_index(
     """
     catch_df = pd.read_csv(catch_csv_path)
     
+    # Map SDK column names to standard shorthand expected by this skill
+    column_mapping = {
+        "survey_year": "year",
+        "catch_per_unit_effort_kg_per_ha": "cpue_kg_per_ha",
+        "on_bottom_seafloor_depth_m": "depth_m",
+        "best_tow_latitude_dd": "latitude_dd"
+    }
+    catch_df = catch_df.rename(columns={k: v for k, v in column_mapping.items() if k in catch_df.columns})
+    
     if strata_csv_path and os.path.exists(strata_csv_path):
         strata_df = pd.read_csv(strata_csv_path)
     else:
@@ -86,6 +95,16 @@ def skill_expand_compositions(
     """
     catch_df = pd.read_csv(catch_csv_path)
     bio_df = pd.read_csv(bio_csv_path)
+
+    # Map SDK column names to standard shorthand expected by this skill
+    column_mapping = {
+        "survey_year": "year",
+        "catch_per_unit_effort_kg_per_ha": "cpue_kg_per_ha",
+        "on_bottom_seafloor_depth_m": "depth_m",
+        "best_tow_latitude_dd": "latitude_dd"
+    }
+    catch_df = catch_df.rename(columns={k: v for k, v in column_mapping.items() if k in catch_df.columns})
+    bio_df = bio_df.rename(columns={k: v for k, v in column_mapping.items() if k in bio_df.columns})
 
     out_dir = output_dir or tempfile.gettempdir()
     len_path = os.path.join(out_dir, "length_comps.csv")

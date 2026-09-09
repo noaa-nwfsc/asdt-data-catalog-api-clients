@@ -105,7 +105,12 @@ class DataCatalog:
 
     def _list_methods(self):
         """Helper for introspection/autocomplete to find dynamic methods."""
-        base = [n for n in dir(self._api) if n.startswith("get_")]
+        base = [
+            n for n in dir(self._api)
+            if n.startswith("get_")
+            and not n.endswith("_with_http_info")
+            and not n.endswith("_without_preload_content")
+        ]
         return sorted(
             base
             + [n.replace("get_", "read_") for n in base]
@@ -145,6 +150,101 @@ class DataCatalog:
             else attr
         )
 
+    def read_bottom_trawl_data(
+        self,
+        data_type: str,
+        limit: int = 1000,
+        fields: list = None,
+        **kwargs
+    ) -> pd.DataFrame:
+        """
+        Consolidated fetcher for the West Coast Bottom Trawl survey datasets.
+        
+        Args:
+            data_type (str): Type of bottom trawl data to retrieve. Options: tows, catch, specimens, vessels, sampling_stations, station_searches, search_results, common_names, survey_years, nmfs_projects, triennial_vessels, triennial_survey_years, triennial_nmfs_projects, shelf_slope_vessels, shelf_slope_survey_years.
+            limit (int): Max records to retrieve. Defaults to 1000.
+            fields (list): Optional list of columns to return.
+            **kwargs: Dynamic filter parameters (e.g., vessel_name="Oceanus", survey_year=2024).
+        """
+        mapping = {
+            "tows": "bottom_trawl_tows",
+            "catch": "bottom_trawl_catch",
+            "specimens": "bottom_trawl_specimens",
+            "vessels": "bottom_trawl_vessels",
+            "sampling_stations": "bottom_trawl_sampling_stations",
+            "station_searches": "bottom_trawl_station_searches",
+            "search_results": "bottom_trawl_search_results",
+            "common_names": "bottom_trawl_common_names",
+            "survey_years": "bottom_trawl_survey_years",
+            "nmfs_projects": "bottom_trawl_nmfs_projects",
+            "triennial_vessels": "bottom_trawl_triennial_vessels",
+            "triennial_survey_years": "bottom_trawl_triennial_survey_years",
+            "triennial_nmfs_projects": "bottom_trawl_triennial_nmfs_projects",
+            "shelf_slope_vessels": "bottom_trawl_shelf_slope_vessels",
+            "shelf_slope_survey_years": "bottom_trawl_shelf_slope_survey_years",
+        }
+        if data_type not in mapping:
+            raise ValueError(f"Invalid bottom trawl data_type '{data_type}'. Valid options: {list(mapping.keys())}")
+        
+        read_func = getattr(self, f"read_{mapping[data_type]}")
+        return read_func(limit=limit, fields=fields, **kwargs)
+
+    def read_hook_and_line_data(
+        self,
+        data_type: str,
+        limit: int = 1000,
+        fields: list = None,
+        **kwargs
+    ) -> pd.DataFrame:
+        """
+        Consolidated fetcher for the West Coast Hook and Line survey datasets.
+        
+        Args:
+            data_type (str): Type of hook and line data to retrieve. Options: vessels, common_names.
+            limit (int): Max records to retrieve. Defaults to 1000.
+            fields (list): Optional list of columns to return.
+            **kwargs: Dynamic filter parameters (e.g., vessel_name="Aggressor").
+        """
+        mapping = {
+            "vessels": "hook_and_line_vessels",
+            "common_names": "hook_and_line_common_names",
+        }
+        if data_type not in mapping:
+            raise ValueError(f"Invalid hook and line data_type '{data_type}'. Valid options: {list(mapping.keys())}")
+        
+        read_func = getattr(self, f"read_{mapping[data_type]}")
+        return read_func(limit=limit, fields=fields, **kwargs)
+
+    def read_nwfsc_metadata(
+        self,
+        data_type: str,
+        limit: int = 1000,
+        fields: list = None,
+        **kwargs
+    ) -> pd.DataFrame:
+        """
+        Consolidated fetcher for general NWFSC survey metadata and taxonomy.
+        
+        Args:
+            data_type (str): Type of metadata/taxonomy to retrieve. Options: survey_taxonomy, all_survey_years, all_taxon_categories, all_taxon_subcategories, hook_and_line_survey_years, triennial_specimen_lengths.
+            limit (int): Max records to retrieve. Defaults to 1000.
+            fields (list): Optional list of columns to return.
+            **kwargs: Dynamic filter parameters (e.g., survey_year=2024).
+        """
+        mapping = {
+            "survey_taxonomy": "nwfsc_survey_taxonomy",
+            "all_survey_years": "nwfsc_all_survey_years",
+            "all_taxon_categories": "nwfsc_all_taxon_categories",
+            "all_taxon_subcategories": "nwfsc_all_taxon_subcategories",
+            "hook_and_line_survey_years": "nwfsc_hook_and_line_survey_years",
+            "triennial_specimen_lengths": "nwfsc_triennial_specimen_lengths",
+        }
+        if data_type not in mapping:
+            raise ValueError(f"Invalid metadata data_type '{data_type}'. Valid options: {list(mapping.keys())}")
+        
+        read_func = getattr(self, f"read_{mapping[data_type]}")
+        return read_func(limit=limit, fields=fields, **kwargs)
+
     def get_sdk_metadata(self) -> str:
         """
         Scans the DataCatalog instance and returns a JSON string of all available
@@ -152,11 +252,11 @@ class DataCatalog:
         """
         metadata = []
 
-        # 1. Introspect Explicitly Defined Methods (e.g., custom UI helpers you add)
+        # Introspect Explicitly Defined Methods starting with read_
         for name, method in inspect.getmembers(
             self.__class__, predicate=inspect.isfunction
         ):
-            if name.startswith("_"):
+            if name.startswith("_") or not name.startswith("read_"):
                 continue
 
             docstring = inspect.getdoc(method) or "No description available."
@@ -182,37 +282,6 @@ class DataCatalog:
                     "parameters": params,
                 }
             )
-
-        # 2. Introspect Dynamically Generated API Methods (get_, read_, fetch_all_)
-        for name in self._list_methods():
-            # Route back to the base 'get_' method on the private api client to read the true signature
-            base_name = name.replace("read_", "get_", 1).replace(
-                "fetch_all_", "get_", 1
-            )
-            original_method = getattr(self._api, base_name, None)
-
-            if not original_method:
-                continue
-
-            docstring = inspect.getdoc(original_method) or "Fetch API Data."
-            desc = docstring.split("\n")[0]
-
-            # Add helpful prefixes for the UI drawer
-            if name.startswith("read_"):
-                desc = f"[Returns DataFrame] {desc}"
-            elif name.startswith("fetch_all_"):
-                desc = f"[Paginates All Records] {desc}"
-
-            sig = inspect.signature(original_method)
-            params = {
-                p_name: str(p.annotation).replace("typing.", "")
-                if p.annotation != inspect.Parameter.empty
-                else "Any"
-                for p_name, p in sig.parameters.items()
-                if p_name not in ("self", "kwargs")
-            }
-
-            metadata.append({"name": name, "description": desc, "parameters": params})
 
         return json.dumps(metadata)
 
