@@ -1,0 +1,17 @@
+{
+  "name": "@nwfsc/data-catalog-client",
+  "version": "0.1.10",
+  "description": "TypeScript SDK for the NWFSC Data Catalog",
+  "author": "NWFSC Data Catalog Team",
+  "main": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "sideEffects": false,
+  "scripts": {
+    "build": "tsc && tsc -p tsconfig.esm.json",
+    "test": "tsc --noEmit tests/test_catalog.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.0"
+  }
+}

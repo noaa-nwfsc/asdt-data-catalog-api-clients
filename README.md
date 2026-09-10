@@ -1,8 +1,8 @@
 **NOTE: SDKs and the NWFSC Data Catalog is in pre-release and actively being developed for first release**
 
-# NWFSC Data Catalog R & Python SDKs
+# NWFSC Data Catalog R, Python & TypeScript SDKs
 
-This repository contains the source code and build system for the **NWFSC Data Catalog SDKs**, available for both Python and R. The entire build process is orchestrated through a Python script, requires no containerization (like Docker), and automatically bootstraps its own Java runtime and Pandoc toolchain to remain portable and dependency-free.
+This repository contains the source code and build system for the **NWFSC Data Catalog SDKs**, available for Python, R, and TypeScript. The entire build process is orchestrated through a Python script, requires no containerization (like Docker), and automatically bootstraps its own Java runtime, Pandoc toolchain, and npm modules to remain portable and dependency-free.
 
 ## Quick Start
 
@@ -25,6 +25,11 @@ if (!requireNamespace("pak", quietly = TRUE)) install.packages("pak")
 # Install the SDK (pak automatically resolves dependencies from CRAN)
 pak::pkg_install("url::https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfscDataCatalog-latest.tar.gz")
 ```
+
+### TypeScript / JavaScript Installation
+```bash
+npm install https://github.com/noaa-nwfsc/asdt-data-catalog-api-clients/releases/latest/download/nwfsc-data-catalog-client-latest.tgz
+```
 ---
 
 ## Repository Structure
@@ -32,6 +37,7 @@ pak::pkg_install("url::https://github.com/noaa-nwfsc/asdt-data-catalog-api-clien
 - **/clients**: Contains the source code for the individual language-specific SDKs.
   - `/python_public`: The public Python SDK package.
   - `/r_public`: The public R SDK package.
+  - `/typescript_public`: The public TypeScript SDK package (targets browsers/Node.js).
 - **/openapi**: Stores the `openapi-public.json` specification file, which is the single source of truth for all code generation.
 - **/scripts**: Home for all build and automation logic.
   - `/python/build_tools.py`: The primary build orchestrator.
@@ -53,30 +59,31 @@ To update the API clients, developers must follow these steps:
    make fetch-public-spec
    ```
 3. **Review the Diff**: Use `git diff openapi/openapi-public.json` to carefully review changes (e.g., new endpoints, updated parameters).
-4. **Verify Version Bump**: The build orchestrator will automatically detect the spec change and increment the package version in `clients/python_public/pyproject.toml`.
+4. **Verify Version Bump**: The build orchestrator will automatically detect the spec change and increment the package version in `clients/python_public/pyproject.toml` and `clients/typescript_public/package.json`.
 5. **Commit and Open a Pull Request**:
    ```bash
-   git add openapi/openapi-public.json clients/python_public/pyproject.toml
+   git add openapi/openapi-public.json clients/python_public/pyproject.toml clients/typescript_public/package.json
    git commit -m "feat: Update API spec to include new endpoints"
    ```
    Open a Pull Request to merge your changes into the `main` or `develop` branch.
 6. **Merge to Trigger Release**: Once merged, the GitHub Actions pipeline will automatically:
    - Generate the new client code from the updated spec.
-   - Build, test, and compile the Python and R packages.
+   - Build, test, and compile the Python, R, and TypeScript packages.
    - Create a new GitHub Release tagged with the new version number.
-   - Upload the `.whl` and `.tar.gz` packages as release assets.
+   - Upload the `.whl`, `.tar.gz`, and `.tgz` packages as release assets.
    - Deploy the updated documentation to GitHub Pages.
 
 ---
 
 ## Local Development & Building
 
-The build system is designed to be simple and portable. You only need `uv` (a fast Python package manager) and a modern version of `R` installed on your system.
+The build system is designed to be simple and portable. You only need `uv` (a fast Python package manager), `R` (a modern version installed), and `Node.js` (with `npm`).
 
 ### Prerequisites
 
 1. **uv**: [Install from astral.sh](https://github.com/astral-sh/uv)
 2. **R**: [Install from CRAN](https://cran.r-project.org/)
+3. **Node.js & npm**: [Install from nodejs.org](https://nodejs.org/)
 
 ### Makefile Menu
 
@@ -84,9 +91,10 @@ All common tasks are handled by the root `Makefile`.
 
 | Command | Description |
 | :--- | :--- |
-| `make all` | **(Default)** Builds all SDKs (Python and R). |
+| `make all` | **(Default)** Builds all SDKs (Python, R, and TypeScript). |
 | `make build-python-public` | Builds and tests only the public Python SDK. |
 | `make build-r-public` | Builds only the public R SDK. |
+| `make build-ts-public` | Builds and compiles only the public TypeScript SDK. |
 | | |
 | `make fetch-public-spec` | Downloads the latest `openapi.json` from the server. |
 | `make fetch-jdk` | Downloads a portable Java 17 JRE. Run automatically as needed. |
@@ -106,35 +114,20 @@ All common tasks are handled by the root `Makefile`.
 
 This project features a fully automated, unified CI/CD workflow (`ci-cd.yml`) that strictly gates deployments and releases using a GitOps model. The pipeline operates in three distinct phases depending on the branch:
 
-1. **Continuous Integration (PR Phase)**: On every Pull Request, the pipeline provisions clean `uv` and `R` environments, bootstraps Java, reads the checked-in `openapi-public.json` spec, generates the client source code, and builds the artifacts. This acts as a security gate to ensure broken code or invalid specs never merge.
+1. **Continuous Integration (PR Phase)**: On every Pull Request, the pipeline provisions clean `uv`, `R`, and `Node.js` environments, bootstraps Java, reads the checked-in `openapi-public.json` spec, generates the client source code, and builds the artifacts. This acts as a security gate to ensure broken code or invalid specs never merge.
 2. **Continuous Deployment (Merge to `develop`)**: When code is successfully merged into `develop`, the pipeline rebuilds the artifacts and securely deploys the static Python (`Sphinx`) and R (`pkgdown`) documentation sites directly to GitHub Pages.
-3. **Automated Release (Merge to `main`)**: When code is ready for production and merges into `main`, the pipeline extracts the newly incremented SDK version from `pyproject.toml`, authors a new GitHub Release (e.g., `v1.2.3`), and uploads the `.whl` and `.tar.gz` packages. It also automatically generates `-latest` file aliases so standard installation links never break.
+3. **Automated Release (Merge to `main`)**: When code is ready for production and merges into `main`, the pipeline extracts the newly incremented SDK version from `pyproject.toml`, authors a new GitHub Release (e.g., `v1.2.3`), and uploads the `.whl`, `.tar.gz`, and `.tgz` packages. It also automatically generates `-latest` file aliases so standard installation links never break.
 
-## WebAssembly (WebR) Architecture
+## WebAssembly (WebR & Pyodide) Architecture
 
-This SDK is specifically engineered to run seamlessly across two completely different environments:
-1. **Standard Desktop (Python/R)**: Uses standard system networking libraries (like `libcurl` and `urllib3`).
-2. **Browser-Based WebAssembly**: Runs entirely client-side via **Pyodide** (Python) and **WebR** (R), powering our interactive API Coding Lab.
-
-**The WebR Networking Nuance:**
-Base R compiled for WebAssembly is built without `libcurl` support. As a result, standard R networking packages (like `httr`) fail when making `https://` requests from the browser. 
-
-To solve this, our R SDK contains an environment-aware fetch engine. It dynamically detects if it is running inside WebR (`Emscripten`). If it is, the SDK completely bypasses the standard R networking stack and instead routes requests through a synchronous **XHR Bridge** (`download.file(method="xhr")`), natively leveraging the browser's JavaScript `fetch` API. 
-
-As a user, you don't need to change any code—functions like `read_bottom_trawl_tows()` will automatically use the correct networking protocol whether you run them in RStudio or in the browser.
+This SDK is specifically engineered to run seamlessly across standard desktop environments as well as browser-based WebAssembly (via Pyodide and WebR), powering our interactive API Coding Lab.
 
 ---
-
-
 
 ## Documentation & GitHub Pages
 
 Static documentation sites are built on every pipeline execution and deployed directly to **GitHub Pages**.
 
-- **Python Documentation**: Generated using `Sphinx`, producing a clean, structured API reference guide.
-- **R Documentation**: Generated using `pkgdown`, featuring organized sections configured in `_pkgdown.yml`.
-
-### Accessing the Docs
 View the live documentation landing page at:
 **`https://noaa-nwfsc.github.io/asdt-data-catalog-api-clients/`**
 
@@ -173,6 +166,26 @@ print(head(vessels_df))
 
 # Use a UI utility to convert a dataframe to a styled HTML table
 html_output <- to_html(vessels_df)
+```
+
+### TypeScript / JavaScript Example
+```typescript
+import { NWFSCDataCatalog } from '@nwfsc/data-catalog-client';
+
+// Initialize the ergonomic client
+const catalog = new NWFSCDataCatalog();
+
+// Fetch vessels used in the bottom trawl survey for 2023
+catalog.getBottomTrawlVessels({ year: 2023 })
+  .then(vessels => {
+    console.log('Vessels:', vessels);
+  });
+
+// Auto-paginate all available survey years dynamically
+catalog.fetch_all_bottom_trawl_survey_years()
+  .then(allYears => {
+    console.log('All survey years:', allYears);
+  });
 ```
 
 ---
